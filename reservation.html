@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reserva - Arena Yeyian</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="stylesheet" href="assets/reservas.css" />
+    <link
+      rel="icon"
+      href="./assets/images/Arena Yeyian Simbolo.png"
+      type="image/png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.9/css/intlTelInput.css"
+    />
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <!-- HEADER -->
+      <header class="nav">
+        <nav class="navContainer">
+          <section class="navbar_left">
+            <a href="index.html" class="logo">
+              <img
+                src="assets/images/Arena Yeyian Logo.png"
+                alt="Logo Arena Yeyian"
+              />
+            </a>
+          </section>
+          <section class="navbar_center">
+            <img src="assets/images/Chivas Logo.png" alt="Logo de Chivas" />
+            <div class="separador"></div>
+            <img src="assets/images/Yeyian Logo.png" alt="Logo Arena Yeyian" />
+          </section>
+          <section class="navbar_right">
+            <a href="reservation.html">
+              <span class="reservationText">¡Reserva Ya Tu Horario!</span>
+              <span class="reservationShortText">¡Reserva Ya!</span>
+            </a>
+          </section>
+        </nav>
+      </header>
+
+      <!-- Formulario de reserva -->
+      <div class="reservation-container">
+        <form id="reservation-form" class="reservation-form">
+          <!-- Paso 1: Datos personales -->
+          <div class="step active" id="step-1">
+            <h1>Reserva tu Experiencia Gamer</h1>
+            <p class="form-instructions">
+              Por favor rellena este formulario para poder completar tu
+              reservación.
+            </p>
+            <div class="input-container">
+              <input
+                type="text"
+                name="nombre"
+                id="nombre"
+                placeholder="Nombre completo"
+                required
+              />
+            </div>
+            <div class="input-container">
+              <input
+                type="email"
+                name="correo"
+                id="correo"
+                placeholder="Correo electrónico"
+                required
+              />
+            </div>
+            <div class="form-buttons">
+              <button type="button" class="next-btn" onclick="nextStep(2)">
+                Siguiente
+              </button>
+            </div>
+          </div>
+
+          <!-- Paso 2: Tipo de reserva -->
+          <div class="step" id="step-2">
+            <h1>Tipo de Reserva</h1>
+            <p class="form-instructions">
+              Seleccione el tipo de reserva que deseas.
+            </p>
+            <div class="input-container">
+              <select
+                name="tipoReserva"
+                id="tipoReserva"
+                required
+                onchange="checkSpecialReservation()"
+              >
+                <option value="">Tipo de reserva</option>
+                <option value="Individual">Individual</option>
+                <option value="Corporativo">Corporativo</option>
+                <option value="Streamer">Streamer</option>
+                <option value="Educativo">Educativo</option>
+                <option value="Escolar">Escolar</option>
+              </select>
+            </div>
+
+            <!-- Banner especial para reservas corporativas/streamers -->
+            <div
+              class="special-banner"
+              id="special-banner"
+              style="display: none"
+            >
+              <h3>
+                <i class="fas fa-info-circle"></i> ¡Hola
+                <strong><span id="banner-nombre"></span></strong>!
+              </h3>
+              <p>
+                Dado que tu evento es
+                <strong><span id="banner-tipo"></span></strong>, sugerimos de
+                parte del equipo de Chivas E-sports que agendes una cita con
+                nuestros administrativos para obtener más información y
+                personalizar tu experiencia.
+              </p>
+
+              <p>
+                Puedes contactarnos directamente a:
+                <strong
+                  ><i class="fas fa-envelope"></i>
+                  reservas@arenayeyian.com</strong
+                >
+              </p>
+
+              <p>O indícanos tu medio de contacto preferido:</p>
+
+              <div class="contact-options">
+                <div class="contact-option">
+                  <input
+                    type="radio"
+                    id="contact-whatsapp"
+                    name="contact-method"
+                    value="whatsapp"
+                    onclick="showContactInput('whatsapp')"
+                  />
+                  <label for="contact-whatsapp"
+                    ><i class="fab fa-whatsapp" style="color: #25d366"></i>
+                    WhatsApp</label
+                  >
+                  <div
+                    id="whatsapp-container"
+                    class="phone-input-container"
+                    style="display: none"
+                  >
+                    <input
+                      type="tel"
+                      id="whatsapp-number"
+                      placeholder="Ej. 3312345678"
+                    />
+                  </div>
+                </div>
+
+                <div class="contact-option">
+                  <input
+                    type="radio"
+                    id="contact-email"
+                    name="contact-method"
+                    value="email"
+                    onclick="showContactInput('email')"
+                  />
+                  <label for="contact-email"
+                    ><i class="fas fa-envelope" style="color: #d44638"></i>
+                    Correo electrónico</label
+                  >
+                  <input
+                    type="email"
+                    id="email-input"
+                    class="contact-input"
+                    placeholder="tucorreo@ejemplo.com"
+                    style="display: none"
+                  />
+                </div>
+              </div>
+
+              <div class="special-banner-buttons">
+                <button
+                  type="button"
+                  class="special-banner-btn continue"
+                  onclick="continueWithSpecialReservation()"
+                >
+                  <i class="fas fa-check-circle"></i> Continuar
+                </button>
+                <button
+                  type="button"
+                  class="special-banner-btn cancel"
+                  onclick="cancelSpecialReservation()"
+                >
+                  <i class="fas fa-times-circle"></i> Cancelar
+                </button>
+              </div>
+            </div>
+
+            <div class="form-buttons">
+              <button type="button" class="prev-btn" onclick="prevStep(1)">
+                Volver
+              </button>
+              <button
+                type="button"
+                class="next-btn"
+                id="next-step-2"
+                onclick="nextStep(3)"
+              >
+                Siguiente
+              </button>
+            </div>
+          </div>
+
+          <!-- Paso 3: Fecha y hora -->
+          <div class="step" id="step-3">
+            <h1>Selecciona la Fecha y Hora</h1>
+            <p class="form-instructions">
+              Seleccione alguna de las fechas disponibles.
+            </p>
+            <div class="input-container">
+              <input
+                type="text"
+                id="fecha"
+                name="fecha"
+                placeholder="Selecciona la fecha"
+                required
+              />
+            </div>
+            <div class="input-container">
+              <input type="time" name="hora" id="hora" required />
+            </div>
+            <div class="form-buttons">
+              <button type="button" class="prev-btn" onclick="prevStep(2)">
+                Volver
+              </button>
+              <button type="submit" class="next-btn">Finalizar Reserva</button>
+            </div>
+          </div>
+          <div id="mensaje" style="text-align: center; margin-top: 10px"></div>
+        </form>
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <nav class="footerContainer">
+          <section class="footer_left">
+            <p>Horario de Atención: 9am-9pm.</p>
+          </section>
+          <section class="footer_center">
+            <a href="#"
+              ><img src="assets/images/facebook_logo.png" alt="Facebook"
+            /></a>
+            <a href="#"
+              ><img src="assets/images/instagram_logo.png" alt="Instagram"
+            /></a>
+            <a href="#"><img src="assets/images/x_logo.png" alt="X" /></a>
+            <a href="#"
+              ><img src="assets/images/twitch_logo.png" alt="Twitch"
+            /></a>
+            <a href="#"
+              ><img src="assets/images/youtube_logoDOS.png" alt="YouTube"
+            /></a>
+          </section>
+          <section class="footer_right">
+            <p>+52 XXX XXX XXXX</p>
+          </section>
+        </nav>
+      </footer>
+
+      <script src="assets/js/index.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+      <script src="assets/js/reservas.js"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.9/js/intlTelInput.min.js"></script>
+
+      <script>
+        // Reemplaza tu actual input de WhatsApp
+        const phoneInput = document.querySelector("#whatsapp-number");
+        const iti = window.intlTelInput(phoneInput, {
+          preferredCountries: ["mx", "us"], // México y USA primero
+          separateDialCode: true,
+          utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.9/js/utils.js",
+        });
+
+        // Obtener lada + número completo al enviar
+        phoneInput.addEventListener("blur", () => {
+          const fullNumber = iti.getNumber();
+          console.log(fullNumber); // Ej: +521331234567
+        });
+      </script>
+    </div>
+  </body>
+</html>

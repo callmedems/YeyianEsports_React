@@ -1,0 +1,38 @@
+[
+    {
+      "name": "Carlos Méndez",
+      "timeAgo": "hace 1 semana",
+      "profileImage": "https://unsplash.com/photos/7YVZYZeITc8/download?force=true",
+      "stars": 5,
+      "comment": "¡La mejor experiencia gamer que he tenido! Todo el equipo está a otro nivel."
+    },
+    {
+      "name": "Andrea López",
+      "timeAgo": "hace 3 días",
+      "profileImage": "https://unsplash.com/photos/1SAnrIxw5OY/download?force=true",
+      "stars": 3,
+      "comment": "Muy buena ambientación y atención. Solo le falta más variedad de snacks."
+    },
+    {
+      "name": "Luis Fernando",
+      "timeAgo": "hace 2 semanas",
+      "profileImage": "https://unsplash.com/photos/0Zx1bDv5BNY/download?force=true",
+      "stars": 4,
+      "comment": "Perfecto para torneos entre amigos. Equipos de alto rendimiento y ambiente top."
+    },
+    {
+      "name": "Mariana Chávez",
+      "timeAgo": "hace 1 año",
+      "profileImage": "https://unsplash.com/photos/8xAA0f9yQnE/download?force=true",
+      "stars": 4,
+      "comment": "Siempre que vengo me divierto. Recomiendo reservar con anticipación."
+    },
+    {
+      "name": "Jorge Ramírez",
+      "timeAgo": "hace 5 meses",
+      "profileImage": "https://unsplash.com/photos/6anudmpILw4/download?force=true",
+      "stars": 3,
+      "comment": "Buen lugar pero a veces la red se satura. Aun así, volvería."
+    }
+]
+  
