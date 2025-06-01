@@ -1,0 +1,36 @@
+/* PÁGINA ARENA YEYIAN PRINCIPAL */
+
+/* Parámetros generales */
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    text-decoration: none;
+}
+    /*Definición de colores*/
+:root {
+    --color-fondo: #1A1A42;
+    --color-estrellas:#FFD55C;
+    --color-botonRojo:#C4240E;
+}
+
+@font-face {
+    font-family: 'Abolition';
+    src: url("fonts/Abolition/AbolitionTest-Regular.otf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Anton';
+    src: url("fonts/Anton-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

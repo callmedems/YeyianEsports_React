@@ -1,0 +1,86 @@
+/* Página de inicio (tiene el título de la arena yeiyian */
+.mainContainer {
+  padding-top: 80px;
+}
+
+.arenaPresentation {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, var(--color-fondo) 100%),
+        url('/images/background_photo.jpg');
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.arenaPresentation .centerImage {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 40%;
+    height: auto;
+    margin: 0;
+}
+
+.arenaPresentation .titleContainer {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.arenaPresentation h1 {
+    font-family: 'Abolition', sans-serif;
+    font-size: 6rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.arenaPresentation h2 {
+    font-family: 'Abolition', sans-serif;
+    font-size: 2rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    font-style: italic;
+}
+
+/* PÁGINA ARENA YEYIAN PRINCIPAL */
+
+/* Parámetros generales */
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    text-decoration: none;
+}
+    /*Definición de colores*/
+:root {
+    --color-fondo: #1A1A42;
+    --color-estrellas:#FFD55C;
+    --color-botonRojo:#C4240E;
+}
+
+@font-face {
+    font-family: 'Abolition';
+    src: url("fonts/Abolition/AbolitionTest-Regular.otf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Anton';
+    src: url("fonts/Anton-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

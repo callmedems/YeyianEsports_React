@@ -1,0 +1,93 @@
+/* Parámetros generales */
+    /*Definición de colores*/
+:root {
+    --color-fondo: #1A1A42;
+    --color-estrellas:#FFD55C;
+    --color-botonRojo:#C4240E;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    text-decoration: none;
+}
+
+@font-face {
+    font-family: 'Abolition';
+    src: url("fonts/Abolition/AbolitionTest-Regular.otf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Anton';
+    src: url("fonts/Anton-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+.gamesContainer {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-fondo);
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.controllers {
+  font-size: 2.5rem;
+  color: #333;
+  transition: color 0.2s;
+}
+
+.controllers:hover {
+  color: #007bff;
+}
+
+.card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 300px;
+  max-width: 350px;
+  transition: box-shadow 0.2s;
+}
+
+.card img {
+  width: 220px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.gameInfo h3 {
+  margin: 0.5rem 0 0.2rem 0;
+  font-size: 1.4rem;
+}
+
+.gameInfo p {
+  color: #555;
+  font-size: 1rem;
+  margin: 0;
+  text-align: center;
+}
