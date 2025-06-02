@@ -5,11 +5,10 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const Cotizacion = () => {
-  // 1) Sacamos la reserva del storage
+  
   const reserva = JSON.parse(localStorage.getItem("reserva")) || {};
   const tipoReserva = reserva.tipoReserva || "Individual";
 
-  // 2) Simulamos los precios (misma lógica que en cotizacion.js original)
   const precios = {
     Individual: 1500,
     Corporativo: 8000,
@@ -21,7 +20,7 @@ const Cotizacion = () => {
   reserva.cotizacion = precio;
   localStorage.setItem("reserva", JSON.stringify(reserva));
 
-  // 3) Mensajes de marketing (copiados de cotizacion.js)
+  
   const marketingMessages = {
     Escolar: {
       title: "¡Una experiencia educativa inolvidable!",
@@ -75,17 +74,16 @@ const Cotizacion = () => {
     },
   };
 
-  // Estados para renderizar dinámicamente
   const [titulo, setTitulo] = useState("");
   const [marketingHTML, setMarketingHTML] = useState("");
   const [features, setFeatures] = useState([]);
 
   useEffect(() => {
-    // 4) Setup de datos dinámicos (equivalente a configurarCotizacion)
+    
     const marketingData =
       marketingMessages[tipoReserva] || marketingMessages.Individual;
 
-    // 4.a) Formatear fecha y hora
+    
     const fechaObj = new Date(reserva.fecha);
     const opcionesFecha = {
       weekday: "long",
@@ -98,10 +96,9 @@ const Cotizacion = () => {
     const horaFormateada = `${horas}:${minutos}`;
     const periodo = parseInt(horas) >= 12 ? "p.m." : "a.m.";
 
-    // 4.b) Setear el título dinámico
     setTitulo(marketingData.title);
 
-    // 4.c) Generar el bloque de marketing message con fecha/hora
+ 
     const mensajeCompleto = `
       ${marketingData.message}<br /><br />
       <span style="font-size: 0.9em; color: #aaaaaa;">
@@ -110,10 +107,7 @@ const Cotizacion = () => {
     `;
     setMarketingHTML(mensajeCompleto);
 
-    // 4.d) Generar el array de features (título + descripción) para iterar
-    //    En el JS original, cada feature venía con “Título - Descripción”
     const listaFeatures = marketingData.features.map((featureStr, index) => {
-      // Elegimos un ícono distinto según índice (tal como en tu JS original)
       const icons = [
         "fa-gamepad",
         "fa-users",
@@ -131,27 +125,23 @@ const Cotizacion = () => {
     setFeatures(listaFeatures);
   }, [reserva.fecha, reserva.hora, tipoReserva]);
 
-  // 5) Función que se ejecuta al dar “Continuar al pago”
   const irAPago = () => {
-    // Como en tu JS original: window.location.href = "pago.html";
-    // En React Router, si tienes ruta '/pago', podrías usar navigate('/pago')
-    // Pero de momento mantenemos window.location:
     window.location.href = "/pago";
   };
 
   return (
     <>
-      {/* Header (Navbar ya fija en la parte superior) */}
+      {}
       <Navbar />
 
-      {/* Para que el contenido no quede debajo del Navbar, agregamos margen superior */}
+      {}
       <div style={{ marginTop: "80px" }}>
         <div className="cotizacion-container">
           <div className="cotizacion-info">
-            {/* Título dinámico */}
+            {}
             <h1>{titulo}</h1>
 
-            {/* Precio */}
+            {}
             <div className="price-display">
               <span style={{ fontSize: "0.8em", display: "block", marginBottom: "5px" }}>
                 Cotización para reserva {tipoReserva.toLowerCase()}
@@ -159,13 +149,13 @@ const Cotizacion = () => {
               ${precio.toLocaleString("es-MX")} MXN
             </div>
 
-            {/* Mensaje de marketing con fecha+hora */}
+            {}
             <div
               className="marketing-highlight"
               dangerouslySetInnerHTML={{ __html: marketingHTML }}
             ></div>
 
-            {/* Imágenes de la “arena” */}
+            {}
             <div className="arena-showcase">
               <img
                 src="src/assets/images/arena-1.jpg"
@@ -186,7 +176,7 @@ const Cotizacion = () => {
 
             <h2>Lo que incluye tu experiencia:</h2>
 
-            {/* Features dinámicos */}
+            {}
             <div className="features-grid">
               {features.map((f, idx) => (
                 <div key={idx} className="feature-card">
@@ -199,7 +189,7 @@ const Cotizacion = () => {
               ))}
             </div>
 
-            {/* Botón de pago */}
+            {}
             <button id="pago-button" onClick={irAPago}>
               Continuar al pago
             </button>
@@ -212,10 +202,10 @@ const Cotizacion = () => {
         </div>
       </div>
 
-      {/* Espacio para que el footer no tape contenido */}
+      {}
       <div style={{ marginBottom: "80px" }} />
 
-      {/* Footer fijo abajo */}
+      {}
       <Footer />
     </>
   );

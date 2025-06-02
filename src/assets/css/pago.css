@@ -1,9 +1,6 @@
-/* src/assets/css/pago.css */
 
-/* 1) Encapsular el fondo en .pago-page en lugar de body */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
-/* De aquí se eliminó: body { background: … } */
 .pago-page {
   font-family: "Poppins", sans-serif;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
@@ -14,7 +11,7 @@
   width: 100%;
 }
 
-/* 2) Colores de encabezados y texto */
+
 h1,
 h2,
 h3,
@@ -52,13 +49,13 @@ h6 {
   color: #8a2be2;
 }
 
-/* 3) Estructura del grid principal */
+
 .pago-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
   max-width: 1200px;
-  margin: 100px auto 80px; /* Empujar para navbar y footer */
+  margin: 100px auto 80px; 
   padding: 20px;
   min-height: calc(100vh - 280px);
 }
@@ -72,7 +69,7 @@ h6 {
   border: 1px solid #8a2be2;
 }
 
-/* 4) Resumen de la compra */
+
 .resumen-compra h2 {
   color: #8a2be2;
   margin-bottom: 20px;
@@ -127,7 +124,7 @@ h6 {
   text-align: center;
 }
 
-/* 5) Selectores de método de pago */
+
 .metodos-lista {
   display: flex;
   gap: 15px;
@@ -157,7 +154,7 @@ h6 {
   box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
 }
 
-/* 6) Formularios de pago (Stripe y PayPal) */
+
 .metodo-form {
   display: none;
   animation: fadeIn 0.5s;
@@ -226,7 +223,7 @@ h6 {
   margin-top: 20px;
 }
 
-/* 7) Botones y animaciones */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -291,7 +288,7 @@ h6 {
   text-align: center;
 }
 
-/* 8) Responsive para pantallas pequeñas */
+
 @media (max-width: 768px) {
   .pago-container {
     grid-template-columns: 1fr;

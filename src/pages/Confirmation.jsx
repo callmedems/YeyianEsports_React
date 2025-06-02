@@ -1,16 +1,12 @@
-// src/pages/Confirmation.jsx
 import React, { useEffect, useRef, useState } from "react";
-import "../assets/css/confirmation.css"; // CSS que creamos en el paso anterior
-import "../assets/css/styles.css";       // CSS global (navbar + footer)
+import "../assets/css/confirmation.css"; 
+import "../assets/css/styles.css";  
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const Confirmation = () => {
-  // 1) Leemos la reserva desde localStorage
   const reserva = JSON.parse(localStorage.getItem("reserva")) || {};
-
-  // 2) Estado local para mostrar los datos de la reserva en el JSX
   const [detalles, setDetalles] = useState({
     nombre: "",
     tipoReserva: "",
@@ -21,10 +17,10 @@ const Confirmation = () => {
     correo: "",
   });
 
-  // 3) Ref para el contenedor del mapa
+
   const mapaArenaRef = useRef(null);
 
-  // 4) Función para formatear fecha (igual que antes)
+
   const formatearFecha = (fechaStr) => {
     if (!fechaStr) return "";
     const fechaObj = new Date(fechaStr);
@@ -37,7 +33,7 @@ const Confirmation = () => {
     return fechaObj.toLocaleDateString("es-MX", opcionesFecha);
   };
 
-  // 5) Función para formatear hora (igual que antes)
+  
   const formatearHora = (horaStr) => {
     if (!horaStr) return "";
     const [horas, minutos] = horaStr.split(":");
@@ -45,8 +41,7 @@ const Confirmation = () => {
     return `${horas}:${minutos} ${periodo}`;
   };
 
-  // 6) Definimos window.initMap de inmediato, para que la API de Google Maps 
-  //    no intente llamarlo antes de que exista.
+
   window.initMap = () => {
     if (!mapaArenaRef.current || !window.google || !window.google.maps) {
       return;
@@ -92,15 +87,13 @@ const Confirmation = () => {
     }
   };
 
-  // 7) Al montar el componente, llenamos los datos y montamos el mapa
   useEffect(() => {
-    // 7.a) Si no hay datos de reserva, redirigimos a "/"
     if (!reserva || Object.keys(reserva).length === 0) {
       window.location.href = "/";
       return;
     }
 
-    // 7.b) Creamos un objeto con los detalles a mostrar
+    
     const detallesObj = {
       nombre: reserva.nombre || "",
       tipoReserva: reserva.tipoReserva || "",
@@ -109,8 +102,7 @@ const Confirmation = () => {
       correo: reserva.correo || "",
     };
 
-    // Si el usuario agregó un método de contacto (por ejemplo, WhatsApp),
-    // asumimos que en `reserva.contactMethod` viene el tipo y `reserva.contactValue` el valor.
+
     if (reserva.contactMethod && reserva.contactValue) {
       detallesObj.contacto = reserva.contactMethod;
       detallesObj.contactValue = reserva.contactValue;
@@ -118,28 +110,27 @@ const Confirmation = () => {
 
     setDetalles(detallesObj);
 
-    // 7.c) Si la API de Google Maps ya está lista, la montamos de inmediato
     if (window.google && window.google.maps) {
       window.initMap();
     }
-    // Si la API no está lista, el callback &callback=initMap la invocará
-  }, []); // se ejecuta solo una vez, al montar
+  
+  }, []);
 
-  // 8) Función para volver al inicio (ruta "/")
+ 
   const volverInicio = () => {
     window.location.href = "/";
   };
 
   return (
     <>
-      {/* Navbar */}
+      {}
       <Navbar />
 
-      {/* Encapsulamos todo el fondo y el contenido en .confirmation-page */}
+      {}
       <div className="confirmation-page">
         <div className="confirmation-container">
           <div className="confirmation-card">
-            {/* 1) Animación de checkmark */}
+            {}
             <div className="checkmark-animation">
               <div className="check-icon">
                 <i className="fas fa-check"></i>
@@ -150,13 +141,13 @@ const Confirmation = () => {
               </svg>
             </div>
 
-            {/* 2) Mensaje de confirmación */}
+            {}
             <h1 className="confirmation-title">¡Pago Exitoso!</h1>
             <p className="confirmation-message">
               Tu reserva en Arena Yeyian ha sido confirmada
             </p>
 
-            {/* 3) Detalles de la reserva */}
+            {}
             <div className="reservation-details">
               <h2>Detalles de tu reserva:</h2>
               <div className="details-container">
@@ -181,7 +172,7 @@ const Confirmation = () => {
               </div>
             </div>
 
-            {/* 4) Mapa de ubicación */}
+            {}
             <div className="ubicacion-container">
               <h2>
                 <i className="fas fa-map-marked-alt"></i> Recuerda dónde nos
@@ -206,7 +197,7 @@ const Confirmation = () => {
               </div>
             </div>
 
-            {/* 5) Información adicional (correo y soporte) */}
+            {}
             <div className="additional-info">
               <div className="info-box">
                 <i className="fas fa-envelope-open-text"></i>
@@ -227,7 +218,7 @@ const Confirmation = () => {
               </div>
             </div>
 
-            {/* 6) Botón “Volver al Inicio” */}
+            {}
             <button className="return-home" onClick={volverInicio}>
               <i className="fas fa-home"></i> Volver al Inicio
             </button>
@@ -235,10 +226,10 @@ const Confirmation = () => {
         </div>
       </div>
 
-      {/* Espacio para que el Footer no tape contenido */}
+      {}
       <div style={{ marginBottom: "80px" }}></div>
 
-      {/* Footer */}
+      {}
       <Footer />
     </>
   );

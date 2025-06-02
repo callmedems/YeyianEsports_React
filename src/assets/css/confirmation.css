@@ -1,6 +1,3 @@
-/* src/assets/css/confirmation.css */
-
-/* 1) APLICAMOS EL FONDO SOLO A .confirmation-page, NO A body */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 .confirmation-page {
@@ -13,7 +10,6 @@
   width: 100%;
 }
 
-/* 2) Contenedor principal */
 .confirmation-container {
   padding: 100px 20px 80px;
   display: flex;
@@ -21,7 +17,7 @@
   min-height: calc(100vh - 200px);
 }
 
-/* 3) Tarjeta de confirmación */
+
 .confirmation-card {
   background: rgba(20, 20, 30, 0.95);
   border: 2px solid #8a2be2;
@@ -33,7 +29,7 @@
   animation: slideIn 1s ease-out;
 }
 
-/* 4) Animación de checkmark */
+
 .checkmark-animation {
   position: relative;
   margin: 0 auto 30px;
@@ -74,7 +70,7 @@
   animation: circleFill 1s forwards;
 }
 
-/* 5) Texto de confirmación */
+
 .confirmation-title {
   color: #8a2be2;
   font-size: 2.5rem;
@@ -88,7 +84,7 @@
   opacity: 0.9;
 }
 
-/* 6) Detalles de la reserva */
+
 .reservation-details {
   background: rgba(30, 30, 45, 0.9);
   border-radius: 15px;
@@ -116,7 +112,7 @@
   border-radius: 10px;
 }
 
-/* 7) Mapa de ubicación */
+
 .ubicacion-container {
   margin-top: 40px;
   background: rgba(30, 30, 45, 0.9);
@@ -146,7 +142,7 @@
   text-align: center;
 }
 
-/* 8) Información adicional */
+
 .additional-info {
   display: grid;
   gap: 20px;
@@ -181,7 +177,7 @@
   text-shadow: 0 0 10px rgba(138, 43, 226, 0.4);
 }
 
-/* 9) Botón “Volver al Inicio” */
+
 .return-home {
   background: linear-gradient(45deg, #8a2be2, #9400d3);
   padding: 15px 40px;
@@ -198,7 +194,7 @@
   transform: translateY(-3px) scale(1.05);
 }
 
-/* 10) Colores forzados */
+
 .confirmation-message,
 .details-container div,
 .additional-info p {
@@ -215,7 +211,7 @@
   font-size: 1.8rem;
 }
 
-/* 11) Animaciones */
+
 @keyframes circleFill {
   to {
     stroke-dashoffset: 0;
@@ -247,7 +243,7 @@
   }
 }
 
-/* 12) Responsive */
+
 @media (max-width: 768px) {
   .details-container {
     grid-template-columns: 1fr;

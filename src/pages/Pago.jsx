@@ -1,23 +1,23 @@
 // src/pages/Pago.jsx
 import React, { useEffect, useRef } from "react";
-import "../assets/css/pago.css";     // Reglas de pago, fondo dentro de .pago-page
-import "../assets/css/styles.css";   // Reglas globales (navbar, footer, tipografía)
+import "../assets/css/pago.css";     
+import "../assets/css/styles.css";  
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const Pago = () => {
-  // 1) Recuperamos la reserva de localStorage
+
   const reserva = JSON.parse(localStorage.getItem("reserva")) || {};
 
-  // 2) Creamos refs para Stripe Elements, PayPal Buttons y Google Maps
+
   const cardNumberRef = useRef(null);
   const cardExpiryRef = useRef(null);
   const cardCvcRef = useRef(null);
   const paypalButtonContainerRef = useRef(null);
   const mapaArenaRef = useRef(null);
 
-  // 3) Funciones auxiliares para formatear fecha/hora
+  
   const formatearFecha = (fechaStr) => {
     if (!fechaStr) return "";
     const fechaObj = new Date(fechaStr);
@@ -37,11 +37,8 @@ const Pago = () => {
     return `${horas}:${minutos} ${periodo}`;
   };
 
-  // 4) Definimos initMap en window lo antes posible, 
-  //    de modo que Google Maps pueda invocarlo sin error.
-  //    Esta función comprueba si el ref ya existe y monta el mapa.
   window.initMap = () => {
-    // Si no hay elemento de mapa o la API no está disponible, salimos
+
     if (!mapaArenaRef.current || !window.google || !window.google.maps) {
       return;
     }
@@ -109,9 +106,7 @@ const Pago = () => {
     }
   };
 
-  // 5) useEffect: corre justo después del primer render
   useEffect(() => {
-    // 5.a) Si no hay reserva, esperamos 500 ms y redirigimos a "/"
     if (!reserva || Object.keys(reserva).length === 0) {
       setTimeout(() => {
         window.location.href = "/";
@@ -119,21 +114,18 @@ const Pago = () => {
       return;
     }
 
-    // 5.b) Inicializamos Stripe, PayPal y el selector de métodos
+    
     configurarStripe();
     configurarPayPal();
     configurarSelectoresPago();
 
-    // 5.c) Si la API de Google Maps ya está cargada (window.google.maps),
-    //      llamamos manualmente a initMap() para montar el mapa.
     if (window.google && window.google.maps) {
       window.initMap();
     }
-    // Si la API aún no está cargada, Google Maps invocará initMap() automáticamente
-    // porque en index.html tenemos &callback=initMap
+
   }, []);
 
-  // 6) Configuración de Stripe Elements (idéntico a tu pago.js original)
+ 
   const configurarStripe = () => {
     if (!window.Stripe) {
       console.error("Stripe.js no está cargado");
@@ -153,7 +145,7 @@ const Pago = () => {
       },
     };
 
-    // a) Campo número de tarjeta
+
     const cardNumber = elements.create("cardNumber", {
       style: {
         base: baseStyle,
@@ -165,7 +157,7 @@ const Pago = () => {
     });
     cardNumber.mount(cardNumberRef.current);
 
-    // b) Campo expiración
+
     const cardExpiry = elements.create("cardExpiry", {
       style: {
         base: baseStyle,
@@ -173,7 +165,6 @@ const Pago = () => {
     });
     cardExpiry.mount(cardExpiryRef.current);
 
-    // c) Campo CVC
     const cardCvc = elements.create("cardCvc", {
       style: {
         base: baseStyle,
@@ -181,7 +172,7 @@ const Pago = () => {
     });
     cardCvc.mount(cardCvcRef.current);
 
-    // d) Listener para el botón “Pagar” con Stripe
+ 
     const pagarBtn = document.getElementById("pagar-tarjeta");
     if (pagarBtn) {
       pagarBtn.addEventListener("click", async (e) => {
@@ -216,7 +207,7 @@ const Pago = () => {
     }
   };
 
-  // 7) Configuración de PayPal Buttons (idéntico a tu pago.js original)
+ 
   const configurarPayPal = () => {
     if (!window.paypal) {
       console.error("PayPal SDK no está cargado");
@@ -276,17 +267,14 @@ const Pago = () => {
 
   return (
     <>
-      {/* Navbar fija arriba */}
+      {}
       <Navbar />
 
-      {/* 
-        9) Encapsulamos TODO en <div className="pago-page"> 
-        para que el fondo sólo se aplique aquí 
-      */}
+      {}
       <div className="pago-page">
         <div style={{ marginTop: "80px" }}>
           <div className="pago-container">
-            {/* 1) Resumen de la compra */}
+            {}
             <div className="pago-info animate__animated animate__fadeIn">
               <div className="resumen-compra">
                 <h2>
@@ -317,13 +305,13 @@ const Pago = () => {
                 </div>
               </div>
 
-              {/* 2) Métodos de pago */}
+              {}
               <div className="metodos-pago">
                 <h2>
                   <i className="fas fa-wallet"></i> Selecciona tu método de pago
                 </h2>
 
-                {/* Lista de opciones: Tarjeta o PayPal */}
+                {}
                 <div className="metodos-lista">
                   <div className="metodo-option active" data-metodo="tarjeta">
                     <i className="fab fa-cc-stripe"></i>
@@ -335,7 +323,7 @@ const Pago = () => {
                   </div>
                 </div>
 
-                {/* Formulario de tarjeta (Stripe) */}
+                {}
                 <div className="metodo-form active" id="tarjeta-form">
                   <div className="form-row">
                     <label htmlFor="card-number">Número de tarjeta</label>
@@ -376,7 +364,7 @@ const Pago = () => {
                   </button>
                 </div>
 
-                {/* Formulario de PayPal */}
+                {}
                 <div className="metodo-form" id="paypal-form">
                   <div
                     id="paypal-button-container"
@@ -386,7 +374,7 @@ const Pago = () => {
               </div>
             </div>
 
-            {/* 3) Mapa de ubicación */}
+            {}
             <div className="ubicacion-container animate__animated animate__fadeInRight">
               <h2>
                 <i className="fas fa-map-marked-alt"></i> Recuerda dónde nos
@@ -414,10 +402,10 @@ const Pago = () => {
         </div>
       </div>
 
-      {/* Espacio para que el footer no tape contenido */}
+      {}
       <div style={{ marginBottom: "80px" }}></div>
 
-      {/* Footer fijo abajo */}
+      {}
       <Footer />
     </>
   );
