@@ -64,9 +64,31 @@
 .nav .navbar_right {
     font-family: 'Abolition', sans-serif;
     margin-right: 50px;
+    display:flex;
+    gap: 15px;
 }
 
-.nav .navbar_right a {
+.login-button { /* estilo del boton de login*/
+font-family: 'Roboto', sans-serif;
+  background: transparent;
+  color: #FFFFFF;
+  padding: 6px 12px;      
+  margin: 0 0 0 15px; 
+  font-weight: bold;
+  font-size: 15px;
+  justify-content: center;
+  display: flex;
+  margin-top: 15px
+
+}
+
+.login-button:hover {
+  background-color: #2a1a42;
+}
+
+
+
+.nav .navbar_right .reservation-link {
     background-image: linear-gradient(150deg, #C92704, #bc04c9, #044bc9);
     border-radius: 8px;
     display: flex;
@@ -77,11 +99,11 @@
     color: #FFFFFF;
 }
 
-.nav .navbar_right a:active{
+.nav .navbar_right  .reservation-link:active{
     transform: scale(0.70);
 }
 
-.nav .navbar_right a span {
+.nav .navbar_right .reservation-link span {
     color: #FFFFFF;
     text-align: center;
     background-color:#170F24;
@@ -90,7 +112,7 @@
     transition: 0.4s;
 }
 
-.nav .navbar_right a:hover span{
+.nav .navbar_right  .reservation-link:hover span{
     background: none;
 }
 

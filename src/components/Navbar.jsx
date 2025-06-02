@@ -1,4 +1,6 @@
 import './Navbar.css'
+import {Link} from 'react-router-dom'; //añadimos link de routerdom para navegar al registro sin que recargue
+
 
 function Navbar() {
   return (
@@ -26,8 +28,12 @@ function Navbar() {
           <img src="/images/Yeyian Logo.png" alt="Logo Arena Yeyian" />
         </section>
         <section className="navbar_right">
-          <a href="#">
-            <span className="reservationText">¡Reserva Ya Tu Horario!</span>
+            <div className="auth-buttons">
+              <Link to="/login" className="nav-button login-button">Iniciar sesión / Registrarse</Link>
+              </div>
+
+          <a href="#" className="reservation-link">
+            <span className="reservationText">¡RESERVA YA TU HORARIO!</span>
             <span className="reservationShortText">¡Reserva Ya!</span>
           </a>
         </section>

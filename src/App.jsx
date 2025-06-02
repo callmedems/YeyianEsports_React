@@ -1,57 +1,19 @@
-import { useState } from 'react'
-import './App.css'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import Games from './components/Games'
-import Reviews from './components/Reviews'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Mainpage from './pages/Mainpage';
+import Login from './components/register_login/Login';
+import Register from './components/register_login/Register';
 
 function App() {
-  const [showModal, setShowModal] = useState(false)
-
   return (
-    <>
-      <Navbar />
-
-      <main className="mainContainer">
-        {/* Arena Presentation */}
-        <section className="arenaPresentation">
-          <div className="titleContainer">
-            <h1>ARENA YEYIAN</h1>
-            <h2>LEVEL UP YOUR GAMING</h2>
-          </div>
-          <div>
-            <img src="images/fortnite_characters.png" className="centerImage" alt="Fortnite Characters" />
-          </div>
-        </section>
-
-        <Games />
-
-        <Reviews onAddReview={() => setShowModal(true)} />
-      </main>
-
-      <Footer />
-
-      {/* MODAL, esto nomas es placeholder */}
-      {showModal && (
-        <div className="modalBlack">
-          <div className="modal-content">
-            <h2>Comparte tu experiencia</h2>
-            <h4>¿Cómo nos calificarías?</h4>
-            <div className="starsGrade">{'⭐️⭐️⭐️⭐️⭐️'}</div>
-            <textarea className="comment" placeholder="Escribe tu opinión"></textarea>
-            <div className="btnInModal">
-              <button type="button" className="btnCancel" onClick={() => setShowModal(false)}>
-                Cancelar
-              </button>
-              <button type="button" className="btnAccept" onClick={() => setShowModal(false)}>
-                Aceptar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Mainpage />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
+        {/* Aqui van las rutas que hagan falta */}
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
