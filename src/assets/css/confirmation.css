@@ -1,0 +1,261 @@
+/* src/assets/css/confirmation.css */
+
+/* 1) APLICAMOS EL FONDO SOLO A .confirmation-page, NO A body */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+.confirmation-page {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../images/background_photo.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: #ffffff;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* 2) Contenedor principal */
+.confirmation-container {
+  padding: 100px 20px 80px;
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+}
+
+/* 3) Tarjeta de confirmación */
+.confirmation-card {
+  background: rgba(20, 20, 30, 0.95);
+  border: 2px solid #8a2be2;
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+  animation: slideIn 1s ease-out;
+}
+
+/* 4) Animación de checkmark */
+.checkmark-animation {
+  position: relative;
+  margin: 0 auto 30px;
+  width: 150px;
+  height: 150px;
+}
+
+.check-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  color: #25d366;
+  opacity: 0;
+  animation: checkScale 0.5s 0.5s forwards;
+}
+
+.circles {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: rgba(138, 43, 226, 0.2);
+  stroke-width: 6;
+}
+
+.circle-progress {
+  fill: none;
+  stroke: #8a2be2;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 440;
+  stroke-dashoffset: 440;
+  animation: circleFill 1s forwards;
+}
+
+/* 5) Texto de confirmación */
+.confirmation-title {
+  color: #8a2be2;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.confirmation-message {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+/* 6) Detalles de la reserva */
+.reservation-details {
+  background: rgba(30, 30, 45, 0.9);
+  border-radius: 15px;
+  padding: 25px;
+  margin: 25px 0;
+  text-align: left;
+}
+
+.reservation-details h2 {
+  color: #8a2be2;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.details-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  color: #fff;
+}
+
+.details-container div {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+/* 7) Mapa de ubicación */
+.ubicacion-container {
+  margin-top: 40px;
+  background: rgba(30, 30, 45, 0.9);
+  border-radius: 15px;
+  padding: 25px;
+}
+
+#mapa-arena {
+  height: 300px;
+  width: 100%;
+  border-radius: 15px;
+  margin: 20px 0;
+  border: 2px solid #8a2be2;
+}
+
+.direccion p {
+  color: #ffffff;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.direccion i {
+  color: #8a2be2;
+  width: 25px;
+  text-align: center;
+}
+
+/* 8) Información adicional */
+.additional-info {
+  display: grid;
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.info-box {
+  background: linear-gradient(45deg, #8a2be230, #9400d330);
+  padding: 20px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-align: left;
+}
+
+.info-box i {
+  font-size: 2rem;
+  color: #8a2be2;
+  flex-shrink: 0;
+}
+
+.enlace-soporte {
+  color: #8a2be2 !important;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.enlace-soporte:hover {
+  color: #a66efa !important;
+  text-shadow: 0 0 10px rgba(138, 43, 226, 0.4);
+}
+
+/* 9) Botón “Volver al Inicio” */
+.return-home {
+  background: linear-gradient(45deg, #8a2be2, #9400d3);
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  margin-top: 30px;
+  transition: transform 0.3s;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.return-home:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* 10) Colores forzados */
+.confirmation-message,
+.details-container div,
+.additional-info p {
+  color: #ffffff !important;
+}
+
+.info-box span {
+  color: #8a2be2;
+  font-weight: 600;
+}
+
+.info-box .fa-life-ring {
+  color: #8a2be2;
+  font-size: 1.8rem;
+}
+
+/* 11) Animaciones */
+@keyframes circleFill {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes checkScale {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  80% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 12) Responsive */
+@media (max-width: 768px) {
+  .details-container {
+    grid-template-columns: 1fr;
+  }
+  .reservation-details {
+    padding: 15px;
+  }
+  .confirmation-card {
+    padding: 25px;
+  }
+}

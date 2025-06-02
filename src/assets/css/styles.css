@@ -1,0 +1,262 @@
+/* PÁGINA ARENA YEYIAN PRINCIPAL */
+
+/* Parámetros generales */
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    text-decoration: none;
+}
+
+@font-face {
+    font-family: 'Abolition';
+    src: url("../assets/fonts/Abolition/AbolitionTest-Regular.otf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* BODY */
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('../assets/images/background_photo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* BARRA DE NAVEGACIÓN */
+.nav {
+    background-color: #170F24;
+    padding: 10px 20px;
+    box-shadow: 0 2px 8px #2f1be3;
+    position: fixed;
+    top: 0;
+    width:100%;
+    z-index: 1;
+}
+
+.navContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+      /* parte izquierda */
+.nav .navbar_left {
+    margin-left: 5px;
+}
+
+.nav .navbar_left img {
+    height: 50px;
+}
+
+.logo {
+    padding-left: 5px;
+    height: 65px;
+    filter: drop-shadow(0 0 2px white)
+            drop-shadow(0 0 1px white);
+    transition: transform 0.4s ease;    
+}
+
+.logo img:hover {
+    transform:scale(1.1);
+}
+
+
+
+    /* parte central */
+
+.nav .navbar_center {
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%); /* para centrarlo */
+    display: flex;
+    align-items: center;
+    gap: 15px; /* para el espacio entre los logos */
+}
+
+.nav .navbar_center img {
+    height: 50px;
+}
+
+.separador {
+    width: 1px;
+    height: 50px;
+    background-color: #FFFFFF;
+    margin: 0 5px; /* espacio entre los logos y el separador */
+}
+
+.nav .navbar_right {
+    font-family: 'Abolition', sans-serif;
+    margin-right: 50px;
+}
+
+.nav .navbar_right a {
+    background-image: linear-gradient(150deg, #C92704, #bc04c9, #044bc9);
+    border-radius: 8px;
+    display: flex;
+    font-size: 30px;
+    padding: 3px;
+    cursor: pointer;
+    transition: 0.4s;
+    color: #FFFFFF;
+}
+
+.nav .navbar_right a:active{
+    transform: scale(0.70);
+}
+
+.nav .navbar_right a span {
+    color: #FFFFFF;
+    text-align: center;
+    background-color:#170F24;
+    padding: 6px 20px;
+    border-radius: 6px;
+    transition: 0.4s;
+}
+
+.nav .navbar_right a:hover span{
+    background: none;
+}
+
+.reservationShortText {
+    display: none;
+}
+
+@media (max-width: 850px) { /* para q se vea bien en pantallas pequeñas */
+/*Si el ancho es menor que 850px se quita el texto largo */
+    .nav {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    /*.nav .navbar_center {
+        margin: 10px 0;
+    }*/
+
+    .reservationText {
+        display: none;
+    }
+
+    .reservationShortText {
+        display: inline;
+    }
+}
+
+/* para el dropdown menu */
+/* Dropdown Button */
+.dropbtn {
+    background-color: #170F24;
+    border: none;
+    cursor: pointer;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    height: 50px; /* Match the height of other navbar elements */
+    width: 50px; /* Make it square for the image */
+  }
+
+  .dropbtn img {
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover{
+    background-color: #35274b;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .nav .navbar_left .dropdown {
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: 'Abolition', sans-serif;
+    font-size: 16px;
+    display: none;
+    position: absolute;
+    background-color: #170F24;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: 5px;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #35274b;}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;}
+
+
+/* FOOTER */
+.footer {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    background-color: #170F24; 
+    color: #FFFFFF;
+    position: fixed; 
+    bottom: 0;
+    width: 100%; 
+    box-shadow: 0 -2px 8px #2f1be3;
+    z-index: 1;
+    padding: 10px 0px;
+    
+}
+
+.footerContainer {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+/* Sección izquierda */
+.footer_left {
+    padding-left: 20px;
+}
+
+/* Sección central */
+.footer_center {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* para el espacio entre los logos */
+}
+
+.footer_center img {
+    height: 15px;
+}
+
+.footer_right {
+    padding-right: 20px;
+}
+
+
+
