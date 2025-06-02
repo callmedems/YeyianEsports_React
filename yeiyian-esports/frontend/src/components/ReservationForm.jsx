@@ -1,6 +1,5 @@
-// ReservationForm.jsx
-
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import "intl-tel-input/build/css/intlTelInput.css";
@@ -8,13 +7,13 @@ import intlTelInput from "intl-tel-input";
 import "../css/reservas.css";
 
 const ReservationForm = () => {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const fechaRef = useRef(null);
   const whatsappRef = useRef(null);
   const itiRef = useRef(null);
   const [contactMethod, setContactMethod] = useState(null);
   const [emailInput, setEmailInput] = useState("");
-
   const slides = ["/assets/images/slide1.jpg", "/assets/images/slide2.jpg", "/assets/images/slide3.jpg"];
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -26,27 +25,30 @@ const ReservationForm = () => {
   }, []);
 
   useEffect(() => {
-    if (fechaRef.current) {
-      flatpickr(fechaRef.current, {
-        minDate: "today",
-        disable: [
-          function (date) {
-            const fechasOcupadas = ["2025-05-01", "2025-05-05"];
-            return fechasOcupadas.includes(date.toISOString().split("T")[0]);
+    const initCalendar = async () => {
+      if (!fechaRef.current) return;
+      try {
+        const res = await fetch("http://localhost:3000/api/occupied-dates");
+        const occupiedDates = await res.json();
+        flatpickr(fechaRef.current, {
+          minDate: "today",
+          disable: occupiedDates,
+          onChange: function (selectedDates) {
+            const mensaje = document.getElementById("mensaje");
+            if (selectedDates.length) {
+              mensaje.innerText = "¡Fecha disponible!";
+              mensaje.style.color = "green";
+            } else {
+              mensaje.innerText = "Selecciona una fecha válida.";
+              mensaje.style.color = "red";
+            }
           },
-        ],
-        onChange: function (selectedDates) {
-          const mensaje = document.getElementById("mensaje");
-          if (selectedDates.length) {
-            mensaje.innerText = "¡Fecha disponible!";
-            mensaje.style.color = "green";
-          } else {
-            mensaje.innerText = "Selecciona una fecha válida.";
-            mensaje.style.color = "red";
-          }
-        },
-      });
-    }
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    initCalendar();
   }, []);
 
   useEffect(() => {
@@ -54,8 +56,7 @@ const ReservationForm = () => {
       itiRef.current = intlTelInput(whatsappRef.current, {
         preferredCountries: ["mx", "us"],
         separateDialCode: true,
-        utilsScript:
-          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.9/js/utils.js",
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.9/js/utils.js",
       });
     }
   }, []);
@@ -69,7 +70,6 @@ const ReservationForm = () => {
   const showErrorTooltip = (field, message) => {
     const container = field.parentNode;
     container.style.position = "relative";
-
     let tooltip = container.querySelector(".error-tooltip");
     if (!tooltip) {
       tooltip = document.createElement("div");
@@ -212,11 +212,9 @@ const ReservationForm = () => {
 
   const showContactInput = (type) => {
     setContactMethod(type);
-    document
-      .querySelectorAll(".phone-input-container, #email-input")
-      .forEach((el) => {
-        el.style.display = "none";
-      });
+    document.querySelectorAll(".phone-input-container, #email-input").forEach((el) => {
+      el.style.display = "none";
+    });
 
     if (type === "whatsapp") {
       document.getElementById("whatsapp-container").style.display = "flex";
@@ -248,16 +246,10 @@ const ReservationForm = () => {
       };
 
       if (!emailInput.trim()) {
-        showErrorTooltip(
-          document.getElementById("email-input"),
-          "Por favor ingresa tu correo"
-        );
+        showErrorTooltip(document.getElementById("email-input"), "Por favor ingresa tu correo");
         return;
       } else if (!validarFormatoCorreo(emailInput)) {
-        showErrorTooltip(
-          document.getElementById("email-input"),
-          "Formato de correo inválido"
-        );
+        showErrorTooltip(document.getElementById("email-input"), "Formato de correo inválido");
         return;
       }
     }
@@ -266,7 +258,7 @@ const ReservationForm = () => {
     nextStep(3);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (contactMethod === "whatsapp" && !validatePhoneNumber()) {
@@ -287,12 +279,34 @@ const ReservationForm = () => {
       return;
     }
 
-    localStorage.setItem(
-      "reserva",
-      JSON.stringify({ nombre, correo, tipoReserva, fecha, hora })
-    );
-
-    window.location.href = "/cotizacion";
+    try {
+      const response = await fetch("http://localhost:3000/api/reservations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, correo, tipoReserva, fecha, hora }),
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        const mensaje = document.getElementById("mensaje");
+        mensaje.innerText = errorData.error || "Error al crear la reserva.";
+        mensaje.style.color = "red";
+        return;
+      }
+      const fechaInput = document.getElementById("fecha");
+      if (fechaInput._flatpickr) {
+        fechaInput._flatpickr.clear();
+        const fechasNuevas = await fetch("http://localhost:3000/api/occupied-dates").then((r) => r.json());
+        fechaInput._flatpickr.set("disable", fechasNuevas);
+      }
+      const mensaje = document.getElementById("mensaje");
+      mensaje.innerText = "Reservación creada. ¡Gracias!";
+      mensaje.style.color = "green";
+      navigate("/cotizacion");
+    } catch (err) {
+      const mensaje = document.getElementById("mensaje");
+      mensaje.innerText = "No se pudo conectar al servidor.";
+      mensaje.style.color = "red";
+    }
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -300,18 +314,15 @@ const ReservationForm = () => {
 
   const computeOpenStatus = () => {
     const now = new Date();
-    const day = now.getDay(); 
+    const day = now.getDay();
     const hour = now.getHours();
     const minute = now.getMinutes();
 
     let openHourStart, openHourEnd;
-
     if (day >= 1 && day <= 5) {
-      // Lunes-Viernes
       openHourStart = 10;
       openHourEnd = 22;
     } else {
-      // Sábado-Domingo
       openHourStart = 12;
       openHourEnd = 18;
     }
@@ -322,33 +333,24 @@ const ReservationForm = () => {
       setNextOpenText(`Cerrará hoy a las ${openHourEnd}:00`);
     } else {
       setIsOpen(false);
-      // calcular próximo horario de apertura
       let nextDay = day;
       let nextOpenHour = openHourStart;
-
       if (nowInHours >= openHourEnd) {
-        // ya pasó la hora de cierre de hoy, salto al siguiente día
         nextDay = (day + 1) % 7;
       }
-
       if (nextDay === 0 || nextDay === 6) {
-        // fin de semana, la apertura es a las 12:00
         nextOpenHour = 12;
       } else {
-        // día entre semana, la apertura es a las 10:00
         nextOpenHour = 10;
       }
-
       const isTomorrow =
         nowInHours >= openHourEnd ||
         (day === 6 && nowInHours < openHourStart) ||
         (day === 0 && nowInHours < openHourStart);
-
       let labelDay = isTomorrow ? "Mañana" : "Hoy";
       if (nowInHours < openHourStart) {
         labelDay = "Hoy";
       }
-
       setNextOpenText(`${labelDay} a las ${nextOpenHour}:00`);
     }
   };
@@ -363,41 +365,18 @@ const ReservationForm = () => {
     <div className="reservation-page">
       <div className="reservation-container">
         <div className="reservation-wrapper">
-          <form
-            id="reservation-form"
-            className="reservation-form"
-            onSubmit={handleSubmit}
-          >
+          <form id="reservation-form" className="reservation-form" onSubmit={handleSubmit}>
             <div className="step active" id="step-1">
               <h1>Reserva tu Experiencia Gamer</h1>
-              <p className="form-instructions">
-                Por favor rellena este formulario para poder completar tu
-                reservación.
-              </p>
+              <p className="form-instructions">Por favor rellena este formulario para poder completar tu reservación.</p>
               <div className="input-container">
-                <input
-                  type="text"
-                  name="nombre"
-                  id="nombre"
-                  placeholder="Nombre completo"
-                  required
-                />
+                <input type="text" name="nombre" id="nombre" placeholder="Nombre completo" required />
               </div>
               <div className="input-container">
-                <input
-                  type="email"
-                  name="correo"
-                  id="correo"
-                  placeholder="Correo electrónico"
-                  required
-                />
+                <input type="email" name="correo" id="correo" placeholder="Correo electrónico" required />
               </div>
               <div className="form-buttons">
-                <button
-                  type="button"
-                  className="next-btn"
-                  onClick={() => nextStep(2)}
-                >
+                <button type="button" className="next-btn" onClick={() => nextStep(2)}>
                   <i className="fas fa-arrow-right"></i> Siguiente
                 </button>
               </div>
@@ -405,16 +384,9 @@ const ReservationForm = () => {
 
             <div className="step" id="step-2">
               <h1>Tipo de Reserva</h1>
-              <p className="form-instructions">
-                Seleccione el tipo de reserva.
-              </p>
+              <p className="form-instructions">Seleccione el tipo de reserva.</p>
               <div className="input-container">
-                <select
-                  name="tipoReserva"
-                  id="tipoReserva"
-                  required
-                  onChange={checkSpecialReservation}
-                >
+                <select name="tipoReserva" id="tipoReserva" required onChange={checkSpecialReservation}>
                   <option value="">Tipo de reserva</option>
                   <option value="Individual">Individual</option>
                   <option value="Corporativo">Corporativo</option>
@@ -424,30 +396,15 @@ const ReservationForm = () => {
                 </select>
               </div>
 
-              <div
-                className="special-banner"
-                id="special-banner"
-                style={{ display: "none" }}
-              >
+              <div className="special-banner" id="special-banner" style={{ display: "none" }}>
                 <h3>
-                  <i className="fas fa-info-circle"></i> ¡Hola{" "}
-                  <strong>
-                    <span id="banner-nombre"></span>
-                  </strong>
-                  !
+                  <i className="fas fa-info-circle"></i> ¡Hola <strong><span id="banner-nombre"></span></strong>!
                 </h3>
                 <p>
-                  Dado que tu evento es{" "}
-                  <strong>
-                    <span id="banner-tipo"></span>
-                  </strong>
-                  , sugerimos agendar cita con nuestros administrativos.
+                  Dado que tu evento es <strong><span id="banner-tipo"></span></strong>, sugerimos agendar cita con nuestros administrativos.
                 </p>
                 <p>
-                  Puedes contactarnos a:{" "}
-                  <strong>
-                    <i className="fas fa-envelope"></i> reservas@arenayeyian.com
-                  </strong>
+                  Puedes contactarnos a: <strong><i className="fas fa-envelope"></i> reservas@arenayeyian.com</strong>
                 </p>
                 <p>O indícanos tu medio de contacto:</p>
 
@@ -463,17 +420,8 @@ const ReservationForm = () => {
                     <label htmlFor="contact-whatsapp">
                       <i className="fab fa-whatsapp"></i> WhatsApp
                     </label>
-                    <div
-                      id="whatsapp-container"
-                      className="phone-input-container"
-                      style={{ display: "none" }}
-                    >
-                      <input
-                        type="tel"
-                        id="whatsapp-number"
-                        placeholder="Ej. 3312345678"
-                        ref={whatsappRef}
-                      />
+                    <div id="whatsapp-container" className="phone-input-container" style={{ display: "none" }}>
+                      <input type="tel" id="whatsapp-number" placeholder="Ej. 3312345678" ref={whatsappRef} />
                     </div>
                   </div>
 
@@ -486,8 +434,7 @@ const ReservationForm = () => {
                       onClick={() => showContactInput("email")}
                     />
                     <label htmlFor="contact-email">
-                      <i className="fas fa-envelope"></i> Correo
-                      electrónico
+                      <i className="fas fa-envelope"></i> Correo electrónico
                     </label>
                     <input
                       type="email"
@@ -502,21 +449,15 @@ const ReservationForm = () => {
                 </div>
 
                 <div className="special-banner-buttons">
-                  <button
-                    type="button"
-                    className="special-banner-btn continue"
-                    onClick={continueWithSpecialReservation}
-                  >
+                  <button type="button" className="special-banner-btn continue" onClick={continueWithSpecialReservation}>
                     <i className="fas fa-check-circle"></i> Continuar
                   </button>
                   <button
                     type="button"
                     className="special-banner-btn cancel"
                     onClick={() => {
-                      document.getElementById("special-banner").style.display =
-                        "none";
-                      document.getElementById("next-step-2").style.display =
-                        "inline-block";
+                      document.getElementById("special-banner").style.display = "none";
+                      document.getElementById("next-step-2").style.display = "inline-block";
                     }}
                   >
                     <i className="fas fa-times-circle"></i> Cancelar
@@ -525,19 +466,10 @@ const ReservationForm = () => {
               </div>
 
               <div className="form-buttons">
-                <button
-                  type="button"
-                  className="prev-btn"
-                  onClick={() => prevStep(1)}
-                >
+                <button type="button" className="prev-btn" onClick={() => prevStep(1)}>
                   <i className="fas fa-arrow-left"></i> Volver
                 </button>
-                <button
-                  type="button"
-                  className="next-btn"
-                  id="next-step-2"
-                  onClick={() => nextStep(3)}
-                >
+                <button type="button" className="next-btn" id="next-step-2" onClick={() => nextStep(3)}>
                   <i className="fas fa-arrow-right"></i> Siguiente
                 </button>
               </div>
@@ -545,28 +477,15 @@ const ReservationForm = () => {
 
             <div className="step" id="step-3">
               <h1>Selecciona la Fecha y Hora</h1>
-              <p className="form-instructions">
-                Seleccione alguna de las fechas disponibles.
-              </p>
+              <p className="form-instructions">Seleccione alguna de las fechas disponibles.</p>
               <div className="input-container">
-                <input
-                  type="text"
-                  id="fecha"
-                  name="fecha"
-                  placeholder="Selecciona la fecha"
-                  required
-                  ref={fechaRef}
-                />
+                <input type="text" id="fecha" name="fecha" placeholder="Selecciona la fecha" required ref={fechaRef} />
               </div>
               <div className="input-container">
                 <input type="time" name="hora" id="hora" required />
               </div>
               <div className="form-buttons">
-                <button
-                  type="button"
-                  className="prev-btn"
-                  onClick={() => prevStep(2)}
-                >
+                <button type="button" className="prev-btn" onClick={() => prevStep(2)}>
                   <i className="fas fa-arrow-left"></i> Volver
                 </button>
                 <button type="submit" className="next-btn">
@@ -581,11 +500,8 @@ const ReservationForm = () => {
           <div className="info-panel">
             <h2>Estás a un paso de la experiencia gamer más épica</h2>
             <p>
-              Vive torneos en vivo, estaciones de última generación y eventos
-              exclusivos. ¡No te pierdas el ambiente más emocionante de
-              Guadalajara!
+              Vive torneos en vivo, estaciones de última generación y eventos exclusivos. ¡No te pierdas el ambiente más emocionante de Guadalajara!
             </p>
-
             <ul className="features-list">
               <li>
                 <i className="fas fa-gamepad"></i> Estaciones de alta potencia
@@ -597,43 +513,23 @@ const ReservationForm = () => {
                 <i className="fas fa-users"></i> Quedadas y streaming en vivo
               </li>
             </ul>
-
             <div className="carousel">
               {slides.map((src, index) => (
-                <img
-                  key={index}
-                  src={src}
-                  alt={`Slide ${index + 1}`}
-                  className={index === currentSlide ? "active" : ""}
-                />
+                <img key={index} src={src} alt={`Slide ${index + 1}`} className={index === currentSlide ? "active" : ""} />
               ))}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="discord-panel">
-        <i className="fab fa-discord"></i>
-        <span>Síguenos en Discord para estar al tanto de todas las novedades</span>
-      </div>
-
       <div className="visit-panel">
         <div className="visit-left">
           <span className="visit-caption">¡Ven a visitarnos!</span>
           <h2 className="visit-status">
-            Estamos{" "}
-            <span className={`status ${isOpen ? "open" : "closed"}`}>
-              {isOpen ? "abiertos" : "cerrados"}
-            </span>
+            Estamos <span className={`status ${isOpen ? "open" : "closed"}`}>{isOpen ? "abiertos" : "cerrados"}</span>
           </h2>
           <p className="visit-subtext">
-            {isOpen
-              ? `Abierto hasta las ${
-                  new Date().getDay() >= 1 && new Date().getDay() <= 5
-                    ? "22:00"
-                    : "18:00"
-                }`
-              : `Abrirá ${nextOpenText}`}
+            {isOpen ? `Abierto hasta las ${new Date().getDay() >= 1 && new Date().getDay() <= 5 ? "22:00" : "18:00"}` : `Abrirá ${nextOpenText}`}
           </p>
           <div className="visit-info">
             <p>
@@ -653,6 +549,11 @@ const ReservationForm = () => {
             loading="lazy"
           ></iframe>
         </div>
+      </div>
+
+      <div className="discord-panel">
+        <i className="fab fa-discord"></i>
+        <span>Síguenos en Discord para estar al tanto de todas las novedades</span>
       </div>
     </div>
   );
