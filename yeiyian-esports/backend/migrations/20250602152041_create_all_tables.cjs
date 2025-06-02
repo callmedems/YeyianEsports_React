@@ -1,3 +1,4 @@
+// migrations/20250602152041_create_all_tables.cjs
 exports.up = function(knex) {
   return knex.schema
     .createTable('Admin', table => {
@@ -8,11 +9,13 @@ exports.up = function(knex) {
     })
     .createTable('Client', table => {
       table.increments('clientId').primary();
-      table.string('mail', 100);
+      table.string('mail', 100).notNullable().unique();
       table.string('phoneNumber', 20);
-      table.string('userName', 100);
+      table.string('userName', 100).notNullable();
       table.string('password', 100);
       table.string('profilePicture', 255);
+      // --- Agregamos columna token ---
+      table.string('token', 255).nullable().unique();
     })
     .createTable('Game', table => {
       table.increments('gameId').primary();
@@ -57,7 +60,7 @@ exports.down = function(knex) {
   return knex.schema
     .dropTableIfExists('Review')
     .dropTableIfExists('Reservation')
-    .dropTableIfExists('Reservation_Costs')
+    .dropTableIfExists('ReservationCosts')
     .dropTableIfExists('Game')
     .dropTableIfExists('Client')
     .dropTableIfExists('Admin');
