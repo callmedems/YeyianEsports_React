@@ -1,0 +1,306 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+.pago-page {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../images/background_photo.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: #ffffff;
+  min-height: 100vh;
+  width: 100%;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #8a2be2;
+}
+
+.resumen-compra h2 {
+  color: #8a2be2;
+}
+
+.resumen-header h3 {
+  color: #8a2be2 !important;
+}
+
+.detail-item {
+  color: #ffffff;
+}
+
+#card-name {
+  color: #ffffff;
+}
+
+.direccion p {
+  color: #ffffff;
+}
+
+.form-row label {
+  color: #ffffff;
+}
+
+.precio-resumen {
+  color: #8a2be2;
+}
+
+
+.pago-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 100px auto 80px; 
+  padding: 20px;
+  min-height: calc(100vh - 280px);
+}
+
+.pago-info,
+.ubicacion-container {
+  background: rgba(20, 20, 30, 0.9);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(138, 43, 226, 0.6);
+  border: 1px solid #8a2be2;
+}
+
+
+.resumen-compra h2 {
+  color: #8a2be2;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.resumen-card {
+  background: rgba(138, 43, 226, 0.1);
+  border-radius: 15px;
+  border-left: 4px solid #8a2be2;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.resumen-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+}
+
+.resumen-header h3 {
+  color: #ffffff;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.precio-resumen {
+  color: #8a2be2;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.resumen-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+}
+
+.detail-item i {
+  color: #8a2be2;
+  width: 20px;
+  text-align: center;
+}
+
+
+.metodos-lista {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.metodo-option {
+  flex: 1;
+  padding: 15px;
+  border: 2px solid rgba(138, 43, 226, 0.3);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.metodo-option i {
+  font-size: 1.8rem;
+}
+
+.metodo-option.active {
+  border-color: #8a2be2;
+  background: rgba(138, 43, 226, 0.1);
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+}
+
+
+.metodo-form {
+  display: none;
+  animation: fadeIn 0.5s;
+}
+
+.metodo-form.active {
+  display: block;
+}
+
+.form-row {
+  margin-bottom: 20px;
+}
+
+.form-row label {
+  display: block;
+  margin-bottom: 8px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.form-row.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.StripeElement {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #8a2be2;
+}
+
+.StripeElement--focus {
+  border-color: #8a2be2;
+  box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+}
+
+#card-name {
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #8a2be2;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  transition: all 0.3s;
+  box-sizing: border-box;
+  margin: 0;
+  height: auto;
+}
+
+#card-name:focus {
+  outline: none;
+  border-color: #8a2be2;
+  box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+}
+
+#card-name::placeholder {
+  color: #aab7c4;
+}
+
+#paypal-button-container {
+  min-height: 50px;
+  margin-top: 20px;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pago-btn {
+  background: linear-gradient(45deg, #8a2be2, #9400d3);
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.pago-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.6);
+}
+
+#mapa-arena {
+  height: 400px;
+  width: 100%;
+  border-radius: 15px;
+  margin-top: 20px;
+  border: 2px solid #8a2be2;
+  background-color: #1e1b38;
+}
+
+.direccion {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(138, 43, 226, 0.1);
+  border-radius: 10px;
+  border-left: 3px solid #8a2be2;
+}
+
+.direccion p {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.direccion i {
+  color: #8a2be2;
+  width: 20px;
+  text-align: center;
+}
+
+
+@media (max-width: 768px) {
+  .pago-container {
+    grid-template-columns: 1fr;
+    margin-top: 80px;
+    margin-bottom: 120px;
+  }
+
+  .form-row.two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .metodos-lista {
+    flex-direction: column;
+  }
+}

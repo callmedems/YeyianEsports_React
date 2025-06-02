@@ -58,12 +58,10 @@ const Navbar = () => {
           <div className="separador"></div>
           <img src="/assets/images/Yeyian Logo.png" alt="Logo Arena Yeyian" />
         </section>
-        <section className="navbar_right">
-          <a href="#" onClick={() => navigateTo('reservation')}>
-            <span className="reservationText">¡Reserva Ya Tu Horario!</span>
-            <span className="reservationShortText">¡Reserva Ya!</span>
-          </a>
-        </section>
+        <Link to="/reservation" className="navbar_right">
+          <span className="reservationText">¡Reserva Ya Tu Horario!</span>
+          <span className="reservationShortText">¡Reserva Ya!</span>
+        </Link>
       </nav>
     </header>
   );

@@ -6,9 +6,9 @@ import Footer from './components/Footer';
 
 import Home from './components/Home';    // ya no es “otro App”, es tu Home
 import LandingPage from './components/LandingPage';
-import Payment from './components/Payment';
-import Reservation from './components/Reservation';
-import Cotization from './components/Cotization';
+import Pago from './components/Pago';
+import ReservationForm from './components/ReservationForm';
+import Cotization from './components/cotizacion';
 import Rules from './components/Rules';
 import News from './components/News';
 import "./App.css";
@@ -22,9 +22,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/landing" element={<LandingPage />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/reservation" element={<Reservation />} />
-        <Route path="/cotization" element={<Cotization />} />
+        <Route path="/payment" element={<Pago />} />
+        <Route path="/reservation" element={<ReservationForm />} />
+        <Route path="/cotizacion" element={<Cotization />} />
         <Route path="/rules" element={<Rules />} />
         <Route path="/news" element={<News />} />
       </Routes>
