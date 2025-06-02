@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/reviews', reviewsRouter);
-app.use('/images/profiles', express.static('public/images'));
+
 
 
 app.listen(3000, () => console.log('Servidor corriendo en puerto 3000'));
