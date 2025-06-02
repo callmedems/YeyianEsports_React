@@ -1,5 +1,7 @@
 /* PÁGINA ARENA YEYIAN PRINCIPAL */
 
+/* PÁGINA ARENA YEYIAN PRINCIPAL */
+
 /* Parámetros generales */
 * {
     margin: 0;
@@ -52,6 +54,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
+    min-height: 100vh;
 }
 
 
