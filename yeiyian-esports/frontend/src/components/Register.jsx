@@ -17,9 +17,40 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if (!form.mail.includes('@')) {
+      alert('Debes escribir un correo válido.');
+      return;
+    }
+
+    fetch('http://localhost:3000/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form)
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('Error al registrar cuenta');
+        return res.json();
+      })
+      .then(() => {
+        alert('¡Se ha registrado tu cuenta!');
+        setForm({ //se reinicia la info del forms para cuando se cree otra cuenta
+          mail: '',
+          phoneNumber: '',
+          userName: '',
+          password: '',
+          profilePicture: ''
+        });
+        // Recargar reseñas
+      })
+      .catch(err => {
+        console.error(err);
+        alert('No se pudo enviar registrar la cuenta');
+      });
+  };
     // backend here
     console.log('Registrando...', form);
-  };
+  
 
   return (
     <div className="authContainer">
@@ -30,7 +61,7 @@ const Register = () => {
           <input name="phoneNumber" type="tel" placeholder="Teléfono" onChange={handleChange} />
           <input name="userName" type="text" placeholder="Nombre de usuario" onChange={handleChange} required />
           <input name="password" type="password" placeholder="Contraseña" onChange={handleChange} required />
-          <button type="submit"> <p style={{  color: 'white' }}></p>Crear cuenta</button>
+          <button type="submit"> <p style={{  color: 'white' }}>Crear cuenta</p></button>
         </form>
       </div>
     </div>
