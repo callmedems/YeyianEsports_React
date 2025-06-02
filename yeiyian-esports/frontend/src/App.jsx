@@ -12,6 +12,8 @@ import ReservationForm from './components/ReservationForm';
 import Cotizacion from './components/cotizacion';
 import Rules from './components/Rules';
 import News from './components/News';
+import Login from './components/Login';
+import Register from './components/Register';
 import "./App.css";
 // importa cotizacion, rules, tour, etc., según las páginas que tengas
 
@@ -22,6 +24,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
         <Route path="/landing" element={<LandingPage />} />
         <Route path="/pago" element={<Pago />} />
         <Route path="/reservation" element={<ReservationForm />} />

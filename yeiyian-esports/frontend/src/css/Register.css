@@ -1,0 +1,108 @@
+.auth-background {
+  position: relative;
+  min-height: 100vh;
+  background-image: url('/images/arena-showcase-2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+
+/* Overlay azul traslúcido */
+.auth-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 38, 81, 0.6); 
+  z-index: 1;
+}
+
+
+.authContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* ocupa toda la altura de pantalla */
+  background-image: url('/images/arena-showcase-2.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* Overlay azul translúcido */
+.authContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 38, 81, 0.6);
+  z-index: 1;
+}
+
+/* Contenedor principal de login */
+.authBox {
+  position: relative;
+  z-index: 2;
+  background-color: #2c2d5b; /* azul oscuro */
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%; /* para responsividad */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+/* Estilos de los inputs */
+.authBox input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.authBox input,
+.authBox button {
+  width: 80%;                
+  max-width: 300px;          
+  margin: 0 auto 1rem auto;  
+  display: block;            
+  box-sizing: border-box;
+}
+
+.authBox h2 {
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: white;
+}
+
+.authBox input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.authBox button {
+  background-color: var(--color-botonRojo);
+  
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.authBox button:hover {
+  background-color: #a81c0a;
+}
