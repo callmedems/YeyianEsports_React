@@ -43,10 +43,10 @@ const Navbar = () => {
               ref={dropdownRef}
               className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}
             >
-              <a href="#" onClick={() => navigateTo('news')}>Noticias</a>
-              <a href="#" onClick={() => navigateTo('rules')}>Reglamento</a>
-              <a href="#" onClick={() => navigateTo('tour')}>Tour Virtual</a>
-              <a href="#" onClick={() => navigateTo('cotization')}>Precios</a>
+              <Link to="/news">Noticias</Link>
+              <Link to="/rules">Reglamento</Link>
+              <Link to="/tour">Tour Virtual</Link>
+              <Link to="/cotization">Precios</Link>
             </div>
           </div>
           <Link to="/" className="logo">
@@ -59,10 +59,11 @@ const Navbar = () => {
           <img src="/assets/images/Yeyian Logo.png" alt="Logo Arena Yeyian" />
         </section>
         <section className="navbar_right">
-          <a href="#" onClick={() => navigateTo('reservation')}>
-            <span className="reservationText">¡Reserva Ya Tu Horario!</span>
-            <span className="reservationShortText">¡Reserva Ya!</span>
-          </a>
+          
+        <Link to="/reservation" className="reservation-link">
+          <span className="reservationText">¡Reserva Ya Tu Horario!</span>
+          <span className="reservationShortText">¡Reserva Ya!</span>
+        </Link>
         </section>
       </nav>
     </header>
