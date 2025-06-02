@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../css/styles.css';
-
+import '../css/Navbar.css';
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -59,7 +59,9 @@ const Navbar = () => {
           <img src="/assets/images/Yeyian Logo.png" alt="Logo Arena Yeyian" />
         </section>
         <section className="navbar_right">
-          
+          <div className="auth-buttons">
+              <Link to="/login" className="nav-button login-button">Iniciar sesión / Registrarse</Link>
+              </div>
         <Link to="/reservation" className="reservation-link">
           <span className="reservationText">¡Reserva Ya Tu Horario!</span>
           <span className="reservationShortText">¡Reserva Ya!</span>
