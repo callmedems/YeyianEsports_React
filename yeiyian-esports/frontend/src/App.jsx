@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 import Home from './components/Home';    // ya no es “otro App”, es tu Home
-import LandingPage from './components/LandingPage';
+
 import Pago from './components/Pago';
 import ReservationForm from './components/ReservationForm';
 import Cotization from './components/cotizacion';
@@ -18,17 +18,17 @@ function App() {
   
   return (
     <BrowserRouter>
-      <Navbar />
+      
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/landing" element={<LandingPage />} />
+        
         <Route path="/payment" element={<Pago />} />
         <Route path="/reservation" element={<ReservationForm />} />
         <Route path="/cotizacion" element={<Cotization />} />
         <Route path="/rules" element={<Rules />} />
         <Route path="/news" element={<News />} />
       </Routes>
-      <Footer />
+      
     </BrowserRouter>
   );
 }

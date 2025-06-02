@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import "../assets/css/confirmation.css"; 
 import "../assets/css/styles.css";  
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 const Confirmation = () => {
   const reserva = JSON.parse(localStorage.getItem("reserva")) || {};
@@ -123,10 +121,7 @@ const Confirmation = () => {
 
   return (
     <>
-      {}
-      <Navbar />
-
-      {}
+      
       <div className="confirmation-page">
         <div className="confirmation-container">
           <div className="confirmation-card">
@@ -226,11 +221,7 @@ const Confirmation = () => {
         </div>
       </div>
 
-      {}
-      <div style={{ marginBottom: "80px" }}></div>
-
-      {}
-      <Footer />
+      
     </>
   );
 };
