@@ -1,0 +1,209 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    background-image: url('/assets/images/background_photo.jpg');
+background-repeat: no-repeat;
+background-position: center center;
+background-attachment: fixed;
+
+    background-size: cover;
+}
+
+
+.cotizacion-page .cotizacion-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 160px); 
+    padding: 80px 20px 60px;
+    margin-top: 80px;
+    margin-bottom: 60px; 
+}
+
+
+.cotizacion-page .cotizacion-info {
+    width: 80%;
+    max-width: 900px;
+    background: rgba(20, 20, 30, 0.9);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.6);
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    transition: all 0.5s ease;
+    border: 1px solid #8a2be2;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.cotizacion-page button {
+    background: linear-gradient(45deg, #8a2be2, #9400d3);
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+    padding: 15px 30px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+}
+
+.cotizacion-page button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(138, 43, 226, 0.6);
+    animation: pulse 1.5s infinite;
+}
+
+
+.cotizacion-page .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(138, 43, 226, 0.3);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+    border-color: #8a2be2;
+}
+
+.feature-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+    color: #8a2be2;
+}
+
+
+.price-display {
+    font-size: 42px;
+    font-weight: 700;
+    color: #8a2be2;
+    margin: 30px 0;
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+    line-height: 1.3;
+}
+
+.price-display span {
+    display: block;
+    font-size: 18px;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.marketing-highlight {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #ffffff;
+    margin: 25px 0;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(138, 43, 226, 0.1);
+    border-left: 4px solid #8a2be2;
+}
+
+.marketing-highlight span {
+    display: block;
+    margin-top: 10px;
+}
+
+
+.arena-showcase {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.arena-image {
+    width: 200px;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(138, 43, 226, 0.5);
+}
+
+.arena-image:hover {
+    transform: scale(1.1);
+    border-color: #8a2be2;
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.7);
+}
+
+
+.cotizacion-page h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.7);
+}
+
+.cotizacion-page h2 {
+    font-size: 1.8rem;
+    color: #8a2be2;
+    margin: 30px 0 20px;
+}
+
+.cotizacion-page p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+
+.marketing-highlight {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #8a2be2;
+    margin: 25px 0;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(0, 255, 170, 0.1);
+    border-left: 4px solid #8a2be2;
+}
+
+
+.reviews-cta {
+    margin-top: 40px;
+    font-style: italic;
+    color: #aaaaaa;
+}
+
+.reviews-cta a {
+    color: #8a2be2;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.reviews-cta a:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    position: relative;
+    height: 80px; 
+}

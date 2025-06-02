@@ -1,3 +1,6 @@
+/* reservas.css */
+
+/* Body queda global (si quieres que siga el mismo fondo en toda la app, o lo puedes extraer a un CSS global aparte) */
 .reservation-page body {
   margin: 0;
   padding: 0;
@@ -11,11 +14,12 @@
   background-size: cover;
 }
 
+/* TODO: A partir de aquí, todos los selectores van prefijados con .reservation-page */
 .reservation-page .reservation-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  min-height: calc(100vh - 240px);
+  min-height: calc(100vh - 240px); 
   padding: 60px 20px 20px 20px;
   box-sizing: border-box;
   width: 100%;
@@ -162,6 +166,7 @@
   width: 100%;
 }
 
+/* Esta regla reemplaza el selector global "button" */
 .reservation-page .reservation-form button {
   padding: 14px 28px;
   border-radius: 10px;
@@ -184,9 +189,9 @@
   box-shadow: 0 5px 15px rgba(138, 43, 226, 0.6);
 }
 
-.reservation-page .reservation-form .prev-btn {
-  background: transparent;
-  border: 2px solid #8a2be2;
+.reservation-page .prev-btn {
+  background: transparent !important;
+  border: 2px solid #8a2be2 !important;
   color: #8a2be2;
 }
 
@@ -628,7 +633,7 @@
 .reservation-page .visit-left {
   position: relative;
   flex: 1;
-  padding-left: 20px;
+  padding-left: 20px; 
 }
 
 .reservation-page .visit-left::before {
@@ -638,7 +643,7 @@
   top: 0;
   width: 6px;
   height: 100%;
-  background-color: #8a2be2;
+  background-color: #8a2be2;  
   border-radius: 4px;
 }
 
@@ -707,32 +712,34 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .reservation-page .discord-panel {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  max-width: 1240px;
+  max-width: 1240px;          
   width: 100%;
-  margin: 20px auto 0;
+  margin: 20px auto 0;          
   padding: 14px 20px;
   background: rgba(138, 43, 226, 0.15);
-  border: 1px solid #8a2be2;
+  border: 1px solid #8a2be2;          
   border-radius: 12px;
   color: #ffffff;
   font-size: 1rem;
   font-weight: 500;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
   animation: fadeIn 0.8s ease-out;
-}
-
-.reservation-page .discord-panel i {
-  font-size: 1.6rem;
-  color: #7289da;
-}
-
-.reservation-page .discord-panel span {
-  color: #ffffff;
 }
 
 @media (max-width: 1024px) {
@@ -746,4 +753,13 @@
   .reservation-page .discord-panel span {
     font-size: 0.95rem;
   }
+}
+
+.reservation-page .discord-panel i {
+  font-size: 1.6rem;
+  color: #7289da; 
+}
+
+.reservation-page .discord-panel span {
+  color: #ffffff;
 }

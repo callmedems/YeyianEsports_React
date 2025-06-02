@@ -1,5 +1,7 @@
 // App.jsx
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+
 //import 'bootstrap-icons/font/bootstrap-icons.css'; // Para los íconos bi
 
 const App = () => {
@@ -103,10 +105,11 @@ const App = () => {
           className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}
           ref={dropdownRef}
         >
-          <a onClick={() => navigateTo('news')}>Noticias</a>
-          <a onClick={() => navigateTo('rules')}>Reglamento</a>
-          <a onClick={() => navigateTo('tour')}>Tour Virtual</a>
-          <a onClick={() => navigateTo('cotizacion')}>Precios</a>
+          <Link to="/news">Noticias</Link>
+          <Link to="/rules">Reglamento</Link>
+          <Link to="/tour">Tour Virtual</Link>
+          <Link to="/cotizacion">Precios</Link>
+
         </div>
       </div>
 
