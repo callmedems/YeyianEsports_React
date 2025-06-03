@@ -106,3 +106,22 @@
 .authBox button:hover {
   background-color: #a81c0a;
 }
+
+.success-banner {
+  width: 80%;                
+  max-width: 300px;          
+  margin: 0 auto 1rem auto;  
+  display: block;            
+  box-sizing: border-box;
+
+  
+  
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+

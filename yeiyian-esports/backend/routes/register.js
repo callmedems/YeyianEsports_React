@@ -9,11 +9,6 @@ module.exports = function (knex) {
     try {
       const { mail, phoneNumber, userName,password } = req.body;
 
-      // Validación básica
-      if (!mail || !phoneNumber || !userName|| !password) {
-        return res.status(400).json({ error: 'Faltan campos requeridos' });
-      }
-
       await knex('client').insert({
         mail,
         phoneNumber,

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import '../css/Register.css';
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     mail: '',
     phoneNumber: '',
@@ -10,6 +13,8 @@ const Register = () => {
     password: '',
     profilePicture: ''
   });
+  const [showBanner, setShowBanner]=useState(false);
+  const [showRegisterBanner, setShowRegisterBanner]=useState(true);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -33,7 +38,8 @@ const Register = () => {
         return res.json();
       })
       .then(() => {
-        alert('¡Se ha registrado tu cuenta!');
+        
+        
         setForm({ //se reinicia la info del forms para cuando se cree otra cuenta
           mail: '',
           phoneNumber: '',
@@ -41,6 +47,10 @@ const Register = () => {
           password: '',
           profilePicture: ''
         });
+        setShowBanner(true);
+        setTimeout(() => {
+            navigate('/');  // Redirecciona a la pag principal
+        }, 1000);
         // Recargar reseñas
       })
       .catch(err => {
@@ -54,8 +64,9 @@ const Register = () => {
 
   return (
     <div className="authContainer">
-      <div className="authBox">
+     <div className="authBox">
         <h2>Registrarse</h2>
+        
         <form onSubmit={handleSubmit}>
           <input name="mail" type="email" placeholder="Correo" onChange={handleChange} required />
           <input name="phoneNumber" type="tel" placeholder="Teléfono" onChange={handleChange} />
@@ -63,7 +74,17 @@ const Register = () => {
           <input name="password" type="password" placeholder="Contraseña" onChange={handleChange} required />
           <button type="submit"> <p style={{  color: 'white' }}>Crear cuenta</p></button>
         </form>
+        {showBanner && (
+          <div className="success-banner">
+            Cuenta registrada con éxito
+          </div>
+        )}
+
       </div>
+
+      
+      
+
     </div>
   );
 };
