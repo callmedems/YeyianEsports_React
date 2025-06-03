@@ -286,8 +286,6 @@
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
     font-style: italic;
 }
-
-
 /* FOOTER */
 .footer {
     font-family: 'Roboto', sans-serif;
@@ -334,7 +332,7 @@
 .rulesMainContainer {
     font-family: 'Abolition', sans-serif;
     color:#FFFFFF;
-    position: absolute;
+    position: relative;
     font-size: 2rem;
     padding: 100px 20% 100px 20%;
     max-width: 5000px;
@@ -531,6 +529,7 @@ p {
     background-color: var(--color-fondo);
     text-align: center;
     padding-top: 12vh;
+    padding-bottom:7vh;
 }
 
 .gamesContainer h1 {
