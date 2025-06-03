@@ -1,6 +1,7 @@
 // src/components/Navbar.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import '../css/styles.css';
 import '../css/Navbar.css';
 const Navbar = () => {
@@ -59,6 +60,7 @@ const Navbar = () => {
           <img src="/assets/images/Yeyian Logo.png" alt="Logo Arena Yeyian" />
         </section>
         <section className="navbar_right">
+          
           <div className="auth-buttons">
               <Link to="/login" className="nav-button login-button">Iniciar sesión / Registrarse</Link>
               </div>
@@ -73,3 +75,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

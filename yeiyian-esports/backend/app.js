@@ -7,12 +7,17 @@ const knex = require('knex')(knexConfig.development);
 const reviewsRouter = require('./routes/reviews')(knex);
 const registerRouter = require('./routes/register')(knex);
 
+const loginRouter = require('./routes/login')(knex);
+
+
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 app.use('/api/reviews', reviewsRouter);
 app.use('/api/register', registerRouter);
+app.use('/api/login', loginRouter);
 
 
 

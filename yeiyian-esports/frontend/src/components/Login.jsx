@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import '../css/Register.css';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const Login = () => {
   const [form, setForm] = useState({ mail: '', password: '' });
   const navigate = useNavigate();
@@ -13,13 +11,28 @@ const Login = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // validacion del login (despues)
-    console.log('Iniciando sesión...', form);
+  e.preventDefault();
 
-    // Redirección simulada
-    navigate('/');
-  };
+  fetch('http://localhost:3000/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(form)
+  })
+    .then(res => {
+      if (!res.ok) throw new Error('Correo o contraseña incorrectos');
+      return res.json();
+    })
+    .then(data => {
+      console.log('Login exitoso:', data);
+      // Aquí puedes guardar al usuario en Redux o localStorage si quieres
+      navigate('/');
+    })
+    .catch(err => {
+      console.error(err);
+      alert('Correo o contraseña incorrectos');
+    });
+};
+
 
   return (
     <div className="authContainer">

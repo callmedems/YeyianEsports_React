@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../css/Register.css';
 
 const Register = () => {
-  const navigate = useNavigate();
+ 
 
   const [form, setForm] = useState({
     mail: '',
@@ -13,8 +13,9 @@ const Register = () => {
     password: '',
     profilePicture: ''
   });
+  const navigate = useNavigate();
   const [showBanner, setShowBanner]=useState(false);
-  const [showRegisterBanner, setShowRegisterBanner]=useState(true);
+
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
