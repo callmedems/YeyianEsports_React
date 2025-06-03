@@ -10,7 +10,7 @@ module.exports = function (knex) {
 
     try {
       const user = await knex('client')
-        .where({ mail, password }) // 👈 valida ambos
+        .where({ mail, password }) 
         .first();
 
       if (!user) {

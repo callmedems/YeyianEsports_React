@@ -1,26 +1,22 @@
-/* reservas.css */
-
-/* Body queda global (si quieres que siga el mismo fondo en toda la app, o lo puedes extraer a un CSS global aparte) */
-.reservation-page body {
+.reservation-page {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
   position: relative;
   color: #ffffff;
-  background: 
-    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.95)),
     url("src/assets/images/background_photo.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
-/* TODO: A partir de aquí, todos los selectores van prefijados con .reservation-page */
 .reservation-page .reservation-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  min-height: calc(100vh - 240px); 
-  padding: 60px 20px 20px 20px;
+  min-height: calc(100vh - 240px);
+  padding: 120px 20px 40px 20px;
   box-sizing: border-box;
   width: 100%;
 }
@@ -142,7 +138,7 @@
 .reservation-page .input-container select {
   appearance: none;
   background-color: rgba(255, 255, 255, 0.05);
-  background-image: 
+  background-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238a2be2' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 18px center;
@@ -166,7 +162,6 @@
   width: 100%;
 }
 
-/* Esta regla reemplaza el selector global "button" */
 .reservation-page .reservation-form button {
   padding: 14px 28px;
   border-radius: 10px;
@@ -249,12 +244,12 @@
 
 @keyframes glowText {
   from {
-    text-shadow: 
+    text-shadow:
       0 0 8px rgba(138, 43, 226, 0.5),
       0 0 16px rgba(138, 43, 226, 0.3);
   }
   to {
-    text-shadow: 
+    text-shadow:
       0 0 12px rgba(138, 43, 226, 0.7),
       0 0 20px rgba(138, 43, 226, 0.5);
   }
@@ -606,7 +601,7 @@
   gap: 30px;
   max-width: 1240px;
   width: 100%;
-  margin: 40px auto 0 auto;
+  margin: 40px auto 80px auto;
   padding: 30px 25px;
   background: rgba(20, 20, 30, 0.95);
   border: 1px solid #8a2be2;
@@ -631,26 +626,19 @@
 }
 
 .reservation-page .visit-left {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
   flex: 1;
-  padding-left: 20px; 
-}
-
-.reservation-page .visit-left::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 6px;
-  height: 100%;
-  background-color: #8a2be2;  
-  border-radius: 4px;
+  border-left: 4px solid #8a2be2;
+  padding-left: 15px;
 }
 
 .reservation-page .visit-left .visit-caption {
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.6);
-  margin: 0 0 8px 0;
+  margin: 0;
   font-weight: 400;
 }
 
@@ -658,29 +646,22 @@
   font-size: 2.5rem;
   line-height: 1.1;
   margin: 0;
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
   color: #ffffff;
   font-weight: 700;
 }
 
 .reservation-page .visit-left .status.open {
   color: #66ff66;
-  font-size: 2.5rem;
-  font-weight: 700;
 }
 
 .reservation-page .visit-left .status.closed {
   color: #ff6666;
-  font-size: 2.5rem;
-  font-weight: 700;
 }
 
 .reservation-page .visit-left .visit-subtext {
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.8);
-  margin: 4px 0 16px 0;
+  margin: 0;
 }
 
 .reservation-page .visit-left .visit-info p {
@@ -712,28 +693,17 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .reservation-page .discord-panel {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  max-width: 1240px;          
+  max-width: 1240px;
   width: 100%;
-  margin: 20px auto 0;          
+  margin: 20px auto 0;
   padding: 14px 20px;
   background: rgba(138, 43, 226, 0.15);
-  border: 1px solid #8a2be2;          
+  border: 1px solid #8a2be2;
   border-radius: 12px;
   color: #ffffff;
   font-size: 1rem;
@@ -755,11 +725,29 @@
   }
 }
 
+.reservation-page .discord-panel {
+  margin-bottom: 60px;
+}
+
+.reservation-page .visit-panel {
+  margin-bottom: 40px;
+}
+
 .reservation-page .discord-panel i {
   font-size: 1.6rem;
-  color: #7289da; 
+  color: #7289da;
 }
 
 .reservation-page .discord-panel span {
   color: #ffffff;
+}
+
+.flatpickr-day.flatpickr-disabled {
+  background-color: rgba(255, 87, 87, 0.3) !important;
+  color: #ff5757 !important;
+  border-color: #ff5757 !important;
+}
+
+.flatpickr-day:not(.flatpickr-disabled) {
+  background-color: rgba(102, 255, 102, 0.2) !important;
 }
