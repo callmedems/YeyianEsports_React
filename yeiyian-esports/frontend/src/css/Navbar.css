@@ -60,34 +60,108 @@
     margin: 0 5px; /* espacio entre los logos y el separador */
 }
 
+
 .nav .navbar_right {
-    font-family: 'Abolition', sans-serif;
-    margin-right: 50px;
-    display:flex;
-    gap: 15px;
+  font-family: 'Abolition', sans-serif;
+  margin-right: 50px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.auth-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: center;
+  align-items: flex-end; 
 }
 
-.login-button { /* estilo del boton de login*/
-font-family: 'Roboto', sans-serif;
+/*Login button*/
+.login-button {
+  font-family: 'Roboto', sans-serif;
   background: transparent;
   color: #FFFFFF;
-  padding: 6px 12px;      
-  margin: 0 0 0 15px; 
+  padding: 6px 12px;
+  margin: 0;
   font-weight: bold;
-  font-size: 15px;
+  font-size: px;
   justify-content: center;
   display: flex;
-  margin-top: 15px
-
+  border-radius: 6px;
+  margin-top: 15px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
 .login-button:hover {
-  background-color: #2a1a42;
+  color: var(--color-estrellas); 
+  cursor: pointer;
+}
+
+.separador {
+    width: 1px;
+    height: 50px;
+    background-color: #FFFFFF;
+    margin: 0 5px; /* espacio entre los logos y el separador */
+}
+/* Register */
+
+.register-button {
+  font-family: 'Roboto', sans-serif;
+  background: transparent;
+  color: #FFFFFF;
+  padding: 6px 12px;
+  margin: 0 ;
+  font-weight: bold;
+  font-size: px;
+  justify-content: center;
+  display: flex;
+  border-radius: 6px;
+  margin-top: 15px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.register-button:hover {
+  color: var(--color-estrellas); 
+  cursor: pointer;
+}
+
+.reservation-link {
+  background-image: linear-gradient(150deg, #C92704, #bc04c9, #044bc9);
+  border-radius: 8px;
+  display: inline-block;
+  font-size: 30px;
+  padding: 3px;
+  cursor: pointer;
+  transition: 0.4s;
+  color: #FFFFFF;
+}
+
+.reservation-link:active {
+  transform: scale(0.70);
+}
+
+.reservation-link span {
+  color: #FFFFFF;
+  text-align: center;
+  background-color:#170F24;
+  padding: 6px 20px;
+  border-radius: 6px;
+  transition: 0.4s;
+}
+
+.reservation-link:hover span {
+  background: none;
+}
+
+.reservationShortText {
+  display: none;
 }
 
 
 
-.nav .navbar_right .reservation-link {
+/* .nav .navbar_right .reservation-link {
     background-image: linear-gradient(150deg, #C92704, #bc04c9, #044bc9);
     border-radius: 8px;
     display: flex;
@@ -113,11 +187,11 @@ font-family: 'Roboto', sans-serif;
 
 .nav .navbar_right  .reservation-link:hover span{
     background: none;
-}
+} */
 
-.reservationShortText {
+/* .reservationShortText {
     display: none;
-}
+} */
 
 @media (max-width: 850px) { /* para q se vea bien en pantallas pequeñas */
 /*Si el ancho es menor que 850px se quita el texto largo */

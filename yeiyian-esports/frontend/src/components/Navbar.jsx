@@ -1,7 +1,6 @@
 // src/components/Navbar.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import '../css/styles.css';
 import '../css/Navbar.css';
 const Navbar = () => {
@@ -60,10 +59,12 @@ const Navbar = () => {
           <img src="/assets/images/Yeyian Logo.png" alt="Logo Arena Yeyian" />
         </section>
         <section className="navbar_right">
-          
           <div className="auth-buttons">
-              <Link to="/login" className="nav-button login-button">Iniciar sesión / Registrarse</Link>
+              <Link to="/login" className="login-button">Iniciar sesión</Link> 
+              {/* añadi un boton pot separado para enclarecer el flujo con la db pero funciona igual si dejen solo el de login */}
+              <Link to="/register" className="register-button">Registrarse</Link> 
               </div>
+
         <Link to="/reservation" className="reservation-link">
           <span className="reservationText">¡Reserva Ya Tu Horario!</span>
           <span className="reservationShortText">¡Reserva Ya!</span>
@@ -74,5 +75,5 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
 
+export default Navbar;
