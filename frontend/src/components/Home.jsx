@@ -55,7 +55,7 @@ function ReviewsSection() {
     <section className="reviews">
       <div className="reviewsContainer">
         <header>
-          <h1>Gameplays reales, opiniones reales</h1>
+          <h1>Opiniones reales, experiencias inolvidables</h1>
         </header>
 
         <div className="carousel">
