@@ -1,0 +1,579 @@
+/*--------------------------
+    GENERAL STYLES
+----------------------------*/
+
+/* Parámetros generales */
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    text-decoration: none;
+}
+
+.backgroundOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #1a1a42;
+    z-index: 0;
+}
+
+/* Página de inicio (tiene el título de la arena yeiyian */
+.arenaPresentation {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, var(--color-fondo) 100%),
+        url('../assets/images/background_photo.jpg');
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.arenaPresentation .centerImage {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 40%;
+    height: auto;
+}
+
+.arenaPresentation .titleContainer {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    letter-spacing: 8px;
+}
+
+.arenaPresentation h1 {
+    font-family: 'Abolition', sans-serif;
+    font-size: 10rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.arenaPresentation h2 {
+    font-family: 'Abolition', sans-serif;
+    font-size: 2.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    font-style: italic;
+}
+
+/* REGLAMENTO */
+.rulesMainContainer {
+    font-family: 'Abolition', sans-serif;
+    color:#FFFFFF;
+    position: relative;
+    font-size: 2rem;
+    padding: 100px 20% 100px 20%;
+    max-width: 5000px;
+    margin: 0 auto;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+.mainTitle {
+    font-style: italic;
+    font-size: 10rem;
+    letter-spacing: 8px;
+    text-align: center;
+}
+
+/* NOTICIAS */
+.newsBody {
+    min-height: 100vh;
+}
+
+
+.aceptButton {
+    background-image: linear-gradient(150deg, #df0909, #044bc9);
+    color:white;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* NOTICIAS */
+.newsMainContainer {
+    padding-top: 120px;
+    padding-bottom: 80px;
+    color: white;
+    font-family: 'Abolition', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.newsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 0 40px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.newsCard {
+    background-color: rgba(23, 15, 36, 0.9);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(47, 27, 227, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.3s;
+}
+
+.newsCard:hover {
+    transform: scale(1.03);
+}
+
+.newsTitle {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.newsDescription {
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.newsButton {
+    align-self: flex-start;
+    margin-top: auto;
+    padding: 8px 16px;
+    font-family: 'Abolition', sans-serif;
+    background-image: linear-gradient(150deg, #df0909, #044bc9);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+}
+
+.newsButton:hover {
+    background-image: linear-gradient(150deg, #044bc9, #df0909);
+}
+
+.modalBlack {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--color-fondo);
+    font-family: 'Roboto';
+    padding: 2rem;
+    border-radius: 3%;
+    width: 50%;
+    position: relative;
+    text-align: center;
+}
+
+.modal-content h2{
+    font: 2.5em 'Abolition';
+    color: white;
+}
+.modal-content h4{
+    margin-top: 2%;
+    font-size: 1.2em;
+    color: white;
+}
+
+
+
+.hideModalBlack{
+    display: none;
+}
+
+.modal-content .starsGrade {
+    color: var(--color-estrellas);
+    font-size:2em;
+    display: flex;
+    gap:2%;
+    margin: 2%;
+    justify-content: center;
+}
+.modal-content .comment{
+    border: 0.3em solid var(--color-botonRojo);
+    border-radius: 2rem;
+    width: 90%;
+    height: 30vh;
+    background-color: var(--color-fondo);
+    color: white;
+    font-size: 1.5em;
+    padding: 1rem;              
+    resize: none;              
+    line-height: 1.4;          
+    vertical-align: top;
+}
+.modal-content .comment:focus {
+    outline: none; 
+  
+}
+
+
+.modal-content .btnAccept, .modal-content .btnCancel{
+    color: white;
+    background: var(--color-botonRojo);  
+    border-radius:1rem;
+    color: white;
+    width:20%;
+    height:5vh;
+    margin-top: 4%;
+    font-size: 1.3em;
+    margin: 2%;
+}
+
+.modal-content .btnCancel{
+    background: rgba(196,36,14,0.6);  
+}
+.modal-content .btnCancel:hover{
+    background: var(--color-botonRojo);  
+}
+.modal-content .btnAccept:active, .modal-content .btnCancel:active{
+    box-shadow: 0 0 0.5vh 0.5vw rgba(196,36,14, 0.5);  
+}
+
+.modal-content .thanksMessage{
+    color: white;
+    font-family: roboto;
+}
+
+/* seccion de juegos*/
+.gamesContainer {
+    background-color: var(--color-fondo);
+    text-align: center;
+    padding-top: 6vh;
+    padding-bottom: 14vh;
+    position: relative;
+    z-index: 0;
+    padding: 2rem 1rem;
+}
+
+.gamesContainer h1 {
+    font-family:'Abolition';
+    color: white;
+    padding-top: 2vh;
+    padding-bottom: 12vh;
+    font-size: 8vh;
+    text-align: center;
+}
+
+.gamesContainer .carousel {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.gamesContainer .card {
+    display: inline-block;
+    background-color: #2a2a5e;
+    color: white;
+    box-sizing: border-box;
+    height: 45vh;
+    width: 25%;
+    border: 2px solid white;
+    border-radius: 10px;
+    margin: 0 2%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.gamesContainer .card img {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+    border-bottom: 2px solid white;
+}
+
+.gamesContainer .gameInfo {
+    padding: 10px;
+}
+
+.gamesContainer .gameInfo h3 {
+    font-family: 'Abolition', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.gamesContainer .gameInfo p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: #ccc;
+}
+
+.gamesContainer .controllers {
+    font-size: 3rem;
+    color: white;
+    cursor: pointer;
+}
+
+.gamesContainer .controllers:hover {
+    color: var(--color-estrellas);
+}
+
+/* --- Desvanecimiento --- */
+.mainContainer {
+  background-color: #1a1a42;
+  color: #ffffff;
+  min-height: 200vh; /* ejemplo: para tener suficiente altura de scroll */
+}
+
+.centerImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* la imagen se ajusta sin deformarse */
+  z-index: 1;
+}
+
+/* --- Estilos de root --- */
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.my-reservations-container {
+  padding: 2rem;
+  background-color: #1a1a42;
+  min-height: 100vh;
+}
+
+.my-reservations-container h1 {
+  color: white;
+  font-family: 'Abolition', sans-serif;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 3rem;
+}
+
+.reservations-list {
+  display: grid;
+  gap: 2rem;
+  /* Dos columnas en escritorio, una en móvil */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.reservation-card {
+  background-color: rgba(23, 15, 36, 0.9);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 4px 12px rgba(47, 27, 227, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.reservation-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.reservation-card .card-header h2 {
+  font-family: 'Abolition', sans-serif;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.reservation-card .card-header .price {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.reservation-card .card-body p {
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reservation-card .card-footer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reservation-card .card-footer .total {
+  font-weight: bold;
+}
+
+.reservation-card .card-footer .status {
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+/* Colores según estado */
+.status.pending {
+  background-color: #f0ad4e; /* naranja para pendiente */
+}
+.status.approved {
+  background-color: #5cb85c; /* verde para aprobada */
+}
+.status.rejected {
+  background-color: #d9534f; /* rojo para rechazada */
+}
+
+    /*Definición de colores*/
+:root {
+    --color-fondo: #1A1A42;
+    --color-estrellas:#FFD55C;
+    --color-botonRojo:#C4240E;
+}
+
+@font-face {
+    font-family: 'Abolition';
+    src: url("../assets/fonts/Abolition/AbolitionTest-Regular.otf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Anton';
+    src: url("../assets/fonts/Anton-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/*Sección de reviews*/
+.reviewsContainer{
+    height: 100vh;
+    background-color: var(--color-fondo);
+}
+.reviewsContainer h1{
+    font-family:'Abolition';
+    color: white;
+    padding-top: 12vh;
+    font-size: 8vh;
+    text-align: center;
+}
+.reviewsContainer .carousel{
+    font-family: 'roboto';
+    width: 98%;
+    margin: 11vh auto 0;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+}
+.reviewsContainer .card{
+    display:inline-block;
+    color: white;
+    box-sizing: border-box;
+    height: 45vh;
+    width: 25%;
+    border: 2px solid white;
+    border-radius:10px;
+    margin: 0 2%; 
+}
+
+.reviewsContainer .controllers{
+    display:inline-block;
+    color: white;
+    font-size:400%;
+}
+
+.reviewsContainer .controllers:hover{
+    color: var(--color-estrellas);
+}
+
+.reviewsContainer .personalInfo{
+    display: flex;
+    justify-content: flex-start;
+    margin:5%;
+}
+.reviewsContainer .profilePicture{
+    color:white;
+    font-size: 300%;
+    margin-right:5%;
+}
+.reviewsContainer .personReview{
+    font-size: 125%;
+    
+}
+.reviewsContainer .additionDate{
+    margin-top:2%;
+    font-size: 85%;
+    
+}
+
+.reviewsContainer .stars{
+    color:var(--color-estrellas);
+    margin-left:5%;
+    font-size:200%;
+    display: flex;
+    gap:5%;
+}
+
+.reviewsContainer .reviewGiven{
+    margin:5%;
+    font-size:1.4em;
+    text-align:justify;
+}
+
+.reviewsContainer .btnReview{
+    background-color:var(--color-botonRojo);
+    border-radius:2em;
+    padding: 0em 0em;
+    color: white;
+    width: 10%;
+    height:5vh;
+    margin: 8vh 45% 0;
+    font-size: 1.3em;
+    
+}
+
+.reviewsContainer .btnReview:hover{
+    background-color:#A51E0C;;
+}
+.reviewsContainer .btnReview:active{
+    box-shadow: 0 0 0.5vh 0.5vw rgba(196,36,14, 0.5);
+}
+
+
