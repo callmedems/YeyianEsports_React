@@ -1,3 +1,24 @@
+# Puntos Importantes para Ejecutarse
+Aún no he especificado bien en "migrations/###create_tables.cjs" como quedaron las tablas, pero para que las tablas se coordinen bien con el proyecto deben de escribir esto en el Script de <arenareservations> en su base de datos en DBeaver:
+1. Añadir que el correo sea único para que funcione con los logins en "client":
+ALTER TABLE client
+ADD CONSTRAINT unique_client_mail UNIQUE (mail);
+
+2. Insertar la información del costo de reserva en "reservationcosts":
+INSERT INTO reservationcosts (reservationTypeId, reservationType, pricePerDay) VALUES
+  (1, 'Individual', 1500.00),
+  (2, 'Corporativo', 8000.00),
+  (3, 'Streamer', 5000.00),
+  (4, 'Educativo', 4500.00),
+  (5, 'Escolar', 4000.00);
+
+3. Añaden reservationTime ya que este será el dato que se extraerá para el frontend de confirmación:
+ALTER TABLE reservation
+ADD COLUMN reservationTime TIME NOT NULL;
+
+--- DBeaver es muy delicado con los errores de sintaxis, en caso que les de error copiando el código escríbanlo a mano.
+Sin más que decir les dejo con las indicaciones del uso de React con Vite:
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
