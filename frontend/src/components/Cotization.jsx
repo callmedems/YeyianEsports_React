@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import "../css/styles.css";
-import "../css/cotizacion.css";
+import "../css/cotization.css";
 
-const Cotizacion = () => {
+const Cotization = () => {
   // Leemos del localStorage la reserva que guardamos justo después de crearla
   const reserva = JSON.parse(localStorage.getItem("ultimaReserva")) || {};
 
@@ -236,4 +236,4 @@ const Cotizacion = () => {
   );
 };
 
-export default Cotizacion;
+export default Cotization;

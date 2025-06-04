@@ -1,24 +1,26 @@
-// src/App.jsx
+// ----- App.jsx ----- //
+
+// Importamos React y las librerías para las páginas necesarias
 import React from 'react';
 import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-import Home from './components/Home';    // ya no es “otro App”, es tu Home
-import LandingPage from './components/LandingPage';
-import Pago from './components/Pago';
+import Home from './components/Home';
+import Payment from './components/Payment';
 import Confirmation from './components/Confirmation';
 import ReservationForm from './components/ReservationForm';
-import Cotizacion from './components/cotizacion';
-import Rules from './components/Rules';
-import News from './components/News';
-import Profile from './components/Profile';
+import Cotization from './components/Cotization';
+
+// Lateral menu
 import Login from './components/Login';
 import Register from './components/Register';
-// importa cotizacion, rules, tour, etc., según las páginas que tengas
+import News from './components/News';
+import Rules from './components/Rules';
+import MyReservations from './components/MyReservations';
 
+// ----- Main Function ----- //
 function App() {
-  
   return (
     <BrowserRouter>
       <Navbar />
@@ -26,15 +28,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/landing" element={<LandingPage />} />
-        <Route path="/pago" element={<Pago />} />
-        <Route path="/reservation" element={<ReservationForm />} />
-        <Route path="/cotizacion" element={<Cotizacion />} />
-        <Route path="/confirmation" element={<Confirmation />} />
-        <Route path="/rules" element={<Rules />} />
-        <Route path="/news" element={<News />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/Payment" element={<Payment />} />
+        <Route path="/Reservation" element={<ReservationForm />} />
+        <Route path="/Cotizacion" element={<Cotization />} />
+        <Route path="/Confirmation" element={<Confirmation />} />
+        <Route path="/Rules" element={<Rules />} />
+        <Route path="/News" element={<News />} />
+        <Route path="/MyReservations" element={<MyReservations />} />
       </Routes>
       </main>
       <Footer />

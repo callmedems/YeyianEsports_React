@@ -1,10 +1,10 @@
 // src/pages/Pago.jsx
 
 import React, { useEffect, useRef } from "react";
-import "../css/pago.css";
+import "../css/payment.css";
 import "../css/styles.css";
 
-const Pago = () => {
+const Payment = () => {
   // Aquí leemos del localStorage la reserva completa que guardamos
   // justo después de crearla en ReservationForm.jsx
   const reserva = JSON.parse(localStorage.getItem("reserva")) || {};
@@ -388,4 +388,4 @@ const Pago = () => {
   );
 };
 
-export default Pago;
+export default Payment;

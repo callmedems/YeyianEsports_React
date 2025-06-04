@@ -1,11 +1,11 @@
-// ReservationForm.jsx
+// ----- ReservationForm.jsx ----- //
 
 import React, { useEffect, useRef, useState } from "react";
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import "intl-tel-input/build/css/intlTelInput.css";
 import intlTelInput from "intl-tel-input";
-import "../css/reservas.css";
+import "../css/reservationForm.css";
 
 const ReservationForm = () => {
   const [currentStep, setCurrentStep] = useState(1);

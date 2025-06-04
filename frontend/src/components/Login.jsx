@@ -1,7 +1,7 @@
-// src/pages/Login.jsx
+// ----- Login.jsx ----- //
 import React, { useState } from 'react';
-import '../css/Register.css';
 import { Link, useNavigate } from 'react-router-dom';
+import '../css/register.css';
 
 const Login = () => {
   const [form, setForm] = useState({ mail: '', password: '' });

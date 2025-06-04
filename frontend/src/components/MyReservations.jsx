@@ -1,8 +1,9 @@
-// src/pages/Profile.jsx
+// ----- MyReservations.jsx ----- //
 import React, { useEffect, useState } from 'react';
+import '../css/myreservations.css';
 import '../css/styles.css';
 
-const Profile = () => {
+const MyReservations = () => {
   const [reservas, setReservas] = useState([]);
   const userId = localStorage.getItem('reservaUserId'); // asegura que está guardado tras el login
 
@@ -26,6 +27,10 @@ const Profile = () => {
     return (
       <div className="no-reservas">
         <h2>No tienes reservaciones</h2>
+        <p>Explora nuestras arenas y agenda tu próxima experiencia.</p>
+        <button className="reservar-button" onClick={() => window.location.href = '/reservation'}>
+          Reservar Ahora
+        </button>
       </div>
     );
   }
@@ -83,4 +88,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default MyReservations;
