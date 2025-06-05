@@ -28,7 +28,7 @@ EMAIL_FROM="Yeyian Arena" <no-reply@yeyianarena.com>
 
 (Obviamente no añado el archivo porque quedaría en el repositorio público de git y contiene mi correo y contraseña lol)
 
-Sin más que decir les dejo con las indicaciones del uso de React con Vite:
+Sin más que decir les dejo con las indicaciones del uso de React con Vite que ya teníamos:
 
 # React + Vite
 
