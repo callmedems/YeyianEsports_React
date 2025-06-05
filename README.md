@@ -17,6 +17,17 @@ ALTER TABLE reservation
 ADD COLUMN reservationTime TIME NOT NULL;
 
 --- DBeaver es muy delicado con los errores de sintaxis, en caso que les de error copiando el código escríbanlo a mano.
+
+
+4. En el directorio de "backend" deben de crear un archivo ".env" donde van a poner los datos de su correo y contraseña para tener un correo de referencia el cual enviar, esto debe incluir:
+SMTP_HOST=smtp.gmail.com #Cambiar a smtp.office365.com si usan outlook o investiguen el de su extensión de correo
+SMTP_PORT=465
+SMTP_USER= #Pongan aquí su correo
+SMTP_PASS= #Pongan aquí su contraseña (si su cuenta tiene autenticación en 2 pasos hagan una app password aquí: https://myaccount.google.com/apppasswords y la ponen en este apartado)
+EMAIL_FROM="Yeyian Arena" <no-reply@yeyianarena.com>
+
+(Obviamente no añado el archivo porque quedaría en el repositorio público de git y contiene mi correo y contraseña lol)
+
 Sin más que decir les dejo con las indicaciones del uso de React con Vite:
 
 # React + Vite
