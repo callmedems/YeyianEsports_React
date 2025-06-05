@@ -1,4 +1,5 @@
 // app.js
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors'); //para poder ejecutar react y express en diferentes puertos
 const knexConfig = require('./knexfile.cjs');

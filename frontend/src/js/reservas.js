@@ -311,3 +311,51 @@ function showContactInput(type) {
     document.getElementById("email-input").style.display = "block";
   }
 }
+
+// frontend/src/js/reservas.js
+
+document.getElementById('formReserva').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  // Supongamos que obtienes el clientId del localStorage tras login:
+  const clientId = localStorage.getItem('clientId'); // ajusta según tu flujo
+  // O si usas JWT, envíalo en la cabecera Authorization
+
+  const reservationDate = document.getElementById('fecha').value;
+  const reservationTime = document.getElementById('hora').value;
+  const reservationTypeId = document.getElementById('tipoReserva').value;
+  // Otros campos del formulario…
+
+  // Montar el body
+  const bodyData = {
+    clientId: clientId,
+    reservationDate,
+    reservationTime,
+    reservationTypeId: parseInt(reservationTypeId),
+    // …otros campos si existieran
+  };
+
+  try {
+    const response = await fetch('http://localhost:3000/api/reservations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // Si usas JWT:
+        // 'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      },
+      body: JSON.stringify(bodyData)
+    });
+    const data = await response.json();
+    if (data.error) {
+      alert('Error al crear reserva: ' + data.error);
+    } else if (data.warning) {
+      alert('Reserva creada, pero no se pudo enviar el correo de confirmación.');
+    } else {
+      alert('Reserva creada y correo de confirmación enviado. ¡Revisa tu correo!');
+      // Limpiar formulario o redirigir, según tu flujo.
+    }
+  } catch (err) {
+    console.error('Error en la petición:', err);
+    alert('Ocurrió un problema de red al intentar reservar.');
+  }
+});

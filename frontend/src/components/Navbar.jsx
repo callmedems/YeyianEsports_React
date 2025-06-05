@@ -110,7 +110,7 @@ const Navbar = () => {
           /* Si SÍ está autenticado, muestro el icono de usuario */
           <div className="sidebar-user-container">
             {/* Al hacer clic en foto o nombre, navegamos a /profile */}
-            <Link to="/profile" onClick={closeMenu} className="sidebar-user-link">
+            <Link to="/MyReservations" onClick={closeMenu} className="sidebar-user-link">
               <img
                 src="/assets/images/usuario_sin_foto.jpg"
                 alt="Usuario"
