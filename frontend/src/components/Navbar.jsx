@@ -1,29 +1,52 @@
-// ----- Footer.jsx ----- //
+// src/components/Navbar.jsx
+
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom'; // <-- importar useLocation
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import '../index.css';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState("");
+  const [profilePicture, setProfilePicture] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
   const closeMenu = () => setMenuOpen(false);
 
-  // Cada vez que cambie la ruta, leemos localStorage para saber si el usuario está logueado
+  // 1) Cada vez que cambie la ruta, checamos si está logueado
   useEffect(() => {
     const token = localStorage.getItem('reserva');
     setIsLoggedIn(!!token);
 
-    // Si existe token, leemos también el userName
-    const storedName = localStorage.getItem('reservaUserName') || '';
+    // Si existe token, leemos también el userName (aunque la suscripción del otro useEffect ya lo cubre)
+    const storedName = localStorage.getItem('navbarUserName') || '';
     setUserName(storedName);
   }, [location]);
 
-  // 2) Permitir cerrar con Esc
+  // 2) Al montar, inicializamos nombre y foto, y nos suscribimos al evento
+  useEffect(() => {
+    const storedName = localStorage.getItem("navbarUserName") || "Usuario";
+    const storedPic  = localStorage.getItem("navbarProfilePicture") || null;
+    setUserName(storedName);
+    setProfilePicture(storedPic);
+
+    // Cuando alguien dispare 'userProfileChanged', volvemos a leer del localStorage:
+    const onChange = () => {
+      const newName = localStorage.getItem("navbarUserName") || "Usuario";
+      const newPic  = localStorage.getItem("navbarProfilePicture") || null;
+      setUserName(newName);
+      setProfilePicture(newPic);
+    };
+    window.addEventListener("userProfileChanged", onChange);
+
+    return () => {
+      window.removeEventListener("userProfileChanged", onChange);
+    };
+  }, []);
+
+  // 3) Permitir cerrar con Esc
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === 'Escape') {
@@ -34,19 +57,21 @@ const Navbar = () => {
     return () => document.removeEventListener('keydown', handleEsc);
   }, []);
 
-  // 3) Función general para navegar y cerrar el menú
+  // 4) Función de navegación
   const navigateTo = (path) => {
     closeMenu();
     navigate(path.startsWith('/') ? path : `/${path}`);
   };
 
-  // 4) Al hacer logout, borramos la clave "reserva" y redirigimos a "/"
+  // 5) Logout
   const handleLogout = () => {
     localStorage.removeItem('reserva');
     localStorage.removeItem('clientId');
-    localStorage.removeItem('reservaUserName');
+    localStorage.removeItem('navbarUserName');
+    localStorage.removeItem('navbarProfilePicture');
     setIsLoggedIn(false);
     setUserName('');
+    setProfilePicture(null);
     closeMenu();
     navigate('/');
   };
@@ -65,10 +90,7 @@ const Navbar = () => {
             </button>
 
             <Link to="/" className="logo">
-              <img
-                src="/assets/images/Arena Yeyian Logo.png"
-                alt="Logo Arena Yeyian"
-              />
+              <img src="/assets/images/Arena Yeyian Logo.png" alt="Logo Arena Yeyian"/>
             </Link>
           </section>
 
@@ -96,7 +118,6 @@ const Navbar = () => {
           &times;
         </button>
 
-        {/* —=== Sección superior del menú lateral ===— */}
         {!isLoggedIn ? (
           /*  Si NO está autenticado, muestro el link "/login" */
           <Link
@@ -107,43 +128,43 @@ const Navbar = () => {
             Iniciar sesión / Registrarse
           </Link>
         ) : (
-          /* Si SÍ está autenticado, muestro el icono de usuario */
+          /* Si SÍ está autenticado, muestro la foto/nombre */
           <div className="sidebar-user-container">
-            {/* Al hacer clic en foto o nombre, navegamos a /profile */}
-            <Link to="/MyReservations" onClick={closeMenu} className="sidebar-user-link">
-              <img
-                src="/assets/images/usuario_sin_foto.jpg"
-                alt="Usuario"
-                className="sidebar-user-icon"
-              />
+            <Link to="/Profile" onClick={closeMenu} className="sidebar-user-link">
+              <div className="profile-avatar-wrapper">
+                {profilePicture ? (
+                  <img
+                    src={`http://localhost:3000/${profilePicture}`}
+                    alt="Foto de perfil"
+                    className="sidebar-user-icon"
+                  />
+                ) : (
+                  <img
+                    src="/assets/images/usuario_sin_foto.jpg"
+                    alt="Usuario"
+                    className="sidebar-user-icon"
+                  />
+                )}
+              </div>
               <span className="sidebar-user-name">{userName}</span>
             </Link>
           </div>
         )}
 
-        {/* —=== Lista de secciones internas ===— */}
         <nav className="sidebar-nav">
-          <Link to="/news" onClick={() => navigateTo('news')}>
-            Noticias
-          </Link>
-          <Link to="/rules" onClick={() => navigateTo('rules')}>
-            Reglamento
-          </Link>
-          <Link to="/tour" onClick={() => navigateTo('tour')}>
-            Tour Virtual
-          </Link>
-          <Link to="/cotization" onClick={() => navigateTo('cotization')}>
-            Precios
-          </Link>
+          <Link to="/" onClick={() => navigateTo('home')}>Inicio</Link>
+          <Link to="/news" onClick={() => navigateTo('news')}>Noticias</Link>
+          <Link to="/rules" onClick={() => navigateTo('rules')}>Reglamento</Link>
+          <Link to="/tour" onClick={() => navigateTo('tour')}>Tour Virtual</Link>
+          <Link to="/cotization" onClick={() => navigateTo('cotization')}>Precios</Link>
         </nav>
 
-        {/* —=== Botón “Cerrar sesión” abajo del todo ===— */}
         {isLoggedIn && (
           <button
             className="sidebar-logout-button"
             onClick={handleLogout}
           >
-            Cerrar sesión
+            Cerrar sesion
           </button>
         )}
       </aside>

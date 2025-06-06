@@ -18,6 +18,7 @@ import Register from './components/Register';
 import News from './components/News';
 import Rules from './components/Rules';
 import MyReservations from './components/MyReservations';
+import Profile from './components/Profile';
 
 // ----- Main Function ----- //
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/Rules" element={<Rules />} />
         <Route path="/News" element={<News />} />
         <Route path="/MyReservations" element={<MyReservations />} />
+        <Route path="/Profile" element={<Profile />} />
       </Routes>
       </main>
       <Footer />

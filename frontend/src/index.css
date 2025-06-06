@@ -281,6 +281,24 @@ button:focus-visible {
   flex-direction: column;
 }
 
+.sidebar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #C92704, #bc04c9, #044bc9, #C92704);
+  background-size: 300% 300%;
+  animation: neonGradient 5s ease infinite;
+}
+
+@keyframes neonGradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 /* Cuando está abierto, la movemos a 0 */
 .sidebar.open {
   left: 0;
@@ -324,25 +342,77 @@ button:focus-visible {
   flex-direction: column;
 }
 
-/* Estilo de cada enlace dentro de la sidebar */
-.sidebar-nav a {
-  display: block;
-  padding: 12px 20px;
-  font-size: 16px;
-  color: #FFFFFF;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.sidebar-nav a:hover {
-  background-color: #2a1a42;
-}
-
 /* Contenedor del icono de usuario */
 .sidebar-user-container {
   display: flex;
-  justify-content: center;
-  margin: 0 0 20px; /* Margen abajo para separar de los links */
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  /* position: relative;  NO lo ponemos aquí, sino en el contenedor directo de la imagen */
+}
+
+/* 2.1) Estilos del wrapper que contiene la imagen de perfil */
+.profile-avatar-wrapper {
+  position: relative; /* necesario para superponer el overlay */
+  width: 70px;       /* mismo tamaño que .sidebar-user-icon */
+  height: 70px;
+  margin-bottom: 8px; /* deja un espacio entre la imagen y el nombre */
+}
+
+/* 2.2) La imagen en sí misma sigue igual que antes: */
+.sidebar-user-icon {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #2a1a42;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+/* 2.3) Al hacer hover sobre la imagen, la hacemos un poco más grande (zoom sutil): */
+.profile-avatar-wrapper:hover .sidebar-user-icon {
+  transform: scale(1.05); /* ligera ampliación */
+}
+
+/* 2.4) Definimos el overlay: una “capa” semitransparente gris en forma de círculo,
+       que solo aparece en hover. */
+.profile-avatar-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* gris semitransparente */
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* 2.5) Definimos el ícono de editar en el centro (puede ser una fuente icono o un SVG inline).
+       Aquí lo hacemos con un pseudo-elemento ::after que muestre un “✏️” (lápiz) centrado: */
+.profile-avatar-wrapper::after {
+  content: "\270E"; /* carácter Unicode de “lápiz” (✎) */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #FFFFFF;
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none; /* para que no interfiera con el click */
+}
+
+/* 2.6) En hover, mostramos tanto overlay (::before) como lápiz (::after) */
+.profile-avatar-wrapper:hover::before {
+  opacity: 1;
+}
+.profile-avatar-wrapper:hover::after {
+  opacity: 1;
 }
 
 /* Icono de usuario: círculo con imagen */
@@ -358,12 +428,13 @@ button:focus-visible {
 
 /* Botón “Cerrar sesión” (aparece al final del sidebar) */
 .sidebar-logout-button {
-  margin: auto 20px 20px; /* centrado horizontal, margen arriba (auto hace que empuje hacia abajo) */
+  margin: 380px 20px 20px; /* centrado horizontal, margen arriba (auto hace que empuje hacia abajo) */
   padding: 10px 0;
   text-align: center;
   font-family: 'Abolition', sans-serif;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 20px;
+  letter-spacing: 2px;
   color: #ffffff;
   background-color: #C92704; /* Color rojo similar al degradado de reserva */
   border: none;
@@ -402,8 +473,8 @@ button:focus-visible {
 
 /* Foto de usuario circular */
 .sidebar-user-icon {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   object-fit: cover;
   background-color: #2a1a42; /* si la imagen es transparente, queda un fondo oscuro */
@@ -411,7 +482,7 @@ button:focus-visible {
   border: 2px solid #ffffff;
 }
 
-/* Nombre de usuario debajo de la foto */
+/* 3.1) Al pasar el cursor sobre el nombre de usuario, lo subrayamos suavemente */
 .sidebar-user-name {
   margin-top: 8px;
   font-family: 'Abolition', sans-serif;
@@ -419,6 +490,82 @@ button:focus-visible {
   letter-spacing: 2px;
   color: #ffffff;
   text-align: center;
+  transition: color 0.2s ease;
+}
+.sidebar-user-link:hover .sidebar-user-name {
+  color: #c9a9ff; /* un lila suave al pasar sobre el nombre */
+}
+
+/* 3.2) Ajuste de los enlaces para que tengan “letter-spacing” mayor y cambien de color un poco */
+.sidebar-nav a {
+  display: block;
+  padding: 12px 20px;
+  font-size: 16px;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: background 0.2s ease, font-size 0.2s ease;
+  letter-spacing: 1px;
+}
+.sidebar-nav a:hover {
+  background-color: #2a1a42;
+  font-size: 18px; /* agrandamos ligeramente (16 → 18) */
+  color: #c9a9ff; /* lila claro */
+  text-shadow: 0 0 5px rgba(138, 43, 226, 0.8), 0 0 10px rgba(138, 43, 226, 0.6);
+}
+
+/* 3.3) Si quieres que el botón de “Cerrar sesión” (sidebar-logout-button) cambie de color en hover: */
+.sidebar-logout-button:hover {
+  background-color: #aa1a0e; /* rojo más oscuro al pasarse */
+  opacity: 0.95;
+}
+
+/* 3.4) Padding left de las secciones */
+.sidebar-nav a {
+  position: relative;
+  overflow: hidden;
+}
+.sidebar-nav a::before {
+  content: "";
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(138, 43, 226, 0.2); /* ligero degradado o color violeta intenso a la izquierda*/
+  transition: left 0.3s ease;
+}
+.sidebar-nav a:hover::before {
+  left: 0;
+}
+
+/* --------------------------------------
+   4) MEDIA QUERIES PARA ACCESIBILIDAD
+   -------------------------------------- */
+@media (max-width: 500px) {
+  /* Reducimos un poco el tamaño de los iconos de usuario en pantallas muy pequeñas */
+  .profile-avatar-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+  .sidebar-user-icon {
+    width: 100%;
+    height: 100%;
+  }
+  .sidebar-user-name {
+    font-size: 20px;
+  }
+  .sidebar-nav a {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+  .sidebar-nav a:hover {
+    font-size: 16px;
+  }
+  .sidebar-logout-button {
+    margin-top: auto;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
 }
 
 /*--------------------------

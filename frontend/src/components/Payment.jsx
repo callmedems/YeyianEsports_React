@@ -248,7 +248,6 @@ const Payment = () => {
             }
 
             // 7.3) Todo salió perfecto: redirigimos a “Mis Reservas”
-            alert("¡Pago confirmado y correo enviado! Gracias por tu reserva.");
             window.location.href = "/mis_reservas";
           } catch (err) {
             console.error("Error en confirm-payment (PayPal):", err);
@@ -389,7 +388,6 @@ const Payment = () => {
           return;
         }
 
-        alert("¡Pago confirmado y correo enviado! Gracias por tu reserva.");
         window.location.href = "/Confirmation";
       } else {
         console.log("⚠️ PaymentIntent status:", paymentIntent.status);
