@@ -5,8 +5,6 @@ import "../css/styles.css";
 const News = ({ navigateTo }) => (
 
   <div className="newsBody">
-   
-
     {/* CONTENIDO PRINCIPAL */}
     <main className="newsMainContainer">
       <h1 className="mainTitle">Noticias Recientes</h1>

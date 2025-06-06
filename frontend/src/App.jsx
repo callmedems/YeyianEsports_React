@@ -13,11 +13,12 @@ import ReservationForm from './components/ReservationForm';
 import Cotization from './components/Cotization';
 
 // Lateral menu
+import Profile from './components/Profile';
 import Login from './components/Login';
 import Register from './components/Register';
 import News from './components/News';
 import Rules from './components/Rules';
-import Profile from './components/Profile';
+import Pricing from "./components/Pricing";
 
 // ----- Main Function ----- //
 function App() {
@@ -33,9 +34,10 @@ function App() {
         <Route path="/Reservation" element={<ReservationForm />} />
         <Route path="/Cotization" element={<Cotization />} />
         <Route path="/Confirmation" element={<Confirmation />} />
-        <Route path="/Rules" element={<Rules />} />
-        <Route path="/News" element={<News />} />
         <Route path="/Profile" element={<Profile />} />
+        <Route path="/News" element={<News />} />
+        <Route path="/Rules" element={<Rules />} />
+        <Route path="/Pricing" element={<Pricing />} />
       </Routes>
       </main>
       <Footer />
