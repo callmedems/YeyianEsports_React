@@ -72,7 +72,7 @@ const MyReservations = () => {
                 </div>
                 <div className="card-footer">
                     <span className="total">
-                    Total: ${r.totalPrice.toLocaleString('es-MX')} MXN
+                    ¡No olvides dejar tu reseña!
                     </span>
                     <span className={`status ${r.ReservationStatus}`}>
                     {r.ReservationStatus === 'pending' ? 'Pendiente' :

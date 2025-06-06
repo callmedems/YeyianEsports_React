@@ -5,7 +5,10 @@ const cors        = require('cors'); //para poder ejecutar react y express en di
 const knexConfig  = require('./db/knexfile.cjs');
 const knex        = require('knex')(knexConfig.development);
 const app         = express();
+const clientRouter = require("./routes/client")(knex);
+const path        = require("path");
 
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.json());
 app.use(cors());
 
@@ -15,6 +18,7 @@ const loginRouter = require('./routes/login')(knex);
 const reservationRouter = require('./routes/reservation')(knex);
 const stripeRouter = require('./routes/stripe');
 
+app.use("/api/client", clientRouter);
 app.use('/api/reviews', reviewsRouter);
 app.use('/api/register', registerRouter);
 app.use('/api/login', loginRouter);
