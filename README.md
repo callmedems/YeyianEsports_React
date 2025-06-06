@@ -1,4 +1,4 @@
-# Puntos Importantes para Ejecutarse
+# Puntos Importantes para Ejecutar de la rama main
 Aún no he especificado bien en "migrations/###create_tables.cjs" como quedaron las tablas, pero para que las tablas se coordinen bien con el proyecto deben de escribir esto en el Script de <arenareservations> en su base de datos en DBeaver:
 1. Añadir que el correo sea único para que funcione con los logins en "client":
 ALTER TABLE client
