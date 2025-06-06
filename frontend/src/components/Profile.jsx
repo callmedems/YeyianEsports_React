@@ -28,7 +28,7 @@ const Profile = () => {
     const fetchUserData = async () => {
       try {
         const resp = await fetch(`http://localhost:3000/api/client/${clientId}`);
-        if (!resp.ok) throw new Error("No se pudo bajar datos del usuario");
+        if (!resp.ok) throw new Error("No se pudo bajar datos del cliente");
         const usuario = await resp.json();
         setUserName(usuario.userName || "");
         setCurrentPhotoUrl(usuario.profilePicture || null);
