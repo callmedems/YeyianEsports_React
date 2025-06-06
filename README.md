@@ -20,6 +20,9 @@ ADD COLUMN reservationTime TIME NOT NULL;
 
 
 4. En el directorio de "backend" deben de crear un archivo ".env" donde van a poner los datos de su correo y contraseña para tener un correo de referencia el cual enviar, esto debe incluir:
+
+STRIPE_SECRET_KEY= (Deben de crear una cuenta y agregar sus Public Key en: Payment.jsx línea 143, y en: .env en esta misma línea que inserten)
+
 SMTP_HOST=smtp.gmail.com #Cambiar a smtp.office365.com si usan outlook o investiguen el de su extensión de correo
 SMTP_PORT=465
 SMTP_USER= #Pongan aquí su correo
