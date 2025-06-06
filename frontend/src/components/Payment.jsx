@@ -385,12 +385,12 @@ const Payment = () => {
         }
         if (confirmData.warning) {
           alert("Pago confirmado, pero no se pudo enviar el correo.");
-          window.location.href = "/MyReservations";
+          window.location.href = "Confirmation";
           return;
         }
 
         alert("¡Pago confirmado y correo enviado! Gracias por tu reserva.");
-        window.location.href = "/MyReservations";
+        window.location.href = "/Confirmation";
       } else {
         console.log("⚠️ PaymentIntent status:", paymentIntent.status);
         alert("El pago no pudo completarse. Intenta con otro método.");
