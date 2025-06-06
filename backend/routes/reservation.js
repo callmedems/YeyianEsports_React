@@ -109,7 +109,7 @@ module.exports = function (knex) {
         return res.status(400).json({ error: 'El pago ya fue confirmado previamente.' });
       }
 
-      // 2.3) Actualizar la reserva: paymentStatus = 1 y ReservationStatus = 'approved'
+      // 2.3) Actualizar la reserva: paymentStatus = 1 y ReservationStatus = 'pending'
       await knex('reservation')
         .where('reservationId', reservationId)
         .update({
