@@ -7,6 +7,7 @@ const knex        = require('knex')(knexConfig.development);
 const app         = express();
 const clientRouter = require("./routes/client")(knex);
 const path        = require("path");
+const reservationCosts = require("./routes/reservationcosts")(knex);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.json());
@@ -24,6 +25,7 @@ app.use('/api/register', registerRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/reservation', reservationRouter);
 app.use('/api/stripe', stripeRouter);
+app.use("/api/reservationcosts", reservationCosts);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

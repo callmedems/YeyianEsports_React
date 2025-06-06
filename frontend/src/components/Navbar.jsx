@@ -155,7 +155,7 @@ const Navbar = () => {
           <Link to="/news" onClick={() => navigateTo('news')}>Noticias</Link>
           <Link to="/rules" onClick={() => navigateTo('rules')}>Reglamento</Link>
           <Link to="/tour" onClick={() => navigateTo('tour')}>Tour Virtual</Link>
-          <Link to="/cotization" onClick={() => navigateTo('cotization')}>Precios</Link>
+          <Link to="/pricing" onClick={() => navigateTo('cotization')}>Precios</Link>
         </nav>
 
         {isLoggedIn && (

@@ -1,0 +1,157 @@
+/* src/css/pricing.css */
+
+/* 1) CONTENEDOR PRINCIPAL */
+.pricing-page {
+  background-color: #1a1a42;
+  background-size: cover;
+  color: #ffffff;
+  min-height: 100vh;
+  padding: 120px 20px 60px; /* deja espacio para la navbar fija */
+  box-sizing: border-box;
+}
+
+/* 2) TÍTULO DE LA PÁGINA */
+.pricing-title {
+  text-align: center;
+  font-family: "Abolition", sans-serif;
+  font-size: 3rem;
+  color: #8a2be2;
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
+}
+
+/* 3) TEXTO DE CARGANDO O ERROR */
+.loading-text,
+.error-text {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  color: #ffffff;
+}
+.error-text {
+  color: #ff6666;
+}
+
+/* 4) GRID DE TARJETAS */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* 5) CADA TARJETA INDIVIDUAL */
+.pricing-card {
+  background: rgba(20, 20, 30, 0.9);
+  border-radius: 16px;
+  border: 2px solid #8a2be2;
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+/* Al hacer hover, la tarjeta se “eleva” y brilla un poco */
+.pricing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(138, 43, 226, 0.6);
+}
+
+/* 6) CABECERA DE LA TARJETA (icono + título) */
+.card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* 6.1) El ícono SVG (puede ser cualquier SVG sencillo) */
+.card-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 12px;
+  stroke: #8a2be2;
+  fill: none;
+  transition: stroke 0.3s ease;
+}
+
+/* Al hacer hover en la tarjeta, hacemos que el icono brille */
+.pricing-card:hover .card-icon {
+  stroke: #bc04c9;
+}
+
+/* 6.2) Título del tipo de reserva */
+.card-title {
+  font-family: "Abolition", sans-serif;
+  font-size: 1.6rem;
+  color: #ffffff;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* 7) CUERPO DE LA TARJETA (precio + etiqueta) */
+.card-body {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 7.1) Precio grande */
+.card-price {
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: #8a2be2;
+  margin-bottom: 4px;
+  /* efecto “neón” muy sutil */
+  text-shadow: 0 0 8px rgba(138, 43, 226, 0.7);
+}
+
+/* 7.2) Texto “por día” */
+.card-label {
+  font-size: 1rem;
+  color: #ccccff;
+}
+
+/* 8) BOTÓN “Reservar ahora” */
+.card-button {
+  margin-top: auto; /* empuja el botón al fondo de la tarjeta */
+  background: linear-gradient(150deg, #C92704, #bc04c9, #044bc9);
+  border: none;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-family: "Abolition", sans-serif;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Al pasar el cursor sobre “Reservar ahora” */
+.card-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(138, 43, 226, 0.6);
+}
+
+/* 9) MEDIA QUERIES PARA PANTALLAS PEQUEÑAS */
+@media (max-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: 1fr; /* una columna en móviles */
+  }
+  .pricing-card {
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  .pricing-title {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+  .card-price {
+    font-size: 2rem;
+  }
+}
