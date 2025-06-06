@@ -28,7 +28,7 @@ const Login = () => {
         console.log('→ Login res.json →', data);
         // 2) Guardas el token (o la bandera) en localStorage
         localStorage.setItem('reserva', data.token || 'true');
-        localStorage.setItem('reservaUserId', data.userId);
+        localStorage.setItem('clientId', data.clientId);
         localStorage.setItem('reservaUserName', data.userName);
 
         // 3) Rediriges inmediatamente a "/"

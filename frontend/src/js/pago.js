@@ -1,31 +1,33 @@
-// Obtener datos de la reserva
-const reserva = JSON.parse(localStorage.getItem("reserva")) || {};
+// pago.js
 
-// Función de depuración para verificar datos
+// 1) Obtener datos de la reserva desde localStorage
+const reserva = JSON.parse(localStorage.getItem("reserva")) || {};
+const pendingReservationId = localStorage.getItem("pendingReservationId");
+
+// 2) Función de depuración
 function debugReserva() {
-  console.log("Datos de reserva en localStorage:", reserva);
-  if (!reserva || Object.keys(reserva).length === 0) {
-    console.error("No se encontraron datos de reserva en localStorage");
-    window.location.href = "reservation.html";
+  if (!reserva || Object.keys(reserva).length === 0 || !pendingReservationId) {
+    console.error("Faltan datos de reserva o no hay reservationId pendiente");
+    window.location.href = "reservation.html"; 
+    // REDIRIGIR si no hay datos
   }
 }
 
-// Mostrar datos de reserva en la página
+// 3) Mostrar datos de la reserva en la página
 function mostrarDatosReserva() {
-  // Actualizar información de reserva
   document.querySelector(".resumen-header h3").textContent =
     reserva.tipoReserva || "Individual";
   document.querySelector(".precio-resumen").textContent = `$${(
     reserva.cotizacion || 1500
   ).toLocaleString("es-MX")} MXN`;
 
-  // Mostrar nombre
+  // Nombre
   const nombreElement = document.querySelector(
     ".resumen-details .detail-item:nth-child(1) span"
   );
   if (nombreElement) nombreElement.textContent = reserva.nombre || "";
 
-  // Formatear y mostrar fecha y hora
+  // Fecha formateada
   if (reserva.fecha) {
     const fechaObj = new Date(reserva.fecha);
     const opcionesFecha = {
@@ -38,6 +40,7 @@ function mostrarDatosReserva() {
     document.getElementById("fecha-formateada").textContent = fechaFormateada;
   }
 
+  // Hora formateada
   if (reserva.hora) {
     const [horas, minutos] = reserva.hora.split(":");
     const periodo = parseInt(horas) >= 12 ? "p.m." : "a.m.";
@@ -47,83 +50,121 @@ function mostrarDatosReserva() {
   }
 }
 
-// Configurar Stripe
-// CONTIENE API, CONTENIDO SENSIBLE
-function configurarStripe() {
-  const stripe = Stripe(
-    "pk_test_51RJhFw2HfMSQSL5i8QnDnjVAutROW6U3LcR7HWpbxxlFOjCpp8eVO8iZ2oHTzcpkrPeJrtcOffE0TVmC8hjVJiI300PSLDTtm3"
-  );
-  const elements = stripe.elements();
+// 4) Configurar Stripe (tu clave pública ya la tienes)
+async function iniciarStripeFlow() {
+  try {
+    // 4.1) Llamar a nuestro backend para crear el PaymentIntent
+    //       Convertimos reserva.cotizacion (que está en pesos) a centavos
+    const response = await fetch("http://localhost:3000/api/stripe/create-payment-intent", {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify({
+        amount:   Math.round(reserva.cotizacion * 100), // convertir a centavos
+        currency: "mxn"
+      })
+    });
+    const data = await response.json();
 
-  // Estilos comunes para elementos de Stripe
-  const baseStyle = {
-    color: "#ffffff",
-    fontFamily: '"Poppins", sans-serif',
-    fontSize: "16px",
-    "::placeholder": {
-      color: "#aab7c4",
-    },
-  };
+    if (data.error || !data.clientSecret) {
+      alert("No se pudo iniciar el pago. Intenta de nuevo más tarde.");
+      return;
+    }
+    const clientSecret = data.clientSecret;
+    console.log("clientSecret que recibimos:", data.clientSecret);
 
-  // Crear elementos de tarjeta separados
-  const cardNumber = elements.create("cardNumber", {
-    style: {
-      base: baseStyle,
-      invalid: {
-        color: "#fa755a",
-        iconColor: "#fa755a",
+    // 4.2) Inicializar Stripe.js con tu clave pública
+    const stripe = Stripe("pk_test_51RJhFw2HfMSQSL5i8QnDnjVAutROW6U3LcR7HWpbxxlFOjCpp8eVO8iZ2oHTzcpkrPeJrtcOffE0TVmC8hjVJiI300PSLDTtm3");
+    const elements = stripe.elements();
+    const style = {
+      base: {
+        color: "#ffffff",
+        fontFamily: '"Poppins", sans-serif',
+        fontSize: "16px",
+        "::placeholder": { color: "#aab7c4" },
       },
-    },
-  });
-  cardNumber.mount("#card-number");
+      invalid: { color: "#fa755a", iconColor: "#fa755a" }
+    };
 
-  const cardExpiry = elements.create("cardExpiry", {
-    style: {
-      base: baseStyle,
-    },
-  });
-  cardExpiry.mount("#card-expiry");
+    // 4.3) Montar los elementos de tarjeta
+    const cardNumber = elements.create("cardNumber", { style });
+    cardNumber.mount("#card-number");
 
-  const cardCvc = elements.create("cardCvc", {
-    style: {
-      base: baseStyle,
-    },
-  });
-  cardCvc.mount("#card-cvc");
+    const cardExpiry = elements.create("cardExpiry", { style });
+    cardExpiry.mount("#card-expiry");
 
-  // Manejar pago con tarjeta
-  document
-    .getElementById("pagar-tarjeta")
-    .addEventListener("click", async () => {
+    const cardCvc = elements.create("cardCvc", { style });
+    cardCvc.mount("#card-cvc");
+
+    // 4.4) Manejar el clic en “Pagar con tarjeta”
+    document.getElementById("pagar-tarjeta").addEventListener("click", async () => {
       const cardName = document.getElementById("card-name").value;
-
       if (!cardName) {
         alert("Por favor ingresa el nombre que aparece en la tarjeta");
         return;
       }
 
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: "card",
-        card: cardNumber,
-        billing_details: {
-          name: cardName,
-          email: reserva.correo || "",
-        },
-      });
+      // 4.5) Confirmar el PaymentIntent en Stripe usando el clientSecret
+      const { paymentIntent, error: stripeError } = await stripe.confirmCardPayment(
+        clientSecret,
+        {
+          payment_method: {
+            card: cardNumber,
+            billing_details: {
+              name:  cardName,
+              email: reserva.correo || ""
+            }
+          }
+        }
+      );
 
-      if (error) {
-        alert(error.message);
+      if (stripeError) {
+        // Algo salió mal al autenticar o procesar la tarjeta
+        alert("Error al procesar el pago: " + stripeError.message);
+        return;
+      }
+
+      // 4.6) Si llegamos aquí, paymentIntent.status === 'succeeded'
+      if (paymentIntent.status === "succeeded") {
+        // NUEVO: llamar a nuestro endpoint confirm-payment
+        try {
+          const respConfirm = await fetch(
+            `http://localhost:3000/api/reservation/${pendingReservationId}/confirm-payment`,
+            { method:  "POST", headers: { "Content-Type": "application/json" },
+              body:    JSON.stringify({
+                transactionId: paymentIntent.id // o paymentIntent.charges.data[0].id
+              })
+            }
+          );
+          const confirmData = await respConfirm.json();
+
+          if (confirmData.error) {
+            alert("Error al confirmar pago: " + confirmData.error);
+            return;
+          }
+          if (confirmData.warning) {
+            alert("Pago confirmado, pero no se pudo enviar el correo.");
+            window.location.href = "mis_reservas.html";
+            return;
+          }
+
+          // Todo salió perfecto: reserva marcada como pagada y correo enviado
+          alert("¡Pago confirmado y correo enviado! Gracias por tu reserva.");
+          window.location.href = "mis_reservas.html";
+        } catch (err) {
+          console.error("Error al llamar a confirm-payment:", err);
+          alert("Ocurrió un error al confirmar el pago. Intenta de nuevo.");
+        }
       } else {
-        alert("Pago exitoso! Redirigiendo...");
-        localStorage.setItem("pagoConfirmado", "true");
-        setTimeout(() => {
-          window.location.href = "confirmation.html";
-        }, 1500);
+        alert("El pago no pudo completarse. Intenta con otro método.");
       }
     });
+  } catch (err) {
+    console.error("Error en iniciarStripeFlow():", err);
+    alert("No se pudo iniciar el proceso de pago. Intenta de nuevo más tarde.");
+  }
 }
 
-// Configurar PayPal
+// 5) Configurar PayPal (similares cambios que en Stripe)
 function configurarPayPal() {
   paypal
     .Buttons({
@@ -134,6 +175,7 @@ function configurarPayPal() {
         height: 40,
       },
       createOrder: function (data, actions) {
+        // 5.1) Indicamos el monto a pagar (en este ejemplo, cotización / 100)
         return actions.order.create({
           purchase_units: [
             {
@@ -146,10 +188,40 @@ function configurarPayPal() {
         });
       },
       onApprove: function (data, actions) {
-        return actions.order.capture().then(function (details) {
+        // 5.2) Cuando PayPal confirma, capturamos la orden
+        return actions.order.capture().then(async function (details) {
           alert("Pago completado por " + details.payer.name.given_name);
-          localStorage.setItem("pagoConfirmado", "true");
-          window.location.href = "confirmacion.html";
+
+          // 5.3) Llamamos a nuestro back para confirmar el pago y enviar correo
+          try {
+            const response = await fetch(
+              `http://localhost:3000/api/reservation/${pendingReservationId}/confirm-payment`,
+              {
+                method:  "POST",
+                headers: { "Content-Type": "application/json" },
+                body:    JSON.stringify({
+                  transactionId: data.orderID,
+                }),
+              }
+            );
+            const dataBack = await response.json();
+
+            if (dataBack.error) {
+              alert("Error al confirmar pago: " + dataBack.error);
+              return;
+            }
+            if (dataBack.warning) {
+              alert("Pago confirmado, pero no se pudo enviar el correo.");
+              window.location.href = "mis_reservas.html";
+              return;
+            }
+
+            alert("¡Pago confirmado y correo enviado! Gracias por tu reserva.");
+            window.location.href = "mis_reservas.html";
+          } catch (err) {
+            console.error("Error en confirm-payment (PayPal):", err);
+            alert("Ocurrió un error al confirmar el pago. Intenta de nuevo.");
+          }
         });
       },
       onError: function (err) {
@@ -159,21 +231,46 @@ function configurarPayPal() {
     .render("#paypal-button-container");
 }
 
-// Inicializar mapa con verificación de carga
+const reservationId = localStorage.getItem('pendingReservationId');
+
+const response = await fetch(
+  `http://localhost:3000/api/reservation/${reservationId}/confirm-payment`,
+  {
+    method:  "POST",
+    headers: { "Content-Type": "application/json" },
+    body:    JSON.stringify({
+      transactionId: paymentIntent.id // o .orderID, según tu pasarela
+    })
+  }
+);
+const data = await response.json();
+
+if (data.error) {
+  alert("Error al confirmar pago: " + data.error);
+  return;
+}
+if (data.warning) {
+  alert("Pago confirmado, pero no se pudo enviar el correo.");
+  window.location.href = "mis_reservas.html";
+  return;
+}
+
+// Si llegamos aquí: data.success === true
+alert("¡Pago confirmado y correo enviado! Gracias por tu reserva.");
+window.location.href = "mis_reservas.html";
+
+// 6) Inicializar mapa (sin cambios)
 function initMap() {
   if (!document.getElementById("mapa-arena")) {
     console.error("Elemento del mapa no encontrado");
     return;
   }
-
-  // Verificar si la API de Google Maps está cargada
   if (typeof google === "undefined" || typeof google.maps === "undefined") {
     console.error("Google Maps API no está cargada");
     return;
   }
 
   const arenaLocation = { lat: 20.6817814, lng: -103.4652204 };
-
   try {
     const map = new google.maps.Map(document.getElementById("mapa-arena"), {
       zoom: 16,
@@ -239,6 +336,7 @@ function initMap() {
   }
 }
 
+// 7) Selector de método de pago (sin cambios)
 function configurarSelectoresPago() {
   document.querySelectorAll(".metodo-option").forEach((option) => {
     option.addEventListener("click", () => {
@@ -257,7 +355,7 @@ function configurarSelectoresPago() {
   });
 }
 
-// Inicializar todo cuando el DOM esté listo
+// 8) Inicializar todo cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
   debugReserva();
   mostrarDatosReserva();
@@ -265,10 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
   configurarPayPal();
   configurarSelectoresPago();
 
-  // Asignar la función initMap al objeto window para que sea accesible globalmente
   window.initMap = initMap;
-
-  // Verificar si la API de Google Maps ya está cargada
   if (typeof google !== "undefined" && typeof google.maps !== "undefined") {
     initMap();
   } else {
@@ -276,7 +371,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Función para manejar posibles errores de carga de la API
+// 9) Manejo de error de Google Maps API
 window.gm_authFailure = function () {
   console.error("Error de autenticación con Google Maps API");
   document.getElementById("mapa-arena").innerHTML =

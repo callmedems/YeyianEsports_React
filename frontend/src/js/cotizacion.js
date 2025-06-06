@@ -1,9 +1,10 @@
-// Obtener datos de la reserva desde local storage
+// cotizacion.js
+
+// 1) Obtener datos de la reserva guardados en localStorage
 const reserva = JSON.parse(localStorage.getItem("reserva")) || {};
 const tipoReserva = reserva.tipoReserva || "Individual";
 
-// Precios simulados según tipo de reserva 
-// PRECIOS SIMULADOS, PREGUNTAR PARA LA COTIZACIÓN
+// 2) Precios simulados según tipo de reserva
 const precios = {
   Individual: 1500,
   Corporativo: 8000,
@@ -12,14 +13,12 @@ const precios = {
   Escolar: 4000,
 };
 
-// Asignar precio basado en el tipo de reserva
+// 3) Calcular precio y actualizar localStorage
 const precio = precios[tipoReserva] || 1500;
 reserva.cotizacion = precio;
-
-// Actualizar local storage con la cotización
 localStorage.setItem("reserva", JSON.stringify(reserva));
 
-// Mensajes de marketing acorde al tipo de reserva
+// 4) Datos de marketing (sin cambios)
 const marketingMessages = {
   Escolar: {
     title: "¡Una experiencia educativa inolvidable!",
@@ -73,12 +72,12 @@ const marketingMessages = {
   },
 };
 
-// Configurar contenido dinámico
+// 5) Función para configurar la página de cotización
 const configurarCotizacion = () => {
   const marketingData =
     marketingMessages[tipoReserva] || marketingMessages["Individual"];
 
-  // Formatear fecha y hora
+  // Formatear fecha y hora para mostrar
   const fechaObj = new Date(reserva.fecha);
   const opcionesFecha = {
     weekday: "long",
@@ -91,27 +90,27 @@ const configurarCotizacion = () => {
   const horaFormateada = `${horas}:${minutos}`;
   const periodo = parseInt(horas) >= 12 ? "p.m." : "a.m.";
 
-  // Actualizar mensajes con el nuevo formato
+  // Actualizar título y mensaje de marketing
   document.querySelector("h1").textContent = marketingData.title;
   document.getElementById("marketing-message").innerHTML = `
-        ${marketingData.message}<br><br>
-        <span style="font-size: 0.9em; color: #aaaaaa;">
-            Este es el precio para la renta de la arena el ${fechaFormateada} a las ${horaFormateada} ${periodo}
-        </span>
-    `;
+    ${marketingData.message}<br><br>
+    <span style="font-size: 0.9em; color: #aaaaaa;">
+      Cotización para la renta el ${fechaFormateada} a las ${horaFormateada} ${periodo}
+    </span>
+  `;
 
+  // Mostrar el precio calculado
   document.getElementById("cotizacion-precio").innerHTML = `
-        <span style="font-size: 0.8em; display: block; margin-bottom: 5px;">
-            Cotización para reserva ${tipoReserva.toLowerCase()}
-        </span>
-        $${precio.toLocaleString("es-MX")} MXN
-    `;
+    <span style="font-size: 0.8em; display: block; margin-bottom: 5px;">
+      Cotización para reserva ${tipoReserva.toLowerCase()}
+    </span>
+    $${precio.toLocaleString("es-MX")} MXN
+  `;
 
-  // Actualizar características específicas
+  // Mostrar las "features" específicas
   const featuresContainer = document.querySelector(".features-grid");
   if (featuresContainer) {
     featuresContainer.innerHTML = "";
-
     marketingData.features.forEach((feature, index) => {
       const icons = [
         "fa-gamepad",
@@ -121,24 +120,83 @@ const configurarCotizacion = () => {
         "fa-video",
       ];
       const [titulo, descripcion] = feature.split(" - ");
-
       featuresContainer.innerHTML += `
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas ${
-                      icons[index]
-                    }"></i></div>
-                    <h3>${titulo}</h3>
-                    <p>${descripcion || feature}</p>
-                </div>
-            `;
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas ${icons[index]}"></i></div>
+          <h3>${titulo}</h3>
+          <p>${descripcion || feature}</p>
+        </div>
+      `;
     });
   }
 };
 
-// Configurar botón de pago
-document.getElementById("pago-button").addEventListener("click", function () {
-  window.location.href = "pago.html";
+// 6) Al hacer click en “Pagar”, primero creamos la reserva en el backend
+document.getElementById("pago-button").addEventListener("click", async function () {
+  // 6.1) Leer clientId desde localStorage (asumimos que el usuario ya está autenticado)
+  const clientId = localStorage.getItem("clientId");
+  if (!clientId) {
+    alert("Debes iniciar sesión para reservar.");
+    return;
+  }
+
+  // 6.2) Armar el body para el servidor
+  const bodyData = {
+    clientId: parseInt(clientId, 10),
+    reservationDate: reserva.fecha,         // ej. "2025-06-15"
+    reservationTime: reserva.hora,         // ej. "14:00"
+    reservationTypeId: getTypeId(tipoReserva),
+    totalPrice: precio                      // asumimos que el back guarda totalPrice también
+  };
+
+  try {
+    // 6.3) Llamar a POST /api/reservation para crear la reserva como "pendiente"
+    const response = await fetch("http://localhost:3000/api/reservation", {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify(bodyData)
+    });
+    const data = await response.json();
+
+    if (data.error) {
+      alert("Error al crear la reserva: " + data.error);
+      return;
+    }
+    if (!data.reservationId) {
+      alert("No obtuvimos reservationId del servidor.");
+      return;
+    }
+
+    // 6.4) Guardar el reservationId para el paso de pago
+    localStorage.setItem("pendingReservationId", data.reservationId);
+
+    // 6.5) Redirigir al usuario a la página de pago (pago.html)
+    window.location.href = "pago.html";
+  } catch (err) {
+    console.error("Error en la petición al crear reserva:", err);
+    alert("Ocurrió un problema de red al intentar crear la reserva.");
+  }
 });
 
-// Inicializar
+// 7) Función auxiliar para obtener el ID numérico del tipo de reserva
+//    (porque en tu tabla `reservationcosts` cada tipo tiene un ID numérico)
+function getTypeId(tipoTexto) {
+  // Ajusta estos valores a como tengas definidos los IDs en tu tabla reservationcosts
+  switch (tipoTexto) {
+    case "Individual":
+      return 1;
+    case "Corporativo":
+      return 2;
+    case "Streamer":
+      return 3;
+    case "Educativo":
+      return 4;
+    case "Escolar":
+      return 5;
+    default:
+      return 1;
+  }
+}
+
+// 8) Inicialización cuando el DOM cargue
 document.addEventListener("DOMContentLoaded", configurarCotizacion);

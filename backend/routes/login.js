@@ -30,7 +30,7 @@ module.exports = function (knex) {
       // 3) Si llegamos aquí, el mail y password coinciden
       return res.status(200).json({
         token: 'true',
-        userId: usuario.clientId,
+        clientId: usuario.clientId,
         userName: usuario.userName
       });
     } catch (err) {

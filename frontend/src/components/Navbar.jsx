@@ -43,7 +43,7 @@ const Navbar = () => {
   // 4) Al hacer logout, borramos la clave "reserva" y redirigimos a "/"
   const handleLogout = () => {
     localStorage.removeItem('reserva');
-    localStorage.removeItem('reservaUserId');
+    localStorage.removeItem('clientId');
     localStorage.removeItem('reservaUserName');
     setIsLoggedIn(false);
     setUserName('');

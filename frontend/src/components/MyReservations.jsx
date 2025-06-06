@@ -5,11 +5,11 @@ import '../css/styles.css';
 
 const MyReservations = () => {
   const [reservas, setReservas] = useState([]);
-  const userId = localStorage.getItem('reservaUserId'); // asegura que está guardado tras el login
+  const clientId = localStorage.getItem('clientId'); // asegura que está guardado tras el login
 
   useEffect(() => {
     // 1) Llamamos al back-end para obtener las reservas
-    fetch(`http://localhost:3000/api/reservation/${userId}`)
+    fetch(`http://localhost:3000/api/reservation/${clientId}`)
       .then((res) => {
         if (!res.ok) throw new Error('No se pudieron obtener las reservas');
         return res.json();
@@ -21,7 +21,7 @@ const MyReservations = () => {
       .catch((err) => {
         console.error(err);
       });
-  }, [userId]);
+  }, [clientId]);
 
   if (!reservas.length) {
     return (

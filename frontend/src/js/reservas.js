@@ -317,14 +317,12 @@ function showContactInput(type) {
 document.getElementById('formReserva').addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Supongamos que obtienes el clientId del localStorage tras login:
-  const clientId = localStorage.getItem('clientId'); // ajusta según tu flujo
-  // O si usas JWT, envíalo en la cabecera Authorization
-
+  // El clientId del localStorage tras login:
+  const clientId = localStorage.getItem('clientId');
   const reservationDate = document.getElementById('fecha').value;
   const reservationTime = document.getElementById('hora').value;
   const reservationTypeId = document.getElementById('tipoReserva').value;
-  // Otros campos del formulario…
+  // Posibles campos a implementar a futuro...
 
   // Montar el body
   const bodyData = {
@@ -336,24 +334,26 @@ document.getElementById('formReserva').addEventListener('submit', async (e) => {
   };
 
   try {
-    const response = await fetch('http://localhost:3000/api/reservations', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        // Si usas JWT:
-        // 'Authorization': 'Bearer ' + localStorage.getItem('token'),
-      },
-      body: JSON.stringify(bodyData)
-    });
-    const data = await response.json();
-    if (data.error) {
+    const clientId = localStorage.getItem('clientId');
+    const response = await fetch(`http://localhost:3000/api/reservation/${clientId}`);
+    const paidReservations = await response.json();
+
+    if (paidReservations.error) {
+      // Si hay error al crear la reserva, mostrarlo y no continuar
       alert('Error al crear reserva: ' + data.error);
-    } else if (data.warning) {
-      alert('Reserva creada, pero no se pudo enviar el correo de confirmación.');
-    } else {
-      alert('Reserva creada y correo de confirmación enviado. ¡Revisa tu correo!');
-      // Limpiar formulario o redirigir, según tu flujo.
+      return;
     }
+    if (!paidReservations.reservationId) {
+      alert('No se recibió reservationId en la respuesta.');
+      return;
+    }
+
+    // 2) Guardamos el reservationId para usarlo en el paso de pago
+    localStorage.setItem('pendingReservationId', paidReservations.reservationId);
+
+    // 3) Redirigimos a la página de cotización / pago
+    //    (en tu flujo original ibas a "cotizacion.html")
+    window.location.href = "cotizacion.html";
   } catch (err) {
     console.error('Error en la petición:', err);
     alert('Ocurrió un problema de red al intentar reservar.');

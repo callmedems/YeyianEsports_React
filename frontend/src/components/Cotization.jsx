@@ -1,4 +1,4 @@
-// src/pages/Cotizacion.jsx
+// src/pages/Cotization.jsx
 
 import React, { useEffect, useState } from "react";
 import "../css/styles.css";
@@ -153,7 +153,7 @@ const Cotization = () => {
       totalPrice: ultima.totalPrice
     };
     localStorage.setItem("reserva", JSON.stringify(objetoPago));
-    window.location.href = "/pago";
+    window.location.href = "/Payment";
   };
 
   return (

@@ -307,19 +307,21 @@ const ReservationForm = () => {
     const fecha = e.target.fecha.value;                 // ej. "2025-06-15"
     const hora = e.target.hora.value;                   // ej. "18:30"
     const reservationTime = hora + ":00";
-    const userId = localStorage.getItem("reservaUserId"); // id del cliente logueado
+    const clientId = localStorage.getItem("clientId"); // id del cliente logueado
+
+    console.log('→ clientId a enviar:', clientId, '→ Number(clientId):', Number(clientId));
 
     const reservationDate = fecha;
 
     // 2) Calcula el precio
-    const precios = {
-      Individual: 1500,
-      Corporativo: 8000,
-      Streamer: 5000,
-      Educativo: 4500,
-      Escolar: 4000,
+    const preciosPorId = {
+      1: 1500,  // Individual
+      2: 8000,  // Corporativo
+      3: 5000,  // Streamer
+      4: 4500,  // Educativo
+      5: 4000   // Escolar
     };
-    const precio = precios[tipoReserva] || precios.Individual;
+    const precio = preciosPorId[ Number(tipoReserva) ] || preciosPorId[1];
 
     // 4) Arma el objeto EXACTO que tu back-end espera:
     const body = {
@@ -327,10 +329,19 @@ const ReservationForm = () => {
       reservationTime: reservationTime,             // puede ser "18:30"
       totalPrice: precio,               // 1500 (o el número que corresponda)
       reservationTypeId: Number(tipoReserva), // conviene que sea int
-      clientId: Number(userId),         // conviene que sea int
+      clientId: Number(clientId),         // conviene que sea int
       // Si tu tabla exige más campos como `paymentStatus`, `ReservationStatus`, etc.,
       // o si en el back-end ya los pones por defecto, no es necesario mandarlos.
     };
+
+    console.log("ENVÍO →", {
+      reservationDate,
+      reservationTime,
+      totalPrice: precio,
+      reservationTypeId: Number(tipoReserva),
+      clientId: Number(clientId)
+    });
+
 
     // 4) Hacemos el fetch al back-end para insertar en la BD:
     fetch("http://localhost:3000/api/reservation", {
@@ -374,10 +385,8 @@ const ReservationForm = () => {
         localStorage.setItem(
           "reserva",
           JSON.stringify({
-            // Puedes leer el nombre y correo del Step 1 (step1Form) o de tu contexto de usuario:
             userName: document.getElementById("nombre").value.trim(),
             correo: document.getElementById("correo").value.trim(),
-            // También puedes copiar la info de “ultimaReserva” si ya la tienes:
             tipoReservaTexto: tipoReserva,
             reservationDate: reservationDate,
             reservationTime: hora + ":00",
@@ -389,7 +398,7 @@ const ReservationForm = () => {
         );
 
         // 5) Rediriges a la página de cotización (o de confirmación):
-        window.location.href = "/cotizacion"; 
+        window.location.href = "/cotization"; 
       })
       .catch((err) => {
         console.error(err);
