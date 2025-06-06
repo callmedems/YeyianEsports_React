@@ -1,0 +1,614 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  --color-fondo: #1A1A42;
+  --color-estrellas:#FFD55C;
+  --color-botonRojo:#C4240E;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/*--------------------------
+    NAVBAR
+----------------------------*/
+
+/* --- BARRA DE NAVEGACIÓN --- */
+.nav {
+    background-color: #170F24;
+    padding: 10px 20px;
+    box-shadow: 0 2px 8px #2f1be3;
+    position: fixed;
+    top: 0;
+    width:100%;
+    height: 70px;
+    z-index: 2;
+}
+
+.navContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.nav .navbar_right {
+    margin-right: 50px;
+    display:flex;
+    gap: 15px;
+}
+
+.nav .navbar_left {
+    margin-left: 5px;
+}
+
+.nav .navbar_left img {
+    height: 50px;
+}
+
+/* Logos centrales */
+.logo {
+    padding-left: 5px;
+    height: 65px;
+    filter: drop-shadow(0 0 2px white)
+            drop-shadow(0 0 1px white);
+    transition: transform 0.4s ease;    
+}
+
+.logo img:hover {
+    transform:scale(1.1);
+}
+
+.nav .navbar_center {
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%); /* para centrarlo */
+    display: flex;
+    align-items: center;
+    gap: 15px; /* para el espacio entre los logos */
+}
+
+.nav .navbar_center img {
+    height: 50px;
+}
+
+.separador {
+    width: 1px;
+    height: 50px;
+    background-color: #FFFFFF;
+    margin: 0 5px; /* espacio entre los logos y el separador */
+}
+
+.nav .navbar_right {
+    font-family: 'Abolition', sans-serif;
+    margin-right: 50px;
+}
+
+.nav .navbar_right a {
+    background-image: linear-gradient(150deg, #C92704, #bc04c9, #044bc9);
+    border-radius: 8px;
+    display: flex;
+    font-size: 30px;
+    padding: 3px;
+    cursor: pointer;
+    transition: 0.4s;
+    color: #FFFFFF;
+}
+
+.nav .navbar_right a:active{
+    transform: scale(0.70);
+}
+
+.nav .navbar_right a span {
+    color: #FFFFFF;
+    text-align: center;
+    background-color:#170F24;
+    padding: 6px 20px;
+    border-radius: 6px;
+    transition: 0.4s;
+}
+
+.nav .navbar_right a:hover span{
+    background: none;
+}
+
+.reservationShortText {
+    display: none;
+}
+
+@media (max-width: 850px) { /* Para q se vea bien en pantallas pequeñas */
+/*Si el ancho es menor que 850px se quita el texto largo */
+    .nav {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    /*.nav .navbar_center {
+        margin: 10px 0;
+    }*/
+
+    .reservationText {
+        display: none;
+    }
+
+    .reservationShortText {
+        display: inline;
+    }
+}
+
+/* --- LINK DE RESERVACION --- */
+
+.nav .navbar_right .reservation-link {
+    background-image: linear-gradient(150deg, #C92704, #bc04c9, #044bc9);
+    border-radius: 8px;
+    display: flex;
+    font-size: 30px;
+    padding: 3px;
+    cursor: pointer;
+    transition: 0.4s;
+    color: #FFFFFF;
+}
+
+.nav .navbar_right  .reservation-link:active{
+    transform: scale(0.70);
+}
+
+.nav .navbar_right .reservation-link span {
+    color: #FFFFFF;
+    text-align: center;
+    background-color:#170F24;
+    padding: 6px 20px;
+    border-radius: 6px;
+    transition: 0.4s;
+}
+
+.nav .navbar_right  .reservation-link:hover span{
+    background: none;
+}
+
+.reservationShortText {
+    display: none;
+}
+
+/* --- MENU LATERAL --- */
+
+/* 1. Botón que abre el menú lateral */
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.menu-button img {
+  width: 40px;
+}
+
+/* 2. Overlay semitransparente que oscurece el fondo */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000; /* Debe estar por debajo de la sidebar */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 3. Sidebar lateral */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px; /* Lejos fuera de pantalla */
+  width: 260px;
+  height: 100%;
+  background-color: #170F24;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  z-index: 1001; /* Por encima del overlay */
+  transition: left 0.3s ease;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #C92704, #bc04c9, #044bc9, #C92704);
+  background-size: 300% 300%;
+  animation: neonGradient 5s ease infinite;
+}
+
+@keyframes neonGradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Cuando está abierto, la movemos a 0 */
+.sidebar.open {
+  left: 0;
+}
+
+/* Botón de cierre “X” */
+.sidebar .close-button {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: 12px;
+  cursor: pointer;
+  color: #FFFFFF;
+}
+
+.sidebar-auth-link {
+  display: block;
+  margin: 0 20px 20px;         /* Margen superior/izquierda/derecha/abajo */
+  padding: 10px 0;             /* Espacio vertical */
+  text-align: center;
+  font-family: 'Abolition', sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  color: #FFFFFF;
+  background-image: linear-gradient(150deg, #C92704, #bc04c9, #044bc9);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-auth-link:hover {
+  opacity: 0.9;
+}
+
+/* Espacio entre la “X” y los enlaces */
+.sidebar-nav {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenedor del icono de usuario */
+.sidebar-user-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  /* position: relative;  NO lo ponemos aquí, sino en el contenedor directo de la imagen */
+}
+
+/* 2.1) Estilos del wrapper que contiene la imagen de perfil */
+.profile-avatar-wrapper {
+  position: relative; /* necesario para superponer el overlay */
+  width: 70px;       /* mismo tamaño que .sidebar-user-icon */
+  height: 70px;
+  margin-bottom: 8px; /* deja un espacio entre la imagen y el nombre */
+}
+
+/* 2.2) La imagen en sí misma sigue igual que antes: */
+.sidebar-user-icon {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #2a1a42;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+/* 2.3) Al hacer hover sobre la imagen, la hacemos un poco más grande (zoom sutil): */
+.profile-avatar-wrapper:hover .sidebar-user-icon {
+  transform: scale(1.05); /* ligera ampliación */
+}
+
+/* 2.4) Definimos el overlay: una “capa” semitransparente gris en forma de círculo,
+       que solo aparece en hover. */
+.profile-avatar-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* gris semitransparente */
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* 2.5) Definimos el ícono de editar en el centro (puede ser una fuente icono o un SVG inline).
+       Aquí lo hacemos con un pseudo-elemento ::after que muestre un “✏️” (lápiz) centrado: */
+.profile-avatar-wrapper::after {
+  content: "\270E"; /* carácter Unicode de “lápiz” (✎) */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #FFFFFF;
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none; /* para que no interfiera con el click */
+}
+
+/* 2.6) En hover, mostramos tanto overlay (::before) como lápiz (::after) */
+.profile-avatar-wrapper:hover::before {
+  opacity: 1;
+}
+.profile-avatar-wrapper:hover::after {
+  opacity: 1;
+}
+
+/* Icono de usuario: círculo con imagen */
+.sidebar-user-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #2a1a42; /* Por si la imagen es transparente */
+  cursor: pointer;
+  border: 2px solid #ffffff;
+}
+
+/* Botón “Cerrar sesión” (aparece al final del sidebar) */
+.sidebar-logout-button {
+  margin: auto 20px 20px; /* centrado horizontal, margen arriba (auto hace que empuje hacia abajo) */
+  padding: 10px 0;
+  text-align: center;
+  font-family: 'Abolition', sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: #ffffff;
+  background-color: #C92704; /* Color rojo similar al degradado de reserva */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-logout-button:hover {
+  opacity: 0.9;
+}
+
+/* Si quieres que quede absolutamente pegado al bottom, podrías usar flex-grow en nav + margen top */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  /* Ya tienes: top, left, width, height, background-color, etc. */
+}
+
+.sidebar-user-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px; /* espacio antes del menú de enlaces */
+}
+
+/* El link que envuelve foto + nombre */
+.sidebar-user-link {
+  text-decoration: none;
+  color: inherit; /* heredamos el color de texto por defecto */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Foto de usuario circular */
+.sidebar-user-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #2a1a42; /* si la imagen es transparente, queda un fondo oscuro */
+  cursor: pointer;
+  border: 2px solid #ffffff;
+}
+
+/* 3.1) Al pasar el cursor sobre el nombre de usuario, lo subrayamos suavemente */
+.sidebar-user-name {
+  margin-top: 8px;
+  font-family: 'Abolition', sans-serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-align: center;
+  transition: color 0.2s ease;
+}
+.sidebar-user-link:hover .sidebar-user-name {
+  color: #c9a9ff; /* un lila suave al pasar sobre el nombre */
+}
+
+/* 3.2) Ajuste de los enlaces para que tengan “letter-spacing” mayor y cambien de color un poco */
+.sidebar-nav a {
+  display: block;
+  padding: 12px 20px;
+  font-size: 16px;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: background 0.2s ease, font-size 0.2s ease;
+  letter-spacing: 1px;
+}
+.sidebar-nav a:hover {
+  background-color: #2a1a42;
+  font-size: 18px; /* agrandamos ligeramente (16 → 18) */
+  color: #c9a9ff; /* lila claro */
+  text-shadow: 0 0 5px rgba(138, 43, 226, 0.8), 0 0 10px rgba(138, 43, 226, 0.6);
+}
+
+/* 3.3) Si quieres que el botón de “Cerrar sesión” (sidebar-logout-button) cambie de color en hover: */
+.sidebar-logout-button:hover {
+  background-color: #aa1a0e; /* rojo más oscuro al pasarse */
+  opacity: 0.95;
+}
+
+/* 3.4) Padding left de las secciones */
+.sidebar-nav a {
+  position: relative;
+  overflow: hidden;
+}
+.sidebar-nav a::before {
+  content: "";
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(138, 43, 226, 0.2); /* ligero degradado o color violeta intenso a la izquierda*/
+  transition: left 0.3s ease;
+}
+.sidebar-nav a:hover::before {
+  left: 0;
+}
+
+/* --------------------------------------
+   4) MEDIA QUERIES PARA ACCESIBILIDAD
+   -------------------------------------- */
+@media (max-width: 500px) {
+  /* Reducimos un poco el tamaño de los iconos de usuario en pantallas muy pequeñas */
+  .profile-avatar-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+  .sidebar-user-icon {
+    width: 100%;
+    height: 100%;
+  }
+  .sidebar-user-name {
+    font-size: 20px;
+  }
+  .sidebar-nav a {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+  .sidebar-nav a:hover {
+    font-size: 16px;
+  }
+  .sidebar-logout-button {
+    margin-top: auto;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+}
+
+/*--------------------------
+    FOOTER
+----------------------------*/
+
+.footer {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    background-color: #170F24; 
+    color: #FFFFFF;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 8px #2f1be3;
+    z-index: 1;
+    padding: 10px 0px;
+}
+
+.footerContainer {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+/* Sección izquierda */
+.footer_left {
+    padding-left: 3vh;
+    font-size: 1.2em;
+}
+
+/* Sección central */
+.footer_center {
+    display: flex;
+    gap: 2vh; /* para el espacio entre los logos */
+}
+
+.footer_center img {
+    height: 2vh;
+}
+
+.footer_right {
+    padding-right: 3vh;
+    font-size: 1.5em;
+}

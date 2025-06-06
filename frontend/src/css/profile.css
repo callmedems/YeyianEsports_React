@@ -1,0 +1,424 @@
+/* src/css/profile.css */
+
+/* ───────────────────────────────────────────────────────────────
+   1) CONTENEDOR PRINCIPAL: Divide la pantalla en dos columnas
+──────────────────────────────────────────────────────────────── */
+.edit-profile-page {
+  min-height: 100vh;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.7)
+    ),
+    url("../images/background_photo.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  padding-top: 80px; /* para que no quede debajo del navbar fijo */
+}
+
+.edit-profile-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  padding: 20px;
+  margin-top: 10vh;
+}
+
+/* En pantallas chicas, apilamos vertical */
+@media (max-width: 900px) {
+  .edit-profile-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────
+   2) SECCIÓN IZQUIERDA: Editar Perfil
+──────────────────────────────────────────────────────────────── */
+.profile-section {
+  background: rgba(20, 20, 30, 0.9);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(138, 43, 226, 0.6);
+  border: 1px solid #8a2be2;
+}
+
+.profile-section h1 {
+  text-align: center;
+  color: #8a2be2;
+  margin-bottom: 20px;
+}
+
+.edit-profile-form .section-label {
+  display: block;
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.photo-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.photo-preview-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 10px;
+}
+
+.photo-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #8a2be2;
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+  background-color: #2a1a42;
+}
+
+.no-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #2a1a42;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 1rem;
+  border: 3px dashed #8a2be2;
+}
+
+.btn-select-photo {
+  background: none;
+  color: #ffffff;
+  border: 2px dashed #8a2be2;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-select-photo:hover:not(:disabled) {
+  background-color: #8a2be2;
+  color: #170f24;
+}
+
+.edit-profile-form .small-text {
+  font-size: 0.75rem;
+  color: #aaa;
+}
+
+.field-group {
+  margin-bottom: 20px;
+}
+
+.field-group input[type="text"] {
+  width: 60%;
+  margin: auto;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #8a2be2;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.field-group input[type="text"]:focus {
+  outline: none;
+  border-color: #8a2be2;
+  box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+}
+
+.button-group {
+  text-align: center;
+}
+
+.btn-save {
+  background: linear-gradient(45deg, #8a2be2, #9400d3);
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-save:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.6);
+}
+
+.btn-save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   3) SECCIÓN DERECHA: Listado de Reservas
+──────────────────────────────────────────────────────────────── */
+.reservations-section {
+  background: rgba(20, 20, 30, 0.9);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(138, 43, 226, 0.6);
+  border: 1px solid #8a2be2;
+}
+
+.reservations-section h1 {
+  text-align: center;
+  color: #8a2be2;
+  margin-bottom: 20px;
+}
+
+.loading-text {
+  text-align: center;
+  color: #aaa;
+  font-size: 1rem;
+}
+
+.no-reservas-section {
+  text-align: center;
+  padding-top: 10vh;
+  color: #fff;
+}
+
+.no-reservas-section h2 {
+  font-size: 1.75rem;
+  margin-bottom: 8px;
+}
+
+.no-reservas-section p {
+  margin-bottom: 16px;
+}
+
+.reservar-button {
+  background: linear-gradient(45deg, #C92704, #bc04c9, #044bc9);
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reservar-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.6);
+}
+
+.reservations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 65vh;
+  overflow-y: auto;
+  padding-right: 5px; /* espacio para el scrollbar */
+}
+
+/* Barra de scroll personalizada */
+.reservations-list::-webkit-scrollbar {
+  width: 8px;
+}
+.reservations-list::-webkit-scrollbar-track {
+  background: rgba(138, 43, 226, 0.1);
+  border-radius: 4px;
+}
+.reservations-list::-webkit-scrollbar-thumb {
+  background: rgba(138, 43, 226, 0.6);
+  border-radius: 4px;
+}
+
+.reservation-card {
+  background: rgba(30, 30, 45, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  border-left: 4px solid #8a2be2;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reservation-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
+}
+
+.card-header {
+  display: flex;
+  letter-spacing: 1px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reservation-type {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+.price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #8a2be2;
+}
+
+.card-body p {
+  margin: 4px 0;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.card-body i {
+  margin-right: 8px;
+  color: #8a2be2;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total {
+  font-weight: 600;
+  color: #fff;
+}
+
+.status {
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+/* Colores según estado */
+.status-pending {
+  background-color: #f0ad4e; /* amarillo suave */
+  color: #170f24;
+}
+.status-approved {
+  background-color: #5cb85c; /* verde suave */
+  color: #170f24;
+}
+.status-rejected {
+  background-color: #d9534f; /* rojo suave */
+  color: #fff;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   4) RESPONSIVE / MOBILE
+──────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .edit-profile-container {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+  .profile-section,
+  .reservations-section {
+    padding: 20px;
+  }
+  .photo-preview-wrapper {
+    width: 100px;
+    height: 100px;
+  }
+  .reservation-card {
+    padding: 15px;
+  }
+  .card-body p {
+    font-size: 0.9rem;
+  }
+  .reservation-type {
+    font-size: 1rem;
+  }
+  .price {
+    font-size: 0.9rem;
+  }
+}
+
+/* ----------------------------
+   MEDIA QUERIES PARA PROFILE
+   ---------------------------- */
+
+/* 1) Escritorio grande (>= 1200px) */
+@media (min-width: 1200px) {
+  .edit-profile-container {
+    max-width: 700px;
+    padding: 40px 50px;
+  }
+  .photo-preview-wrapper {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+/* 2) Escritorio mediano / laptops (<= 992px) */
+@media (max-width: 992px) {
+  .edit-profile-container {
+    margin: 0 20px 30px;
+    padding: 30px;
+  }
+  .photo-preview-wrapper {
+    width: 120px;
+    height: 120px;
+  }
+  .btn-save {
+    font-size: 0.95rem;
+    padding: 10px 0;
+  }
+}
+
+/* 3) Tablets verticales / móviles grandes (<= 768px) */
+@media (max-width: 768px) {
+  .edit-profile-container {
+    padding: 20px;
+    margin: 0 16px 20px;
+  }
+  .photo-preview-wrapper {
+    width: 100px;
+    height: 100px;
+  }
+  .field-group input {
+    font-size: 0.95rem;
+    padding: 8px 12px;
+  }
+  .btn-save {
+    font-size: 0.9rem;
+    padding: 8px 0;
+  }
+}
+
+/* 4) Móviles pequeños (<= 576px) */
+@media (max-width: 576px) {
+  .edit-profile-container {
+    padding: 16px;
+    margin: 0 12px 16px;
+  }
+  .photo-preview-wrapper {
+    width: 80px;
+    height: 80px;
+  }
+  .btn-select-photo {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+  .field-group input {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+  .btn-save {
+    font-size: 0.85rem;
+    padding: 6px 0;
+  }
+}
