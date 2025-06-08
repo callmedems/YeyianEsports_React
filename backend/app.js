@@ -1,4 +1,6 @@
 // app.js
+const express= require('express');
+const morgan= require('morgan');
 require('dotenv').config();
 const express     = require('express');
 const cors        = require('cors'); //para poder ejecutar react y express en diferentes puertos

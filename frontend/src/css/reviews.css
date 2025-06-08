@@ -1,0 +1,142 @@
+/* PÁGINA ARENA YEYIAN PRINCIPAL */
+
+/* Parámetros generales */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+/* Definición de colores */
+:root {
+  --color-fondo: #1A1A42;
+  --color-estrellas: #FFD55C;
+  --color-botonRojo: #C4240E;
+}
+
+@font-face {
+  font-family: 'Abolition';
+  src: url("../assets/fonts/Abolition/AbolitionTest-Regular.otf") format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Anton';
+  src: url("../assets/fonts/Anton-Regular.ttf") format('truetype');
+}
+
+/* Sección de reviews */
+.reviewsContainer {
+  min-height: 100vh;
+  background-color: var(--color-fondo);
+  padding: 0 2vw;
+}
+
+.reviewsContainer h1 {
+  font-family: 'Abolition';
+  color: white;
+  padding-top: 12vh;
+  font-size: 8vh;
+  text-align: center;
+}
+
+/* Swiper carrusel */
+.carousel.swiper {
+  width: 100%;
+  padding: 40px 0;
+}
+
+.swiper-wrapper {
+  display: flex;
+}
+
+.swiper-slide {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: center;
+}
+
+/* Tarjetas */
+.reviewsContainer .card {
+  font-family: 'Roboto';
+  background: rgba(47, 46, 247, 0.2);
+  backdrop-filter: blur(30px);
+  border: 2px solid #2f2ef7;
+  border-radius: 10px;
+  padding: 20px;
+  height: auto;
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reviewsContainer .card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(47, 46, 247, 0.4);
+}
+
+/* Info personal */
+.reviewsContainer .personalInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.reviewsContainer .profilePicture {
+  font-size: 3rem;
+  color: white;
+}
+
+.reviewsContainer .personReview {
+  font-size: 1.2rem;
+}
+
+.reviewsContainer .additionDate {
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
+/* Estrellas */
+.reviewsContainer .stars {
+  display: flex;
+  gap: 0.3rem;
+  color: var(--color-estrellas);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Comentario */
+.reviewsContainer .reviewGiven {
+  font-size: 1.1rem;
+  text-align: justify;
+}
+
+/* Botón */
+.reviewsContainer .btnReview {
+  background-color: var(--color-botonRojo);
+  border-radius: 2em;
+  padding: 0.5em 1.5em;
+  color: white;
+  display: block;
+  margin: 8vh auto 0;
+  font-size: 1.3em;
+  width: fit-content;
+}
+
+.reviewsContainer .btnReview:hover {
+  background-color: #A51E0C;
+}
+
+.reviewsContainer .btnReview:active {
+  box-shadow: 0 0 0.5vh 0.5vw rgba(196, 36, 14, 0.5);
+}
