@@ -1,0 +1,217 @@
+.meetus-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+.meetus-container::-webkit-scrollbar {
+  display: none;
+}
+.snap-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: 120%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 1;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+.content-wrapper-welcome {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: #fff;
+}
+.title, .subtitle, .feature-title, .card-title, .cta-title, .chivas-text h2 {
+  color: #8a2be2;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 15px #8a2be2,
+    0 0 20px #8a2be2;
+}
+.title {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+.subtitle {
+  font-size: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.section-features {
+  background: #111;
+  padding: 2rem 1rem;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+.feature-card {
+  background: #1a1a1a;
+  border: 2px solid #8a2be2;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+}
+.feature-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.feature-desc {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #f0f0f0;
+}
+.section-chivas {
+  background: linear-gradient(135deg, #3b0a45, #000);
+  padding: 2rem 1rem;
+}
+.chivas-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  gap: 2rem;
+}
+.chivas-text {
+  flex: 1 1 500px;
+  color: #fff;
+  position: relative;
+  z-index: 3;
+}
+.chivas-image-wrapper {
+  flex: 1 1 500px;
+  display: flex;
+  justify-content: center;
+}
+.chivas-image {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+}
+.section-summary {
+  padding: 2rem 1rem;
+  color: #fff;
+}
+.summary-container {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 2rem auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 3;
+}
+.card {
+  background: rgba(0,0,0,0.4);
+  border: 2px solid #8a2be2;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  color: #f0f0f0;
+  flex: 1 1 300px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+.card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.card-list li {
+  margin-bottom: 0.75rem;
+}
+.card-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+.card-note {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #d1c4e9;
+  margin-top: 1rem;
+}
+.section-cta .content-wrapper-cta {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: #fff;
+}
+.cta-desc {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+.cta-button {
+  background: #8a2be2;
+  color: #fff;
+  font-size: 1.25rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s ease;
+}
+.cta-button:hover {
+  transform: scale(1.05);
+}
+@media (max-width: 1024px) {
+  .chivas-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .feature-image {
+    height: 160px;
+  }
+}
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  .subtitle {
+    font-size: 1.25rem;
+  }
+  .cta-button {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+}

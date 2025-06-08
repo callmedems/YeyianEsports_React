@@ -1,0 +1,128 @@
+
+.my-reservations-container {
+  padding: 2rem;
+  background-color: #1a1a42;
+  min-height: 100vh;
+}
+
+.my-reservations-container h1 {
+  color: white;
+  font-family: 'Abolition', sans-serif;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 3rem;
+}
+
+.reservations-list {
+  display: grid;
+  gap: 2rem;
+  /* Dos columnas en escritorio, una en móvil */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.reservation-card {
+  background-color: rgba(23, 15, 36, 0.9);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 4px 12px rgba(47, 27, 227, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.reservation-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.reservation-card .card-header h2 {
+  font-family: 'Abolition', sans-serif;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.reservation-card .card-header .price {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.reservation-card .card-body p {
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reservation-card .card-footer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reservation-card .card-footer .total {
+  font-weight: bold;
+}
+
+.reservation-card .card-footer .status {
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+/* Colores según estado */
+.status.pending {
+  background-color: #f0ad4e; /* naranja para pendiente */
+}
+.status.approved {
+  background-color: #5cb85c; /* verde para aprobada */
+}
+.status.rejected {
+  background-color: #d9534f; /* rojo para rechazada */
+}
+
+.no-reservas {
+  background-color: #1a1a42;
+  color: white;
+  text-align: center;
+  padding: 10vh 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Abolition', sans-serif;
+}
+
+.no-reservas h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.no-reservas p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.reservar-button {
+  background-image: linear-gradient(150deg, #df0909, #044bc9);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Abolition', sans-serif;
+  transition: background-image 0.3s;
+}
+
+.reservar-button:hover {
+  background-image: linear-gradient(150deg, #044bc9, #df0909);
+}
