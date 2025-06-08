@@ -210,59 +210,9 @@
     display: none;
 }
 
-.modal-content .starsGrade {
-    color: var(--color-estrellas);
-    font-size:2em;
-    display: flex;
-    gap:2%;
-    margin: 2%;
-    justify-content: center;
-}
-.modal-content .comment{
-    border: 0.3em solid var(--color-botonRojo);
-    border-radius: 2rem;
-    width: 90%;
-    height: 30vh;
-    background-color: var(--color-fondo);
-    color: white;
-    font-size: 1.5em;
-    padding: 1rem;              
-    resize: none;              
-    line-height: 1.4;          
-    vertical-align: top;
-}
-.modal-content .comment:focus {
-    outline: none; 
-  
-}
 
 
-.modal-content .btnAccept, .modal-content .btnCancel{
-    color: white;
-    background: var(--color-botonRojo);  
-    border-radius:1rem;
-    color: white;
-    width:20%;
-    height:5vh;
-    margin-top: 4%;
-    font-size: 1.3em;
-    margin: 2%;
-}
 
-.modal-content .btnCancel{
-    background: rgba(196,36,14,0.6);  
-}
-.modal-content .btnCancel:hover{
-    background: var(--color-botonRojo);  
-}
-.modal-content .btnAccept:active, .modal-content .btnCancel:active{
-    box-shadow: 0 0 0.5vh 0.5vw rgba(196,36,14, 0.5);  
-}
-
-.modal-content .thanksMessage{
-    color: white;
-    font-family: roboto;
-}
 
 /* seccion de juegos*/
 .gamesContainer {

@@ -35,7 +35,7 @@
 .reviewsContainer {
   min-height: 100vh;
   background-color: var(--color-fondo);
-  padding: 0 2vw;
+  
 }
 
 .reviewsContainer h1 {
@@ -47,19 +47,29 @@
 }
 
 /* Swiper carrusel */
-.carousel.swiper {
-  width: 100%;
-  padding: 40px 0;
+.carousel .swiper {
+  overflow:hidden;
+  width:100%;
+  margin: 0 70px 55px;
 }
+  
 
-.swiper-wrapper {
-  display: flex;
+
+
+
+/*
+.swiper-button-prev{
+  margin-right: 10vw;
 }
+.swiper-button-next{
+  margin-left: 10vw;
+}*/
+
 
 .swiper-slide {
   flex-shrink: 0;
   width: 100%;
-  max-width: 400px;
+  max-width: 29%;
   margin: 0 auto;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
@@ -69,6 +79,7 @@
 /* Tarjetas */
 .reviewsContainer .card {
   font-family: 'Roboto';
+  user-select:none;
   background: rgba(47, 46, 247, 0.2);
   backdrop-filter: blur(30px);
   border: 2px solid #2f2ef7;
@@ -131,12 +142,112 @@
   margin: 8vh auto 0;
   font-size: 1.3em;
   width: fit-content;
+  height: fit-content;
 }
 
-.reviewsContainer .btnReview:hover {
-  background-color: #A51E0C;
+
+.modalBlack {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-.reviewsContainer .btnReview:active {
+.modal-content {
+    background: var(--color-fondo);
+    font-family: 'Roboto';
+    padding: 2rem;
+    border-radius: 3%;
+    width: 50%;
+    position: relative;
+    text-align: center;
+}
+
+.modal-content h2{
+    font: 2.5em 'Abolition';
+    color: white;
+}
+.modal-content h4{
+    margin-top: 2%;
+    font-size: 1.2em;
+    color: white;
+}
+
+
+
+.hideModalBlack{
+    display: none;
+}
+
+.modal-content .starsGrade {
+    color: var(--color-estrellas);
+    font-size:2em;
+    display: flex;
+    gap:2%;
+    margin: 2%;
+    justify-content: center;
+}
+.modal-content .comment{
+    border: 0.3em solid var(--color-botonRojo);
+    border-radius: 2rem;
+    width: 90%;
+    height: 30vh;
+    background-color: var(--color-fondo);
+    color: white;
+    font-size: 1.5em;
+    padding: 1rem;              
+    resize: none;              
+    line-height: 1.4;          
+    vertical-align: top;
+}
+.modal-content .comment:focus {
+    outline: none; 
+  
+}
+
+
+.modal-content .btnAccept, .modal-content .btnCancel{
+    color: white;
+    background: var(--color-botonRojo);  
+    border-radius:1rem;
+    
+    width:fit-content;
+    
+    height:fit-content;
+    margin-top: 4%;
+    font-size: 1.3em;
+    margin: 2%;
+}
+
+.modal-content .btnCancel{
+    background: rgba(196,36,14,0.6);  
+}
+.modal-content .btnCancel:hover{
+    background: var(--color-botonRojo);
+    
+}
+.modal-content .btn-review:focus{
+  outline:none;
+}
+
+.modal-content .btnAccept:active,
+.modal-content .btnCancel:active,
+.modal-content .btnAccept:hover,
+.modal-content .btnCancel:hover,
+.modal-content .btn-review:hover,
+.modal-content .btn-review:active
+{
   box-shadow: 0 0 0.5vh 0.5vw rgba(196, 36, 14, 0.5);
+  border: none;
+  background-color: #A51E0C;
+  outline:none;
 }
+
+
+
