@@ -48,9 +48,9 @@
 
 /* Swiper carrusel */
 .carousel .swiper {
-  overflow:hidden;
-  width:100%;
-  margin: 0 70px 55px;
+    width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
   
 
@@ -65,16 +65,12 @@
   margin-left: 10vw;
 }*/
 
-
-.swiper-slide {
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 29%;
-  margin: 0 auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  justify-content: center;
+.slider-wrapper{
+  overflow:hidden;
+  max-width: 1200px;
+  margin: 0 70px 55px;
 }
+
 
 /* Tarjetas */
 .reviewsContainer .card {

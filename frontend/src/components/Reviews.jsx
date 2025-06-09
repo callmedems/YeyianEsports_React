@@ -15,8 +15,8 @@ export default function Reviews() {
         data => {
             setReviews(data)
             //Gives functionality to carrousel buttons
-            const swiper = new Swiper('.swiper', {
-
+            const swiper = new Swiper('.slider-wrapper', {
+               
                 loop: true,
                 grabCursor:false,
                 simulateTouch:false,
@@ -94,7 +94,8 @@ export default function Reviews() {
         </header>
 
         <div className="carousel swiper">
-          
+
+          <div className="slider-wrapper">
             <div className="swiper-wrapper"> 
                 {reviews.map((r, index) => (
                     <div className="card swiper-slide" key={index}>
@@ -121,6 +122,7 @@ export default function Reviews() {
             <div className="swiper-pagination"></div>  
             <div className="swiper-button-prev"></div>
             <div className="swiper-button-next"></div>
+          </div>
 
         </div>
 
