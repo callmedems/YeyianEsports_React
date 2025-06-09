@@ -58,7 +58,7 @@
 
 .slider-wrapper{
   overflow:hidden;
-  padding:2% 0;
+  padding:2% 0 2% 2%;
   max-width: 90%;
   margin: 0 5vh 2vh;
 }

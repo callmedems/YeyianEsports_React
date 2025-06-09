@@ -83,7 +83,8 @@ module.exports = function (knex) {
         // 1) Si envían archivo, guardamos la ruta relativa
         if (req.file) {
           // Ejemplo de ruta a guardar en DB: "uploads/profiles/profile_23_161893798374.png"
-          newProfilePath = path.join("uploads", "profiles", req.file.filename);
+          newProfilePath = path.join("uploads", "profiles", req.file.filename).replace(/\\/g, '/');
+
         }
 
         // 2) Construir objeto a actualizar

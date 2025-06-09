@@ -18,8 +18,8 @@ export default function Reviews() {
             const swiper = new Swiper('.slider-wrapper', {
                
                 loop: true,
-                grabCursor:false,
-                simulateTouch:false,
+                grabCursor:true,
+                simulateTouch:true,
                 spaceBetween: 30,
 
                 pagination: {
@@ -47,17 +47,7 @@ export default function Reviews() {
                     }
                 }
             });
-            data.forEach((r, i) => {
-              
-              console.log("  Nombre:", r.name);
-             
-              console.log("  Foto:", r.profilePicture);
-            });
 
-
-
-        
-    
         })
       .catch(err => console.error('Error al cargar reviews:', err));
   }, []);
@@ -97,6 +87,7 @@ export default function Reviews() {
   return (
     <section className="reviews">
       <div className="reviewsContainer">
+       
         <header>
           <h1>Opiniones reales, experiencias inolvidables</h1>
         </header>
@@ -110,7 +101,7 @@ export default function Reviews() {
                     <div className="card swiper-slide" key={index}>
                         <div className="personalInfo">
                             <div className="profilePicture">
-                            {r.profilePicture== null ? (<i className="bi bi-person-circle"></i>) : (<img className="imgProfile" src={"../../../backend/"+r.profilePicture}></img>)}
+                            {r.profilePicture== null ? (<i className="bi bi-person-circle"></i>) : (<img className="imgProfile" src={"http://localhost:3000/"+r.profilePicture}></img>)}
                             </div>
                             <div className="personReview">
                             <h3 className="nameOp">{r.name}</h3>
