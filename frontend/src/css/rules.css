@@ -1,0 +1,36 @@
+/* REGLAMENTO */
+.rulesMainContainer {
+    font-family: 'Abolition', sans-serif;
+    color:#FFFFFF;
+    position: relative;
+    font-size: 2rem;
+    padding: 100px 20% 100px 20%;
+    max-width: 5000px;
+    margin: 0 auto;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+.mainTitle {
+    font-style: italic;
+    font-size: 10rem;
+    letter-spacing: 8px;
+    text-align: center;
+}
+
+
+.aceptButton {
+    background-image: linear-gradient(150deg, #df0909, #044bc9);
+    color:white;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}

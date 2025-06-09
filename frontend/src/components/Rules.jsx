@@ -1,6 +1,6 @@
 // src/pages/Rules.jsx
 import React from 'react';
-import '../css/styles.css';
+import '../css/rules.css';
 
 const Rules = () => (
     <>

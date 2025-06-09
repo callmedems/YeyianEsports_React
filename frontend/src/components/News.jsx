@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import "../css/styles.css";
+import "../css/news.css";
 
 const News = ({ navigateTo }) => (
 

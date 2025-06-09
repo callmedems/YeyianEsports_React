@@ -1,0 +1,74 @@
+/* seccion de juegos*/
+.gamesContainer {
+    background-color: var(--color-fondo);
+    text-align: center;
+    padding-top: 6vh;
+    padding-bottom: 14vh;
+    position: relative;
+    z-index: 0;
+    padding: 2rem 1rem;
+}
+
+.gamesContainer h1 {
+    font-family:'Abolition';
+    color: white;
+    padding-top: 2vh;
+    padding-bottom: 12vh;
+    font-size: 8vh;
+    text-align: center;
+}
+
+.gamesContainer .carousel {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.gamesContainer .card {
+    display: inline-block;
+    background-color: #2a2a5e;
+    color: white;
+    box-sizing: border-box;
+    height: 45vh;
+    width: 25%;
+    border: 2px solid white;
+    border-radius: 10px;
+    margin: 0 2%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.gamesContainer .card img {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+    border-bottom: 2px solid white;
+}
+
+.gamesContainer .gameInfo {
+    padding: 10px;
+}
+
+.gamesContainer .gameInfo h3 {
+    font-family: 'Abolition', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.gamesContainer .gameInfo p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: #ccc;
+}
+
+.gamesContainer .controllers {
+    font-size: 3rem;
+    color: white;
+    cursor: pointer;
+}
+
+.gamesContainer .controllers:hover {
+    color: var(--color-estrellas);
+}

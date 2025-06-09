@@ -33,8 +33,9 @@
 
 /* Sección de reviews */
 .reviewsContainer {
-  min-height: 100vh;
+  height: 100vh;
   background-color: var(--color-fondo);
+  
   
 }
 
@@ -243,3 +244,4 @@
 
 
 
+/*Lo que estaba en styles*/
