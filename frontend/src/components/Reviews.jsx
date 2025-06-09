@@ -47,6 +47,14 @@ export default function Reviews() {
                     }
                 }
             });
+            data.forEach((r, i) => {
+              
+              console.log("  Nombre:", r.name);
+             
+              console.log("  Foto:", r.profilePicture);
+            });
+
+
 
         
     
@@ -98,10 +106,11 @@ export default function Reviews() {
           <div className="slider-wrapper">
             <div className="swiper-wrapper"> 
                 {reviews.map((r, index) => (
+                  
                     <div className="card swiper-slide" key={index}>
                         <div className="personalInfo">
                             <div className="profilePicture">
-                            <i className="bi bi-person-circle"></i>
+                            {r.profilePicture== null ? (<i className="bi bi-person-circle"></i>) : (<img className="imgProfile" src={"../../../backend/"+r.profilePicture}></img>)}
                             </div>
                             <div className="personReview">
                             <h3 className="nameOp">{r.name}</h3>

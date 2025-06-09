@@ -9,10 +9,17 @@ module.exports = function (knex) {
     try {
       const reviews = await knex('review')
         .join('client', 'review.clientId', '=', 'client.clientId')
-        .select('client.userName', 'review.commentAdded', 'review.givenStars', 'review.additionDate');
+        .select(
+          'client.userName as userName',
+          'client.profilePicture as profilePicture',
+          'review.commentAdded as commentAdded',
+          'review.givenStars as givenStars',
+          'review.additionDate as additionDate'
+        );
 
       const formatted = reviews.map(r => ({
         name: r.userName,
+        profilePicture:r.profilePicture,
         commentAdded: r.commentAdded,
         givenStars: r.givenStars,
         timeAgo: new Date(r.additionDate).toLocaleDateString()
