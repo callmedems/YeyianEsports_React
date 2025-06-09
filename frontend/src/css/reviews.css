@@ -41,34 +41,26 @@
 .reviewsContainer h1 {
   font-family: 'Abolition';
   color: white;
-  padding-top: 12vh;
+  padding-top: 13vh;
   font-size: 8vh;
   text-align: center;
 }
 
 /* Swiper carrusel */
 .carousel .swiper {
-    width: 100%;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  width: 100%;
+ 
+
+ 
 }
   
 
 
-
-
-/*
-.swiper-button-prev{
-  margin-right: 10vw;
-}
-.swiper-button-next{
-  margin-left: 10vw;
-}*/
-
 .slider-wrapper{
   overflow:hidden;
-  max-width: 1200px;
-  margin: 0 70px 55px;
+  padding:2% 0;
+  max-width: 90%;
+  margin: 0 70px 2vh;
 }
 
 
@@ -76,6 +68,7 @@
 .reviewsContainer .card {
   font-family: 'Roboto';
   user-select:none;
+  max-width:29%;
   background: rgba(47, 46, 247, 0.2);
   backdrop-filter: blur(30px);
   border: 2px solid #2f2ef7;
@@ -135,7 +128,7 @@
   padding: 0.5em 1.5em;
   color: white;
   display: block;
-  margin: 8vh auto 0;
+  margin: 4vh auto 0;
   font-size: 1.3em;
   width: fit-content;
   height: fit-content;
