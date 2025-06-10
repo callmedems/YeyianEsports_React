@@ -57,13 +57,13 @@ ADD COLUMN profilePicture VARCHAR(255);
 
 - Agregar un admin: (si quieren pueden poner su correo en el gmail para hacer pruebas)
 
-```
+```sql
 insert into admin(adminId, gmail, username, password) VALUES(1, "anajmz345@gmail.com", "adminArena", "chivas123" )
 
 ```
 
 - Agregar la info de los videojuegos:
-```
+```sql
 INSERT INTO game (gameName, thumbnailImage, releaseDate, genre, lore, adminId) VALUES
 ('Fall Guys', 'fallguys.jpg', '2020-08-04', 'Party', 'Un battle royale de obstáculos caóticos y coloridos.', 1),
 ('FIFA 24', 'fifa24.jpg', '2023-09-29', 'Sports', 'Simulación de fútbol con licencias oficiales.', 1),
