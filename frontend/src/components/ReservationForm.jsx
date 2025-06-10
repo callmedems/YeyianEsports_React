@@ -25,29 +25,37 @@ const ReservationForm = () => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    if (fechaRef.current) {
-      flatpickr(fechaRef.current, {
-        minDate: "today",
-        disable: [
-          function (date) {
-            const fechasOcupadas = ["2025-05-01", "2025-05-05"];
-            return fechasOcupadas.includes(date.toISOString().split("T")[0]);
+    useEffect(() => {
+    const initCalendar = async () => {
+    
+      if (!fechaRef.current) return;
+      try {
+        const res = await fetch("http://localhost:3000/api/occupied-dates");
+        const occupiedDates = await res.json();
+        
+        flatpickr(fechaRef.current, {
+          minDate: "today",
+          disable: occupiedDates,
+          onChange: function (selectedDates) {
+            const mensaje = document.getElementById("mensaje");
+            if (selectedDates.length) {
+              mensaje.innerText = "¡Fecha disponible!";
+              mensaje.style.color = "green";
+            } else {
+              mensaje.innerText = "Selecciona una fecha válida.";
+              mensaje.style.color = "red";
+            }
           },
-        ],
-        onChange: function (selectedDates) {
-          const mensaje = document.getElementById("mensaje");
-          if (selectedDates.length) {
-            mensaje.innerText = "¡Fecha disponible!";
-            mensaje.style.color = "green";
-          } else {
-            mensaje.innerText = "Selecciona una fecha válida.";
-            mensaje.style.color = "red";
-          }
-        },
-      });
-    }
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    initCalendar();
   }, []);
+
+
+
 
   useEffect(() => {
     if (whatsappRef.current) {
@@ -396,7 +404,10 @@ const ReservationForm = () => {
             // contactValue: whatsappNumber o emailExtra,
           })
         );
-
+       
+        const mensaje = document.getElementById("mensaje");
+        mensaje.innerText = "Reservación creada. ¡Gracias!";
+        mensaje.style.color = "green";
         // 5) Rediriges a la página de cotización (o de confirmación):
         window.location.href = "/cotization"; 
       })
@@ -722,11 +733,6 @@ const ReservationForm = () => {
         </div>
       </div>
 
-      <div className="discord-panel">
-        <i className="fab fa-discord"></i>
-        <span>Síguenos en Discord para estar al tanto de todas las novedades</span>
-      </div>
-
       <div className="visit-panel">
         <div className="visit-left">
           <span className="visit-caption">¡Ven a visitarnos!</span>
@@ -764,6 +770,12 @@ const ReservationForm = () => {
           ></iframe>
         </div>
       </div>
+
+      <div className="discord-panel">
+        <i className="fab fa-discord"></i>
+        <span>Síguenos en Discord para estar al tanto de todas las novedades</span>
+      </div>
+
     </div>
   );
 };

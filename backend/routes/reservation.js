@@ -34,6 +34,8 @@ module.exports = function (knex) {
   // 1) Ruta para crear una reserva pendiente (paymentStatus = 0)
   //    POST /api/reservation
   //------------------------------------------------------
+ 
+
   router.post('/', async (req, res) => {
     try {
       // 1.1) Extraer del body lo que espera la base de datos:
