@@ -37,8 +37,11 @@ const Register = () => {
         if (!res.ok) throw new Error('Error al registrar cuenta');
         return res.json();
       })
-      .then(() => {
+      .then((data) => {
         localStorage.setItem('reserva', 'true');
+        
+        localStorage.setItem('clientId', data.clientId);
+        localStorage.setItem('reservaUserName', data.userName);
         
         setForm({ //se reinicia la info del forms para cuando se cree otra cuenta
           mail: '',
@@ -51,7 +54,6 @@ const Register = () => {
         setTimeout(() => {
             navigate('/');  // Redirecciona a la pag principal
         }, 1000);
-        // Recargar reseñas
       })
       .catch(err => {
         console.error(err);

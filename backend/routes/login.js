@@ -32,7 +32,8 @@ module.exports = function (knex) {
       return res.status(200).json({
         token: 'true',
         clientId: usuario.clientId,
-        userName: usuario.userName
+        userName: usuario.userName,
+        profilePicture : usuario.profilePicture,
       });
     } catch (err) {
       console.error('Error POST /api/login:', err);

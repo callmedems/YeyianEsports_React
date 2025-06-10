@@ -21,20 +21,25 @@ const Navbar = () => {
     setIsLoggedIn(!!token);
 
     // Si existe token, leemos también el userName (aunque la suscripción del otro useEffect ya lo cubre)
-    const storedName = localStorage.getItem('navbarUserName') || '';
+    const storedName = localStorage.getItem('reservaUserName') || '';
     setUserName(storedName);
+     const storedPic  = localStorage.getItem("navbarProfilePicture") || null;
+     setProfilePicture(storedPic);
   }, [location]);
 
   // 2) Al montar, inicializamos nombre y foto, y nos suscribimos al evento
   useEffect(() => {
-    const storedName = localStorage.getItem("navbarUserName") || "Usuario";
+    const storedName = localStorage.getItem("reservaUserName") || "Usuario";
     const storedPic  = localStorage.getItem("navbarProfilePicture") || null;
+    const token = localStorage.getItem('reserva');
+    setIsLoggedIn(!!token);
+ 
     setUserName(storedName);
     setProfilePicture(storedPic);
 
     // Cuando alguien dispare 'userProfileChanged', volvemos a leer del localStorage:
     const onChange = () => {
-      const newName = localStorage.getItem("navbarUserName") || "Usuario";
+      const newName = localStorage.getItem("reservaUserName") || "Usuario";
       const newPic  = localStorage.getItem("navbarProfilePicture") || null;
       setUserName(newName);
       setProfilePicture(newPic);
@@ -45,6 +50,7 @@ const Navbar = () => {
       window.removeEventListener("userProfileChanged", onChange);
     };
   }, []);
+  
 
   // 3) Permitir cerrar con Esc
   useEffect(() => {
@@ -67,7 +73,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem('reserva');
     localStorage.removeItem('clientId');
-    localStorage.removeItem('navbarUserName');
+    localStorage.removeItem('reservaUserName');
     localStorage.removeItem('navbarProfilePicture');
     setIsLoggedIn(false);
     setUserName('');
@@ -158,14 +164,17 @@ const Navbar = () => {
           <Link to="/tour" onClick={() => navigateTo('tour')}>Tour Virtual</Link>
           <Link to="/cotization" onClick={() => navigateTo('cotization')}>Precios</Link>
         </nav>
-
-        {isLoggedIn && (
+       
+        {isLoggedIn && ( 
+        
+         
           <button
             className="sidebar-logout-button"
             onClick={handleLogout}
           >
             Cerrar sesion
           </button>
+         
         )}
       </aside>
     </>

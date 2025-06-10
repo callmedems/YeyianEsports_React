@@ -18,7 +18,7 @@ module.exports = function (knex) {
       }
 
       // Insertamos el nuevo usuario en la tabla "client"
-      await knex('client').insert({
+      const [clientId]=await knex('client').insert({
         mail,
         phoneNumber,
         userName,
@@ -29,7 +29,10 @@ module.exports = function (knex) {
       // Respondemos con un status 201 (Created) y un mensaje
       return res
         .status(201)
-        .json({ message: 'Cuenta registrada con éxito' });
+        .json({ token:'true',clientId: clientId,userName: userName,message: 'Cuenta registrada con éxito' });
+
+
+       
     } catch (err) {
       console.error('Error POST /api/register:', err);
       return res

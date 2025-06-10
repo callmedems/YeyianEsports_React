@@ -30,6 +30,7 @@ const Login = () => {
         localStorage.setItem('reserva', data.token || 'true');
         localStorage.setItem('clientId', data.clientId);
         localStorage.setItem('reservaUserName', data.userName);
+        localStorage.setItem('navbarProfilePicture', data.profilePicture);
 
         // 3) Rediriges inmediatamente a "/"
         navigate('/');

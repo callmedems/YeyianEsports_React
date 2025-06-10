@@ -428,7 +428,7 @@ button:focus-visible {
 
 /* Botón “Cerrar sesión” (aparece al final del sidebar) */
 .sidebar-logout-button {
-  margin: 380px 20px 20px; /* centrado horizontal, margen arriba (auto hace que empuje hacia abajo) */
+  margin: auto 20px 20px; /* Esto centrará el botón verticalmente si el espacio es suficiente */
   padding: 10px 0;
   text-align: center;
   font-family: 'Abolition', sans-serif;
@@ -436,7 +436,7 @@ button:focus-visible {
   font-size: 20px;
   letter-spacing: 2px;
   color: #ffffff;
-  background-color: #C92704; /* Color rojo similar al degradado de reserva */
+  background-color: #C92704;
   border: none;
   border-radius: 8px;
   cursor: pointer;

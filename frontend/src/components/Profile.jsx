@@ -34,7 +34,7 @@ const Profile = () => {
         setCurrentPhotoUrl(usuario.profilePicture || null);
 
         // Inicialmente guardamos en localStorage para que la navbar lo capte
-        localStorage.setItem("navbarUserName", usuario.userName || "");
+        localStorage.setItem("reservaUserName", usuario.userName || "");
         if (usuario.profilePicture) {
           localStorage.setItem("navbarProfilePicture", usuario.profilePicture);
         }
@@ -105,7 +105,7 @@ const Profile = () => {
       setNewPhotoFile(null);
       setPreviewUrl(null);
 
-      localStorage.setItem("navbarUserName", data.userName);
+      localStorage.setItem("reservaUserName", data.userName);
       if (data.profilePicture) {
         localStorage.setItem("navbarProfilePicture", data.profilePicture);
       }
