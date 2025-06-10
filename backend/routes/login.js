@@ -44,7 +44,7 @@ module.exports = function (knex) {
       return res.status(200).json({
           token: 'true',
           fullPermits: 'true',
-          adminId: admin.adminId,
+          adminId: admin.adminId, 
           userName: admin.username,
           profilePicture : admin.profilePicture,
       });

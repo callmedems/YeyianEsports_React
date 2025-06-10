@@ -27,8 +27,10 @@ const Login = () => {
       .then((data) => {
         console.log('→ Login res.json →', data);
         // 2) Guardas el token (o la bandera) en localStorage
+        
         localStorage.setItem('reserva', data.token || 'true');
         localStorage.setItem('clientId', data.clientId);
+       
         localStorage.setItem('reservaUserName', data.userName);
         localStorage.setItem('navbarProfilePicture', data.profilePicture);
 
