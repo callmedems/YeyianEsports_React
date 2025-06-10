@@ -45,3 +45,34 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+## Para correr la parte más reciente (brau+ana), hacer modificaciones a la base de datos:
+- Modificar tabla de admin
+```sql
+ALTER TABLE admin
+CHANGE COLUMN gmail mail VARCHAR(100),
+ADD COLUMN profilePicture VARCHAR(255);
+```
+
+- Agregar un admin: (si quieren pueden poner su correo en el gmail para hacer pruebas)
+
+```
+insert into admin(adminId, gmail, username, password) VALUES(1, "anajmz345@gmail.com", "adminArena", "chivas123" )
+
+```
+
+- Agregar la info de los videojuegos:
+```
+INSERT INTO game (gameName, thumbnailImage, releaseDate, genre, lore, adminId) VALUES
+('Fall Guys', 'fallguys.jpg', '2020-08-04', 'Party', 'Un battle royale de obstáculos caóticos y coloridos.', 1),
+('FIFA 24', 'fifa24.jpg', '2023-09-29', 'Sports', 'Simulación de fútbol con licencias oficiales.', 1),
+('Fortnite', 'fortnite.jpg', '2017-07-25', 'Battle Royale', 'Lucha para ser el último en pie en un mundo colorido.', 1),
+('Mario Kart 8 Deluxe', 'mariokart8.jpg', '2017-04-28', 'Racing', 'Compite con tus personajes favoritos de Nintendo.', 1),
+('Mario Strikers: Battle League', 'mariostrikers.jpg', '2022-06-10', 'Sports', 'Fútbol al estilo caótico del universo Mario.', 1),
+('Mario Tennis Aces', 'mariotennis.jpg', '2018-06-22', 'Sports', 'Tennis arcade con personajes de Mario.', 1),
+('Call of Duty: Warzone', 'warzone.jpg', '2020-03-10', 'FPS', 'Battle royale militar de alta intensidad.', 1),
+('League of Legends', 'lol.jpg', '2009-10-27', 'MOBA', 'Juego de estrategia en equipo con campeones únicos.', 1),
+('Minecraft', 'minecraft.jpg', '2011-11-18', 'Sandbox', 'Construcción, supervivencia y creatividad infinita.', 1),
+('Valorant', 'valorant.jpg', '2020-06-02', 'FPS', 'Shooter táctico por equipos con habilidades.', 1);
+```
