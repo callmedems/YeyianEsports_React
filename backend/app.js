@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 const reviewsRouter = require('./routes/reviews')(knex);
+const videogamesRouter = require('./routes/videogames')(knex);
 const registerRouter = require('./routes/register')(knex);
 const loginRouter = require('./routes/login')(knex);
 const reservationRouter = require('./routes/reservation')(knex);
@@ -22,6 +23,7 @@ const stripeRouter = require('./routes/stripe');
 
 app.use("/api/client", clientRouter);
 app.use('/api/reviews', reviewsRouter);
+app.use('/api/videogames', videogamesRouter);
 app.use('/api/register', registerRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/reservation', reservationRouter);

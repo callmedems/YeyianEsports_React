@@ -1,42 +1,54 @@
 import '../css/videogames.css';
-
+import React, { useState, useRef, useEffect } from 'react';
 
 export default function Videogames(){
+    const [videogames, setVideogames] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:3000/api/videogames')
+          .then(response => response.ok ? response.json() : [])
+          .then(
+            data => {
+                setVideogames(data)
+                //Gives functionality to carrousel buttons
+                var swiper = new Swiper(".swiperVideogames", {
+                    effect: "coverflow",
+                    grabCursor: true,
+                    centeredSlides: true,
+                    slidesPerView: "auto",
+                    coverflowEffect: {
+                        rotate: 15,
+                        stretch: 0,
+                        depth: 300,
+                        modifier: 1,
+                        slideShadows: true,
+                    },
+                    loop:true,
+                    
+                    
+                });
+            })
+          .catch(err => console.error('Error al cargar los videojuegos:', err));
+      }, []);
     return(
         <section className="gamesContainer">
             <header>
                 <h1>Explora nuestros videojuegos</h1>
             </header>
-
-            <div className="carousel">
-                <i className="bi bi-arrow-left-circle controllers"></i>
-
-                <div className="card" id="game1">
-                <img src="assets/images/godofwar.jpeg" alt="Juego 1" />
-                <div className="gameInfo">
-                    <h3>God of War</h3>
-                    <p>Eres un dios, ¿ahora qué sigue?</p>
-                </div>
-                </div>
-
-                <div className="card" id="game2">
-                <img src="assets/images/thelastofus.jpeg" alt="Juego 2" />
-                <div className="gameInfo">
-                    <h3>The Last of Us</h3>
-                    <p>Zombies + venganza = depresión.</p>
-                </div>
-                </div>
-
-                <div className="card" id="game3">
-                <img src="assets/images/cod.jpeg" alt="Juego 3" />
-                <div className="gameInfo">
-                    <h3>Call of Duty</h3>
-                    <p>Un clásico para disparar.</p>
-                </div>
-                </div>
-
-                <i className="bi bi-arrow-right-circle controllers"></i>
+                <div class="swiper swiperVideogames">
+                    
+                    <div className="swiper-wrapper videogames"> 
+                        {videogames.map((g, index) => (
+                        
+                            <div className="swiper-slide videogames" key={index}>
+                                <img src={"http://localhost:3000/uploads/games/"+g.thumbnailImage}></img>
+                            </div>
+                        ))}
+                    </div>
+                          
             </div>
+
+
+            
         </section>
     );
 }

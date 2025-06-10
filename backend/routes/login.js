@@ -14,6 +14,7 @@ module.exports = function (knex) {
 
       if (!usuario) {
         // No existe ningún registro con ese correo
+        
         return res
           .status(400)
           .json({ error: 'Email o contraseña incorrectos' });
