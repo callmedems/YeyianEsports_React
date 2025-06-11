@@ -33,7 +33,7 @@ module.exports = function (knex) {
       if(usuario){
         return res.status(200).json({
           token: 'true',
-          fullPermits: 'false',
+          fullPermits: false,
           clientId: usuario.clientId,
           userName: usuario.userName,
           profilePicture : usuario.profilePicture,
@@ -43,7 +43,7 @@ module.exports = function (knex) {
       //si no es usuario es admin
       return res.status(200).json({
           token: 'true',
-          fullPermits: 'true',
+          fullPermits: true,
           adminId: admin.adminId, 
           userName: admin.username,
           profilePicture : admin.profilePicture,

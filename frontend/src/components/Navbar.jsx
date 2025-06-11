@@ -9,6 +9,7 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
+  const[isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -19,6 +20,8 @@ const Navbar = () => {
   useEffect(() => {
     const token = localStorage.getItem('reserva');
     setIsLoggedIn(!!token);
+    localStorage.getItem("adminId") ? setIsAdmin(true) : setIsAdmin(false); //si adminid es true admin es ture tmb
+    console.log("ES ADMIN?",localStorage.getItem("adminId"))
 
     // Si existe token, leemos también el userName (aunque la suscripción del otro useEffect ya lo cubre)
     const storedName = localStorage.getItem('reservaUserName') || '';
@@ -33,7 +36,8 @@ const Navbar = () => {
     const storedPic  = localStorage.getItem("navbarProfilePicture") || null;
     const token = localStorage.getItem('reserva');
     setIsLoggedIn(!!token);
- 
+    localStorage.getItem("adminId") ? setIsAdmin(true) : setIsAdmin(false); //si adminid es true admin es ture tmb
+    console.log("ES ADMIN?",localStorage.getItem("adminId"))
     setUserName(storedName);
     setProfilePicture(storedPic);
 
@@ -163,6 +167,7 @@ const Navbar = () => {
           <Link to="/rules" onClick={() => navigateTo('rules')}>Reglamento</Link>
           <Link to="/MeetUs" onClick={() => navigateTo('MeetUs')}>Conócenos</Link>
           <Link to="/cotization" onClick={() => navigateTo('cotization')}>Precios</Link>
+          {isAdmin&&(<Link to="/AdminConfig" onClick={() => navigateTo('AdminConfig')}>Configuración</Link>)}
         </nav>
        
         {isLoggedIn && ( 
