@@ -69,7 +69,7 @@ const MeetUs = () => {
         <video className="bg-video" src="/assets/videos/promo_arena.MP4" autoPlay loop muted playsInline />
         <div className="overlay" />
         <div className="summary-container">
-          <div className="card card-zonas">
+          <div className="cardM card-zonas">
             <h3 className="card-title">Zonas de Juego Exclusivas</h3>
             <ul className="card-list">
               <li>• Gaming PC: Precisión y velocidad para eSports</li>
@@ -79,13 +79,13 @@ const MeetUs = () => {
             <p className="card-note">¡Tu nuevo lugar te espera!</p>
           </div>
 
-          <div className="card card-eventos">
+          <div className="cardM card-eventos">
             <h3 className="card-title">Eventos Especiales y Sorpresas</h3>
             <p className="card-text">• Torneos oficiales.<br/>• Meet &amp; Greets con streamers y pro-players.<br/>• Lanzamientos de juegos y activaciones exclusivas.</p>
             <p className="card-note">Más que un espacio de juego, un punto de encuentro para vivir experiencias únicas.</p>
           </div>
 
-          <div className="card card-era">
+          <div className="cardM card-era">
             <h3 className="card-title">Nueva Era Gamer en Guadalajara</h3>
             <p className="card-text">• Primer espacio gamer dentro de un estadio de fútbol en México.<br/>• Plataforma innovadora para la comunidad de eSports.<br/>• Punto de encuentro oficial para gamers de todo el país.</p>
             <p className="card-note">Innovación desde el inicio</p>

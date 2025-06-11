@@ -34,7 +34,7 @@ export default function Videogames(){
             <header>
                 <h1>Explora nuestros videojuegos</h1>
             </header>
-                <div class="swiper swiperVideogames">
+                <div className="swiper swiperVideogames">
                     
                     <div className="swiper-wrapper videogames"> 
                         {videogames.map((g, index) => (
