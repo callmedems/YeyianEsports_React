@@ -403,6 +403,7 @@ const ReservationForm = () => {
         localStorage.setItem(
           "reservaDetalle",
           JSON.stringify({
+            reservationId: data.reservationId,
             fullName: nombre,
             email: correo,
             reservationDate: reservationDate,

@@ -10,6 +10,7 @@ const Payment = () => {
   const reserva = reservaRaw ? JSON.parse(reservaRaw) : {};
 
   const {
+    reservationId,
     fullName,
     email,
     reservationDate,
@@ -232,14 +233,9 @@ const Payment = () => {
           const details = await actions.order.capture();
           console.log("→ PayPal payment succeeded:", details);
 
-          // 7.2) En cuanto PayPal confirma, invocamos confirm-payment en nuestro backend
-          const pendingReservationId = JSON.parse(localStorage.getItem("ultimaReserva"))
-            .reservationId;
-          console.log("→ Invocando confirm-payment (PayPal) para ID =", pendingReservationId);
-
           try {
             const response = await fetch(
-              `http://localhost:3000/api/reservation/${pendingReservationId}/confirm-payment`,
+              `http://localhost:3000/api/reservation/${reservationId}/confirm-payment`,
               {
                 method:  "POST",
                 headers: { "Content-Type": "application/json" },
@@ -375,13 +371,8 @@ const Payment = () => {
       if (paymentIntent.status === "succeeded") {
         console.log("✔ Pago registrado en Stripe:", paymentIntent);
 
-        // 9.6) Invocar confirm-payment en nuestro backend
-        const pendingReservationId = JSON.parse(localStorage.getItem("ultimaReserva"))
-          .reservationId;
-        console.log("→ Invocando confirm-payment (Stripe) para ID =", pendingReservationId);
-
         const respConfirm = await fetch(
-          `http://localhost:3000/api/reservation/${pendingReservationId}/confirm-payment`,
+          `http://localhost:3000/api/reservation/${reservationId}/confirm-payment`,
           {
             method:  "POST",
             headers: { "Content-Type": "application/json" },

@@ -94,7 +94,7 @@ button:focus-visible {
 }
 
 .nav .navbar_left {
-    margin-left: 5px;
+    margin-left: 0.5%;
 }
 
 .nav .navbar_left img {
@@ -104,14 +104,16 @@ button:focus-visible {
 /* Logos centrales */
 .logo {
     padding-left: 5px;
-    height: 65px;
-    filter: drop-shadow(0 0 2px white)
+    filter: drop-shadow(0 0 3px white)
             drop-shadow(0 0 1px white);
-    transition: transform 0.4s ease;    
 }
 
 .logo img:hover {
     transform: scale(1.1);
+}
+
+.logo img {
+  transition: transform 0.3s ease;
 }
 
 .nav .navbar_center {
@@ -164,6 +166,29 @@ button:focus-visible {
 
 .nav .navbar_right  .reservation-link:hover span{
     background: none;
+}
+
+/* --- Botón de Login en el navbar superior --- */
+.nav .navbar_right {
+  align-items: center;
+  gap: 2rem; /* separa login y reserva */
+}
+
+.nav .navbar_right .login-button {
+  background: none;      /* sin fondo */
+  border: none;          /* sin borde */
+  padding: 0;            /* sin acolchado */
+  margin: 0;             /* opcional: ajustar si quieres espacio */
+  font-family: inherit;  /* misma tipografía que el navbar */
+  font-size: 0.8em;    /* mismo tamaño de texto que .navbar_right */
+  color: #FFFFFF;        /* color del texto */
+  text-decoration: none; /* sin subrayado */
+  cursor: pointer;       /* para que cambie el cursor */
+}
+
+.nav .navbar_right .login-button:hover {
+  text-decoration: underline;  /* subraya al pasar el ratón */
+  color: #c9a9ff;              /* ligerísimo cambio de color */
 }
 
 /* --- MENU LATERAL --- */
@@ -320,10 +345,11 @@ button:focus-visible {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* gris semitransparente */
+  background-color: rgba(0, 0, 0, 0.3); /* gris semitransparente */
   border-radius: 50%;
   opacity: 0;
   transition: opacity 0.2s ease;
+  z-index: 1;
 }
 
 /* 2.5) Definimos el ícono de editar en el centro (puede ser una fuente icono o un SVG inline).
@@ -339,6 +365,7 @@ button:focus-visible {
   opacity: 0;
   transition: opacity 0.2s ease;
   pointer-events: none; /* para que no interfiera con el click */
+  z-index: 2;
 }
 
 /* 2.6) En hover, mostramos tanto overlay (::before) como lápiz (::after) */
@@ -545,27 +572,4 @@ button:focus-visible {
 .footer_right {
     padding-right: 3vh;
     font-size: 1.5em;
-}
-
-/* --- Botón de Login en el navbar superior --- */
-.nav .navbar_right {
-  align-items: center;
-  gap: 2rem; /* separa login y reserva */
-}
-
-.nav .navbar_right .login-button {
-  background: none;      /* sin fondo */
-  border: none;          /* sin borde */
-  padding: 0;            /* sin acolchado */
-  margin: 0;             /* opcional: ajustar si quieres espacio */
-  font-family: inherit;  /* misma tipografía que el navbar */
-  font-size: 0.8em;    /* mismo tamaño de texto que .navbar_right */
-  color: #FFFFFF;        /* color del texto */
-  text-decoration: none; /* sin subrayado */
-  cursor: pointer;       /* para que cambie el cursor */
-}
-
-.nav .navbar_right .login-button:hover {
-  text-decoration: underline;  /* subraya al pasar el ratón */
-  color: #c9a9ff;              /* ligerísimo cambio de color */
 }
