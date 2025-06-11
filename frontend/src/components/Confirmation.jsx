@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 
 const Confirmation = () => {
   // 1) Leemos del localStorage la reserva completa
-  const reserva = JSON.parse(localStorage.getItem("reserva")) || {};
+  const reserva = JSON.parse(localStorage.getItem("reservaDetalle")) || {};
 
   // 2) Creamos un estado local con TODOS los campos que queremos mostrar
   const [detalles, setDetalles] = useState({
@@ -26,14 +26,17 @@ const Confirmation = () => {
   // Helper para formatear “2025-06-08” → “domingo, 8 de junio de 2025”
   const formatearFecha = (fechaStr) => {
     if (!fechaStr) return "";
-    const fechaObj = new Date(fechaStr);
-    const opcionesFecha = {
+    // descomponer el YYYY-MM-DD
+    const [year, month, day] = fechaStr.split("-").map(Number);
+    // new Date(año, mesÍndice0, día) → evita desplazamientos de zona
+    const fechaObj = new Date(year, month - 1, day);
+    const opciones = {
       weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
+      year:    "numeric",
+      month:   "long",
+      day:     "numeric",
     };
-    return fechaObj.toLocaleDateString("es-MX", opcionesFecha);
+    return fechaObj.toLocaleDateString("es-MX", opciones);
   };
 
   // Helper para formatear “16:00:00” → “4:00 p.m.”, etc.
@@ -106,11 +109,11 @@ const Confirmation = () => {
 
     // Extraemos del objeto “reserva” los campos que necesitamos
     const detallesObj = {
-      nombre: reserva.userName || "",               // nombre del cliente
-      tipoReserva: reserva.tipoReservaTexto || "",   // texto del tipo (“Individual”, etc.)
+      nombre: reserva.fullName,
+      correo: reserva.email,
+      tipoReserva: reserva.tipoReservaTexto,
       fecha: formatearFecha(reserva.reservationDate),
       hora: formatearHora(reserva.reservationTime),
-      correo: reserva.correo || ""
     };
 
     // Si guardaste método de contacto (email/whatsapp), también lo mostramos:
@@ -163,7 +166,7 @@ const Confirmation = () => {
               <h2>Detalles de tu reserva:</h2>
               <div className="details-container">
                 <div>
-                  <strong>Nombre:</strong> {detalles.nombre || "N/A"}
+                  <strong>Nombre:</strong> {detalles.nombre}
                 </div>
                 <div>
                   <strong>Tipo:</strong> {detalles.tipoReserva || "N/A"}

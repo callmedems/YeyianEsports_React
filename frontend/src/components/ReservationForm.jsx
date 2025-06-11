@@ -12,6 +12,7 @@ const ReservationForm = () => {
   const fechaRef = useRef(null);
   const whatsappRef = useRef(null);
   const itiRef = useRef(null);
+  const horaRef = useRef(null);
   const [contactMethod, setContactMethod] = useState(null);
   const [emailInput, setEmailInput] = useState("");
 
@@ -25,7 +26,30 @@ const ReservationForm = () => {
     return () => clearInterval(interval);
   }, []);
 
-    useEffect(() => {
+  useEffect(() => {
+    if (!horaRef.current) return;
+    flatpickr(horaRef.current, {
+      enableTime:      true,
+      noCalendar:      true,
+      dateFormat:      "H:i",
+      time_24hr:       true,
+      minuteIncrement: 30,
+      minTime:         "09:00",
+      maxTime:         "21:00",
+      allowInput:      true,
+      onClose: (selectedDates, dateStr, instance) => {
+        const [hh, mm] = dateStr.split(":").map(Number);
+        const okMinutes = mm === 0 || mm === 30;
+        const okHour    = hh >= 9 && hh <= 21;
+        if (!okMinutes || !okHour) {
+          instance.clear();  
+          alert("Sólo puedes elegir horas en punto o media hora entre 09:00 y 21:00");
+        }
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     const initCalendar = async () => {
     
       if (!fechaRef.current) return;
@@ -99,11 +123,6 @@ const ReservationForm = () => {
 
     if (step === 1) {
       const nombre = document.getElementById("nombre");
-      const correo = document.getElementById("correo");
-      const validarFormatoCorreo = (email) => {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-      };
 
       if (!nombre.value.trim()) {
         isValid = false;
@@ -112,15 +131,6 @@ const ReservationForm = () => {
         clearErrorTooltip(nombre);
       }
 
-      if (!correo.value.trim()) {
-        isValid = false;
-        showErrorTooltip(correo, "Por favor ingresa tu correo");
-      } else if (!validarFormatoCorreo(correo.value)) {
-        isValid = false;
-        showErrorTooltip(correo, "Formato de correo inválido");
-      } else {
-        clearErrorTooltip(correo);
-      }
     } else if (step === 2) {
       const tipoReserva = document.getElementById("tipoReserva");
       if (!tipoReserva.value) {
@@ -173,8 +183,19 @@ const ReservationForm = () => {
         isValid = false;
         showErrorTooltip(fecha, "Por favor selecciona una fecha");
       } else {
-        clearErrorTooltip(fecha);
-      }
+          // comprobamos que los minutos sean “00” y esté en rango
+          const [hh, mm] = hora.value.split(":");
+          if (mm !== "00") {
+            isValid = false;
+            showErrorTooltip(hora, "Debes elegir una hora en punto");
+          } else if (hh < 9 || hh > 21) {
+            isValid = false;
+            showErrorTooltip(hora, "Solo disponible entre 09:00 y 21:00");
+          } else {
+            clearErrorTooltip(hora);
+          }
+        }
+
       if (!hora.value) {
         isValid = false;
         showErrorTooltip(hora, "Por favor selecciona una hora");
@@ -311,6 +332,8 @@ const ReservationForm = () => {
     }
 
     // 1) Lee los valores del form:
+    const nombre = document.getElementById("nombre").value.trim();
+    const correo = localStorage.getItem("reservaUserEmail") || "";
     const tipoReserva = e.target.tipoReserva.value;     // ej. "1" para Individual
     const fecha = e.target.fecha.value;                 // ej. "2025-06-15"
     const hora = e.target.hora.value;                   // ej. "18:30"
@@ -376,32 +399,16 @@ const ReservationForm = () => {
         console.log("→ Reserva guardada con id:", data.reservationId);
 
         // 4) Solo si te interesa seguir mostrando algo en localStorage
-        localStorage.setItem(
-          "ultimaReserva",
-          JSON.stringify({ 
-            reservationId: data.reservationId,
-            reservationDate: reservationDate,
-            reservationTime: reservationTime,
-            hora: hora,
-            tipoReservaTexto: textoTipo,
-            userName: userName,
-            correo: e.target.correo.value,
-            totalPrice: precio,
-          })
-        );
 
         localStorage.setItem(
-          "reserva",
+          "reservaDetalle",
           JSON.stringify({
-            userName: document.getElementById("nombre").value.trim(),
-            correo: document.getElementById("correo").value.trim(),
-            tipoReservaTexto: tipoReserva,
+            fullName: nombre,
+            email: correo,
             reservationDate: reservationDate,
+            tipoReservaTexto: textoTipo,
             reservationTime: hora + ":00",
             totalPrice: precio
-            // (Si el usuario eligió WhatsApp o e-mail extra, agregarlo aquí:)
-            // contactMethod: "whatsapp" o "email",
-            // contactValue: whatsappNumber o emailExtra,
           })
         );
        
@@ -506,15 +513,6 @@ const ReservationForm = () => {
                   name="nombre"
                   id="nombre"
                   placeholder="Nombre completo"
-                  required
-                />
-              </div>
-              <div className="input-container">
-                <input
-                  type="email"
-                  name="correo"
-                  id="correo"
-                  placeholder="Correo electrónico"
                   required
                 />
               </div>
@@ -680,8 +678,15 @@ const ReservationForm = () => {
                 />
               </div>
               <div className="input-container">
-                <input type="time" name="hora" id="hora" required />
-              </div>
+              <input
+                type="text"
+                name="hora"
+                id="hora"
+                placeholder="Selecciona la hora"
+                required
+                ref={horaRef}
+              />
+            </div>
               <div className="form-buttons">
                 <button
                   type="button"

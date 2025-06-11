@@ -6,7 +6,17 @@ import "../css/styles.css";
 
 const Payment = () => {
   // 1) Leemos del localStorage la reserva que se guardó al crearla en ReservationForm.jsx
-  const reserva = JSON.parse(localStorage.getItem("reserva")) || {};
+  const reservaRaw = localStorage.getItem("reservaDetalle");
+  const reserva = reservaRaw ? JSON.parse(reservaRaw) : {};
+
+  const {
+    fullName,
+    email,
+    reservationDate,
+    reservationTime,
+    tipoReservaTexto,
+    totalPrice
+  } = reserva;
 
   const cardNumberRef = useRef(null);
   const cardExpiryRef = useRef(null);
@@ -23,14 +33,17 @@ const Payment = () => {
   // 2) Formatear “YYYY-MM-DD” → “lunes, 1 de junio de 2025”
   const formatearFecha = (fechaStr) => {
     if (!fechaStr) return "";
-    const fechaObj = new Date(fechaStr);
-    const opcionesFecha = {
+    // descomponer el YYYY-MM-DD
+    const [year, month, day] = fechaStr.split("-").map(Number);
+    // new Date(año, mesÍndice0, día) → evita desplazamientos de zona
+    const fechaObj = new Date(year, month - 1, day);
+    const opciones = {
       weekday: "long",
       year:    "numeric",
       month:   "long",
       day:     "numeric",
     };
-    return fechaObj.toLocaleDateString("es-MX", opcionesFecha);
+    return fechaObj.toLocaleDateString("es-MX", opciones);
   };
 
   // 3) Formatear “HH:MM:SS” → “HH:MM a.m.” o “p.m.”
@@ -140,7 +153,7 @@ const Payment = () => {
 
     // 6.1) Inicializa Stripe con tu clave pública
     const stripeInstance = window.Stripe(
-      "pk_test_51RXYlZFjV5Crd3Dk4cvF4ipz6XoQB40CJBlhpwMR6eCtskXqREegrbZ4DtfrIBKeHM3w49sxuzUEUGKu8JbmT3p30034EFhLHg"
+      "pk_test_51RWoZ9Ru378lq3HwVAwzt3K4PO1P6MeUDcXDyofMHoVnZieXhKTbiU0EpVf5ydInLNVRfqIzr0Z5bKxQJblp8T1u00zHw51AQ8"
     );
     setStripe(stripeInstance);
 
@@ -421,7 +434,7 @@ const Payment = () => {
                 <div className="resumen-details">
                   <div className="detail-item">
                     <i className="fas fa-user"></i>
-                    <span>{reserva.userName || ""}</span>
+                    <span>{fullName || "-"}</span>
                   </div>
                   <div className="detail-item">
                     <i className="fas fa-calendar-day"></i>
