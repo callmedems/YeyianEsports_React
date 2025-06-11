@@ -161,7 +161,7 @@ const Navbar = () => {
           <Link to="/" onClick={() => navigateTo('home')}>Inicio</Link>
           <Link to="/news" onClick={() => navigateTo('news')}>Noticias</Link>
           <Link to="/rules" onClick={() => navigateTo('rules')}>Reglamento</Link>
-          <Link to="/tour" onClick={() => navigateTo('tour')}>Tour Virtual</Link>
+          <Link to="/MeetUs" onClick={() => navigateTo('MeetUs')}>Conócenos</Link>
           <Link to="/cotization" onClick={() => navigateTo('cotization')}>Precios</Link>
         </nav>
        

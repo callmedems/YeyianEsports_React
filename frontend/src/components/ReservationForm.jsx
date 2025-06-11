@@ -737,7 +737,7 @@ const ReservationForm = () => {
         <div className="visit-left">
           <span className="visit-caption">¡Ven a visitarnos!</span>
           <h2 className="visit-status">
-            Estamos{" "}
+            Estamos{""}
             <span className={`status ${isOpen ? "open" : "closed"}`}>
               {isOpen ? "abiertos" : "cerrados"}
             </span>

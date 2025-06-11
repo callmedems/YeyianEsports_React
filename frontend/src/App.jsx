@@ -19,6 +19,7 @@ import News from './components/News';
 import Rules from './components/Rules';
 import MyReservations from './components/MyReservations';
 import Profile from './components/Profile';
+import MeetUs from './components/MeetUs';
 
 // ----- Main Function ----- //
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/News" element={<News />} />
         <Route path="/MyReservations" element={<MyReservations />} />
         <Route path="/Profile" element={<Profile />} />
+         <Route path="/MeetUs" element={<MeetUs />} />
       </Routes>
       </main>
       <Footer />
