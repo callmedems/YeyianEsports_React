@@ -29,10 +29,21 @@ const Login = () => {
         // 2) Guardas el token (o la bandera) en localStorage
         
         localStorage.setItem('reserva', data.token || 'true');
-        localStorage.setItem('clientId', data.clientId);
+       
+
+        if(data.fullPermits === true){
+          
+          localStorage.setItem('adminId', data.adminId);
+          
+        }
+        else{
+          localStorage.setItem('clientId', data.clientId);
+        }
        
         localStorage.setItem('reservaUserName', data.userName);
         localStorage.setItem('navbarProfilePicture', data.profilePicture);
+
+        
 
         // 3) Rediriges inmediatamente a "/"
         navigate('/');

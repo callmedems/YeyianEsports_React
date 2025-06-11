@@ -20,6 +20,7 @@ import Rules from './components/Rules';
 import MyReservations from './components/MyReservations';
 import Profile from './components/Profile';
 import MeetUs from './components/MeetUs';
+import AdminConfig from './components/AdminConfig';
 
 // ----- Main Function ----- //
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Route path="/MyReservations" element={<MyReservations />} />
         <Route path="/Profile" element={<Profile />} />
          <Route path="/MeetUs" element={<MeetUs />} />
+         <Route path="/AdminConfig" element={<AdminConfig />} />
       </Routes>
       </main>
       <Footer />
