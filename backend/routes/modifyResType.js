@@ -20,20 +20,21 @@ module.exports = function (knex) {
     }
   });
 
-  /*router.update('/:id', async (req, res) => {
-    const reservationId = req.params.id;
+   router.put('/:id', async (req, res) => {
+    const reservationTypeId = req.params.id;
+    const { pricePerDay } = req.body;
 
     try {
-        await knex('reservation')
-            .where('reservationId', reservationId)
-            .update({ reservationStatus: 'rejected' });
+      await knex('reservationcosts')
+        .where('reservationTypeId', reservationTypeId)
+        .update({ pricePerDay });
 
-        res.json({ message: 'Reserva cancelada correctamente.' });
+      res.json({ message: 'Precio actualizado correctamente.' });
     } catch (err) {
-        console.error('Error al cancelar reserva:', err);
-        res.status(500).json({ error: 'Error al cancelar la reserva' });
+      console.error('Error al actualizar precio:', err);
+      res.status(500).json({ error: 'Error al actualizar el precio' });
     }
-        });*/
+  });
 
 
 
