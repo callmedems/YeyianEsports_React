@@ -26,14 +26,17 @@ const Confirmation = () => {
   // Helper para formatear “2025-06-08” → “domingo, 8 de junio de 2025”
   const formatearFecha = (fechaStr) => {
     if (!fechaStr) return "";
-    const fechaObj = new Date(fechaStr);
-    const opcionesFecha = {
+    // descomponer el YYYY-MM-DD
+    const [year, month, day] = fechaStr.split("-").map(Number);
+    // new Date(año, mesÍndice0, día) → evita desplazamientos de zona
+    const fechaObj = new Date(year, month - 1, day);
+    const opciones = {
       weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
+      year:    "numeric",
+      month:   "long",
+      day:     "numeric",
     };
-    return fechaObj.toLocaleDateString("es-MX", opcionesFecha);
+    return fechaObj.toLocaleDateString("es-MX", opciones);
   };
 
   // Helper para formatear “16:00:00” → “4:00 p.m.”, etc.

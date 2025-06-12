@@ -1,0 +1,98 @@
+.containerAdminReserv {
+  padding: 4vh;
+  color: white;
+  height: 100vh;
+  background: linear-gradient(180deg, #1A1A42 0%, #25314c 40%, #3a4870 70%, #4e5b8c 100%);
+}
+
+.containerAdminReserv h2 {
+  text-align: center;
+  font-size: 5vh;
+  margin-top: 15vh;
+}
+
+.chooseResToWatch {
+  margin-top:3vh;
+  display: flex;
+  justify-content: space-around;
+  background-color: #333;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  width:95vw;
+}
+
+.chooseResToWatch div {
+  flex: 1;
+  text-align: center;
+  padding: 1rem;
+  cursor: pointer;
+  color: #bbb;
+  font-weight: bold;
+}
+
+.chooseResToWatch div:hover {
+  background-color: #555;
+}
+
+
+.reservationsTable { /*space between table column names and reservation registers*/
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+}
+
+.columnsNames, .reservationRow {
+  /*display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f1f1f;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 90rem;*/
+ display: flex;
+  justify-content: space-around;
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  width:95vw;
+}
+
+
+
+
+.columnsNames i {
+    margin-right: 1rem; /* Espacio entre el icono y el texto */
+}
+
+
+.columnsNames div, .reservationRow div {
+  padding: 10px;
+
+  width: 19vw;
+  font-size: 1.2em;
+  color: #bbb;
+  flex: 1;
+  text-align: center;
+}
+
+.reservationRow {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.columnsNames div:last-child, .reservationRow div:last-child {
+  border-right: none;
+}
+
+
+.cancelBTN {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.cancelBTN:hover {
+  background-color: #c0392b;
+}

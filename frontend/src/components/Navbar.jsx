@@ -77,9 +77,11 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem('reserva');
     localStorage.removeItem('clientId');
+    localStorage.removeItem("adminId")
     localStorage.removeItem('reservaUserName');
     localStorage.removeItem('navbarProfilePicture');
     setIsLoggedIn(false);
+    setIsAdmin(false);
     setUserName('');
     setProfilePicture(null);
     closeMenu();

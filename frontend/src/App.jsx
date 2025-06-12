@@ -21,9 +21,11 @@ import MyReservations from './components/MyReservations';
 import Profile from './components/Profile';
 import MeetUs from './components/MeetUs';
 import AdminConfig from './components/AdminConfig';
+import AdminReservations from './components/AdminReservations';
 
 // ----- Main Function ----- //
 function App() {
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -42,6 +44,7 @@ function App() {
         <Route path="/Profile" element={<Profile />} />
          <Route path="/MeetUs" element={<MeetUs />} />
          <Route path="/AdminConfig" element={<AdminConfig />} />
+         <Route path="/AdminConfig/AdminReservations" element={<AdminReservations />} />
       </Routes>
       </main>
       <Footer />

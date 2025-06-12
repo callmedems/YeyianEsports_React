@@ -1,4 +1,66 @@
-.containerAdminConfig{
+.containerAdminConfig {
     height: 100vh;
-    background-color: brown;
+    background: linear-gradient(135deg, #0b003b 0%, #1b0066 40%, #220088 70%, #2a0080 100%);
+}
+
+.mainAdminConfig {
+    padding-top: 22vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btnsAdmin {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    gap: 4vh 3vw; /* espacio vertical y horizontal */
+    justify-content: center;
+    align-items: center;
+    margin-top: 12vh;
+
+}
+/*
+.mainAdminConfig h1 {
+ 
+    color: #5f7cf9;
+    background-clip: text;
+    -webkit-background-clip: text;
+   
+    text-shadow: 
+        0 0 8px rgba(95, 124, 249, 1),
+        0 0 20px rgba(95, 124, 249, 0.8),
+        0 0 40px rgba(95, 124, 249, 0.6),
+        0 0 80px rgba(95, 124, 249, 0.4);
+}*/
+
+.btnsAdmin .myBtn {
+    width: 30vw;
+    height: 20vh;
+    border-radius: 10px;
+    font-size: 1.2em;
+    border: 4px solid transparent;
+    background: linear-gradient(90deg, #121212, #121212) padding-box, 
+                linear-gradient(90deg, #a64fd4, #5f7cf9, #3ad4f9) border-box;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+
+}
+.btnsAdmin .myBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 0 10px rgba(166, 79, 212, 0.7),  /* #a64fd4 */
+        0 0 20px rgba(95, 124, 249, 0.6),  /* #5f7cf9 */
+        0 0 30px rgba(58, 212, 249, 0.5);  /* #3ad4f9 */
+    transition: all 0.5s ease;
+}
+
+
+.btnsAdmin .myBtn span {
+    background: linear-gradient(90deg, #a64fd4, #5f7cf9, #3ad4f9);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+               
 }
