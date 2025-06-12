@@ -76,9 +76,7 @@
 }
 
 /* Colores según estado */
-.status.pending {
-  background-color: #f0ad4e; /* naranja para pendiente */
-}
+
 .status.approved {
   background-color: #5cb85c; /* verde para aprobada */
 }

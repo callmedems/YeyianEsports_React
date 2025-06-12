@@ -304,10 +304,7 @@
 }
 
 /* Colores según estado */
-.status-pending {
-  background-color: #f0ad4e; /* amarillo suave */
-  color: #170f24;
-}
+
 .status-approved {
   background-color: #5cb85c; /* verde suave */
   color: #170f24;

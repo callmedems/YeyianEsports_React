@@ -233,10 +233,7 @@ const Profile = () => {
                 // Determinamos texto de estado y clase CSS:
                 let estadoTexto = "";
                 let estadoClase = "";
-                if (r.ReservationStatus === "pending") {
-                  estadoTexto = "Pendiente";
-                  estadoClase = "status-pending";
-                } else if (r.ReservationStatus === "approved") {
+               if (r.ReservationStatus === "approved") {
                   estadoTexto = "Aprobada";
                   estadoClase = "status-approved";
                 } else if (r.ReservationStatus === "rejected") {

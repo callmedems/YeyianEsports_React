@@ -104,3 +104,8 @@
 .cancelBTN:hover {
   background-color: #c0392b;
 }
+
+
+.cancelText{
+  color: #c0392b;
+}

@@ -35,7 +35,7 @@ exports.up = function(knex) {
       table.boolean('paymentStatus');
       table.double('totalPrice');
       table.date('addedReservationDate');
-      table.enu('ReservationStatus', ['pending', 'approved', 'rejected']).defaultTo('pending');
+      table.enu('ReservationStatus', ['approved', 'rejected']).defaultTo('approved');
       table.date('ReservationStatusDate');
       table.text('adminResponseComment');
       table.integer('reservationTypeId').unsigned();

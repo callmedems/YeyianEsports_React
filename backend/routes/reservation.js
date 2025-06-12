@@ -67,7 +67,7 @@ module.exports = function (knex) {
           paymentStatus:          0,
           totalPrice:             totalPrice,
           addedReservationDate:   knex.fn.now(),
-          ReservationStatus:      "pending",
+          ReservationStatus:      "approved",
           ReservationStatusDate:  knex.fn.now(),
           adminResponseComment:   null,
           reservationTypeId:      reservationTypeId,
@@ -111,12 +111,12 @@ module.exports = function (knex) {
         return res.status(400).json({ error: 'El pago ya fue confirmado previamente.' });
       }
 
-      // 2.3) Actualizar la reserva: paymentStatus = 1 y ReservationStatus = 'pending'
+      // 2.3) Actualizar la reserva: paymentStatus = 1 y ReservationStatus = 'approved'
       await knex('reservation')
         .where('reservationId', reservationId)
         .update({
           paymentStatus:          1,
-          ReservationStatus:      'pending',
+          ReservationStatus:      'approved',
           ReservationStatusDate:  knex.fn.now()
         });
 

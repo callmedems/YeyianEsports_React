@@ -75,7 +75,7 @@ const MyReservations = () => {
                     ¡No olvides dejar tu reseña!
                     </span>
                     <span className={`status ${r.ReservationStatus}`}>
-                    {r.ReservationStatus === 'pending' ? 'Pendiente' :
+                    {
                     r.ReservationStatus === 'approved' ? 'Aprobada' :
                     r.ReservationStatus === 'rejected' ? 'Rechazada' : r.ReservationStatus}
                     </span>

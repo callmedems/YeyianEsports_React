@@ -21,6 +21,7 @@ const loginRouter = require('./routes/login')(knex);
 const reservationRouter = require('./routes/reservation')(knex);
 const stripeRouter = require('./routes/stripe');
 const occupiedDatesRouter = require('./routes/occupied-dates')(knex);
+const configReservationsRouter = require('./routes/adminReservations')(knex);
 
 
 app.use("/api/client", clientRouter);
@@ -31,6 +32,7 @@ app.use('/api/login', loginRouter);
 app.use('/api/reservation', reservationRouter);
 app.use('/api/stripe', stripeRouter);
 app.use('/api/occupied-dates', occupiedDatesRouter);
+app.use('/api/config-reservations', configReservationsRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
