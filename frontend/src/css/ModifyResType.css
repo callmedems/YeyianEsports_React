@@ -1,20 +1,22 @@
-body {
-  background-color: #000000;
-  margin: 0;
-  padding: 0;
+
+
+.containerModifyResType{
+  padding-top: 20vh;
+  color: white;
+  height: 100vh;
+  background: linear-gradient(180deg, #1A1A42 0%, #25314c 40%, #3a4870 70%, #4e5b8c 100%);
 }
 
-.container {
+.contentMRTP{
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 2vw;
   flex-wrap: wrap;
-  padding: 40px;
-  background-color: #000000;
+  margin-top:5vw;
 }
 
-.card {
+.cardEvent {
   background-color: #111111;
   border: 3px solid transparent;
   border-radius: 15px;
@@ -31,31 +33,8 @@ body {
   position: relative;
 }
 
-.card:hover {
-  transform: scale(1.05);
-}
 
 /* Aplicamos sombra del mismo color al hacer hover */
-
-.card-orange:hover {
-  box-shadow: 0 0 20px #FF512F;
-}
-
-.card-purple:hover {
-  box-shadow: 0 0 20px #9733EE;
-}
-
-.card-green:hover {
-  box-shadow: 0 0 20px #00FFA2;
-}
-
-.card-blue:hover {
-  box-shadow: 0 0 20px #2948ff;
-}
-
-.card-pink:hover {
-  box-shadow: 0 0 20px #ee0979;
-}
 
 
 /* Colores sólidos para cada borde */
@@ -76,13 +55,14 @@ body {
   border-color: #2948ff;
 }
 
-.card-pink {
+.contentMRTP .card-pink {
   border-color: #ee0979;
 }
 
 .icon {
-  font-size: 40px;
-  margin-bottom: 20px;
+  font-size: 250%;
+  margin-bottom:2vh;
+  color:white;
 }
 
 
@@ -91,29 +71,83 @@ body {
   color: #aaa;
 }
 
-.title {
+.nameEvent {
   font-weight: bold;
   font-size: 18px;
   margin-bottom: 10px;
 }
 
 /* Coloreamos los títulos por cada tarjeta */
-.card-orange .title {
+.card-orange .nameEvent {
   color: #FF512F;
 }
 
-.card-purple .title {
+.card-purple .nameEvent {
   color: #9733EE;
 }
 
-.card-green .title {
+.card-green .nameEvent {
   color: #00FFA2;
 }
 
-.card-blue .title {
+.card-blue .nameEvent {
   color: #2948ff;
 }
 
-.card-pink .title {
+.contentMRTP .card-pink .nameEvent {
   color: #ee0979;
+}
+
+.modifyEventBTN{
+  width:7vw;
+  font-size: 80%;
+  text-align: center;
+  align-items: center;
+  margin: 0 auto;
+  display: block;
+  margin-top:3vh;
+}
+.card-orange .modifyEventBTN {
+  background-color: #FF512F;
+}
+
+.card-purple .modifyEventBTN {
+  background-color: #9733EE;;
+}
+.card-green .modifyEventBTN {
+  background-color: #00FFA2;
+  color:black;
+}
+.card-blue  .modifyEventBTN {
+  background-color: #2948ff;
+}
+.contentMRTP .card-pink .modifyEventBTN {
+  background-color: #ee0979;
+}
+
+
+
+.card-orange .modifyEventBTN:hover {
+  box-shadow: 0 0 20px #FF512F;
+  transform: scale(1.05);
+}
+
+.card-purple .modifyEventBTN:hover{
+  box-shadow: 0 0 20px #9733EE;
+  transform: scale(1.05);
+}
+
+.card-green .modifyEventBTN:hover {
+  box-shadow: 0 0 20px #00FFA2;
+  transform: scale(1.05);
+}
+
+.card-blue .modifyEventBTN:hover {
+  box-shadow: 0 0 20px #2948ff;
+    transform: scale(1.05);
+}
+
+.contentMRTP .card-pink .modifyEventBTN:hover {
+  box-shadow: 0 0 20px #ee0979;
+  transform: scale(1.05);
 }

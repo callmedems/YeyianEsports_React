@@ -1,54 +1,36 @@
-import React from 'react';
+import {useState,useEffect} from 'react';
 import '../css/modifyResType.css';
 
+
 export default function ModifyResType() {
-  const cards = [
-    {
-      id: 1,
-      icon: "📱",
-      title: "Modern iOS apps",
-      description: "Cruising from Swift to AppStore.",
-      colorClass: "card-orange"
-    },
-    {
-      id: 2,
-      icon: "🌐",
-      title: "No-code websites",
-      description: "Vibrant designs with Webflow.",
-      colorClass: "card-purple"
-    },
-    {
-      id: 3,
-      icon: "🎨",
-      title: "Delish UI",
-      description: "Crafting products with Figma.",
-      colorClass: "card-green"
-    },
-    {
-      id: 4,
-      icon: "🎮",
-      title: "Gaming events",
-      description: "Competitive tournaments.",
-      colorClass: "card-blue"
-    },
-    {
-      id: 5,
-      icon: "🎤",
-      title: "Live streaming",
-      description: "Broadcast your events.",
-      colorClass: "card-pink"
-    }
-  ];
+ const [detailsEvent,setDetailsEvent] =useState([])
+const icons = [<i className="bi bi-file-earmark-person"></i>,<i className="bi bi-buildings"></i>,<i className="bi bi-controller"></i>,<i className="bi bi-journals"></i>,<i className="bi bi-emoji-laughing"></i>]
+  
+
+  useEffect(() => {
+      fetch('http://localhost:3000/api/config-event-type')
+        .then(response => response.ok ? response.json() : [])
+        .then(
+          data => {
+              setDetailsEvent(data)
+          })
+        .catch(err => console.error('Error al cargar los eventos:', err));
+    }, []);
+  
 
   return (
-    <div className="container">
-      {cards.map(card => (
-        <div key={card.id} className={`card ${card.colorClass}`}>
-          <div className="icon">{card.icon}</div>
-          <div className="title">{card.title}</div>
-          <div className="description">{card.description}</div>
-        </div>
-      ))}
+    <div className="containerModifyResType">
+      <h1>Modifica los tipos de evento</h1>
+      <div className="contentMRTP">
+        {detailsEvent.map((card,index) => (
+          <div key={index} className={`cardEvent ${index}`}>
+             <div className="icon">{icons[index]}</div> 
+            <div className="nameEvent">{card.reservationType}</div>
+            <div className="description">{card.pricePerDay}</div>
+            <button className="modifyEventBTN">Modificar</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

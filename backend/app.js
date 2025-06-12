@@ -22,7 +22,7 @@ const reservationRouter = require('./routes/reservation')(knex);
 const stripeRouter = require('./routes/stripe');
 const occupiedDatesRouter = require('./routes/occupied-dates')(knex);
 const configReservationsRouter = require('./routes/adminReservations')(knex);
-
+const configEventTypeRouter = require('./routes/modifyResType')(knex);
 
 app.use("/api/client", clientRouter);
 app.use('/api/reviews', reviewsRouter);
@@ -33,6 +33,7 @@ app.use('/api/reservation', reservationRouter);
 app.use('/api/stripe', stripeRouter);
 app.use('/api/occupied-dates', occupiedDatesRouter);
 app.use('/api/config-reservations', configReservationsRouter);
+app.use('/api/config-event-type', configEventTypeRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
