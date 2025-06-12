@@ -22,7 +22,7 @@ import Profile from './components/Profile';
 import MeetUs from './components/MeetUs';
 import AdminConfig from './components/AdminConfig';
 import AdminReservations from './components/AdminReservations';
-
+import ModifyResType from './components/ModifyResType';
 // ----- Main Function ----- //
 function App() {
 
@@ -45,6 +45,7 @@ function App() {
          <Route path="/MeetUs" element={<MeetUs />} />
          <Route path="/AdminConfig" element={<AdminConfig />} />
          <Route path="/AdminConfig/AdminReservations" element={<AdminReservations />} />
+         <Route path="/AdminConfig/ModifyResType" element={<ModifyResType />} />
       </Routes>
       </main>
       <Footer />

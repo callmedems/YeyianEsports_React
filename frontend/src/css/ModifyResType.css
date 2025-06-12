@@ -1,0 +1,119 @@
+body {
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 40px;
+  background-color: #000000;
+}
+
+.card {
+  background-color: #111111;
+  border: 3px solid transparent;
+  border-radius: 15px;
+  width: 220px;
+  height: 260px;
+  padding: 20px;
+  color: #ffffff;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  position: relative;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Aplicamos sombra del mismo color al hacer hover */
+
+.card-orange:hover {
+  box-shadow: 0 0 20px #FF512F;
+}
+
+.card-purple:hover {
+  box-shadow: 0 0 20px #9733EE;
+}
+
+.card-green:hover {
+  box-shadow: 0 0 20px #00FFA2;
+}
+
+.card-blue:hover {
+  box-shadow: 0 0 20px #2948ff;
+}
+
+.card-pink:hover {
+  box-shadow: 0 0 20px #ee0979;
+}
+
+
+/* Colores sólidos para cada borde */
+
+.card-orange {
+  border-color: #FF512F;
+}
+
+.card-purple {
+  border-color: #9733EE;
+}
+
+.card-green {
+  border-color: #00FFA2;
+}
+
+.card-blue {
+  border-color: #2948ff;
+}
+
+.card-pink {
+  border-color: #ee0979;
+}
+
+.icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+
+.description {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Coloreamos los títulos por cada tarjeta */
+.card-orange .title {
+  color: #FF512F;
+}
+
+.card-purple .title {
+  color: #9733EE;
+}
+
+.card-green .title {
+  color: #00FFA2;
+}
+
+.card-blue .title {
+  color: #2948ff;
+}
+
+.card-pink .title {
+  color: #ee0979;
+}
