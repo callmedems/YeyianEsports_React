@@ -1,0 +1,95 @@
+.admin-dashboard {
+  padding: 100px 3rem 3rem;
+  background: #1b1c2d;
+  color: #eee;
+  min-height: 100vh;
+  font-family: 'Orbitron', sans-serif;
+}
+
+
+.admin-dashboard h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #00e5ff;
+}
+
+.card-grid {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: #24264d;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  flex: 1;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.card h2 {
+  margin-bottom: .5rem;
+  font-size: 1.2rem;
+}
+
+.card p {
+  font-size: 2rem;
+  color: #00ff9e;
+}
+
+.charts-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.chart-card {
+  background: #24264d;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.chart-card h3 {
+  margin-bottom: .5rem;
+  color: #ff79c6;
+}
+
+.table-section {
+  background: #24264d;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.table-section h3 {
+  margin-bottom: .75rem;
+  color: #8be9fd;
+}
+
+.table-section table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-section th,
+.table-section td {
+  border: 1px solid #44475a;
+  padding: .75rem;
+  text-align: center;
+}
+
+.table-section th {
+  background: #282a36;
+  color: #f8f8f2;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #bd93f9;
+  padding: 2rem;
+}

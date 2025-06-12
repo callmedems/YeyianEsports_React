@@ -7,9 +7,7 @@ module.exports = function (knex) {
   // POST /api/register
   router.post('/', async (req, res) => {
     try {
-      const { mail, phoneNumber, userName, password } = req.body;
-
-      // (Opcional) Puedes verificar si ya existe un usuario con ese correo:
+      const { mail, phoneNumber, userName, password, dateOfBirth, gender } = req.body;
       const existing = await knex('client').where({ mail }).first();
       if (existing) {
         return res
@@ -17,22 +15,35 @@ module.exports = function (knex) {
           .json({ error: 'Ya existe una cuenta con ese correo.' });
       }
 
-      // Insertamos el nuevo usuario en la tabla "client"
-      const [clientId]=await knex('client').insert({
+
+      const [clientId] = await knex('client').insert({
         mail,
         phoneNumber,
         userName,
-        password, // Nota: en producción conviene hashear, pero aquí será texto plano
-        profilePicture: null // o quítalo si no lo usas
+        password,            
+        dateOfBirth,         
+        gender,              
+        profilePicture: null 
       });
 
-      // Respondemos con un status 201 (Created) y un mensaje
+  
+      const [session] = await knex('user_sessions').insert({ clientId });
+      const sessionId = session; 
+
+      const isAdmin = (clientId === 1);
+
+
       return res
         .status(201)
-        .json({ token:'true',clientId: clientId,userName: userName,message: 'Cuenta registrada con éxito' });
+        .json({
+          token: 'true',
+          clientId,
+          userName,
+          sessionId,    // 🆕
+          isAdmin,      // 🆕
+          message: 'Cuenta registrada con éxito'
+        });
 
-
-       
     } catch (err) {
       console.error('Error POST /api/register:', err);
       return res

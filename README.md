@@ -76,3 +76,77 @@ INSERT INTO game (gameName, thumbnailImage, releaseDate, genre, lore, adminId) V
 ('Minecraft', 'minecraft.jpg', '2011-11-18', 'Sandbox', 'Construcción, supervivencia y creatividad infinita.', 1),
 ('Valorant', 'valorant.jpg', '2020-06-02', 'FPS', 'Shooter táctico por equipos con habilidades.', 1);
 ```
+
+## Instrucciones adicionales para poder ejecutar el dashboard de admin
+
+- Instalar las librerías
+```
+  npm install recharts
+
+  npm install swiper
+```
+
+##Comandos SQL
+-Modificaciones adicionales a la base de datos mediante la creación de las siguientes tablas
+
+- 1) Agregar columnas a client
+
+```sql
+ALTER TABLE client
+  ADD COLUMN dateOfBirth DATE NULL,
+  ADD COLUMN gender      ENUM('Male','Female','Other') NULL;
+```
+
+- 2) Crear tabla de sesiones de usuario
+
+```sql
+CREATE TABLE user_sessions (
+  sessionId INT AUTO_INCREMENT PRIMARY KEY,
+  clientId  INT UNSIGNED NOT NULL,     
+  startTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  endTime   DATETIME NULL,
+  FOREIGN KEY (clientId) REFERENCES client(clientId)
+);
+```
+
+
+- 3) Crear tabla para vistas de página
+
+```sql
+CREATE TABLE page_views (
+  viewId      INT AUTO_INCREMENT PRIMARY KEY,
+  sessionId   INT NOT NULL,
+  page        VARCHAR(255) NOT NULL,
+  viewTime    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  durationSec INT NULL,
+  FOREIGN KEY (sessionId) REFERENCES user_sessions(sessionId)
+);
+```
+
+
+- 4) Crear tabla para clicks en juegos
+
+```sql
+CREATE TABLE game_clicks (
+  clickId   INT AUTO_INCREMENT PRIMARY KEY,
+  sessionId INT UNSIGNED NOT NULL,
+  gameId    INT UNSIGNED NOT NULL,
+  clickTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (sessionId) REFERENCES user_sessions(sessionId),
+  FOREIGN KEY (gameId)     REFERENCES game(gameId)
+);
+
+```
+
+
+
+- 5) Índices para acelerar consultas
+
+
+```sql
+CREATE INDEX idx_sessions_client ON user_sessions(clientId);
+CREATE INDEX idx_views_session  ON page_views(sessionId);
+CREATE INDEX idx_clicks_session ON game_clicks(sessionId);
+```
+
+

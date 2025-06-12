@@ -140,7 +140,7 @@ const Payment = () => {
 
     // 6.1) Inicializa Stripe con tu clave pública
     const stripeInstance = window.Stripe(
-      "pk_test_51RXYlZFjV5Crd3Dk4cvF4ipz6XoQB40CJBlhpwMR6eCtskXqREegrbZ4DtfrIBKeHM3w49sxuzUEUGKu8JbmT3p30034EFhLHg"
+      "pk_test_51RYeocFMNi8hbOKnOTCB4jWNdxaCppLrrqHIw5QtAUwEZFrwwTpOCxaD1LQdNENkNVkCHBj491txWrukoFkX11dm009WFwBiKk"
     );
     setStripe(stripeInstance);
 
