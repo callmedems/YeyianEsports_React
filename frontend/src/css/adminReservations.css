@@ -21,18 +21,26 @@
   width:95vw;
 }
 
-.chooseResToWatch div {
+.chooseResToWatch .filterOption {
   flex: 1;
   text-align: center;
   padding: 1rem;
   cursor: pointer;
   color: #bbb;
   font-weight: bold;
+   transition: background-color 0.3s ease;
 }
 
-.chooseResToWatch div:hover {
+.chooseResToWatch .filterOption:not(.activeFilter):hover {  /*no se activa el hover si ya está activo el botón*/
   background-color: #555;
+  border-radius: 10px;
 }
+
+.chooseResToWatch .activeFilter {
+  background-color: #5A75FF;
+  border-radius: 10px;
+}
+
 
 
 .reservationsTable { /*space between table column names and reservation registers*/
