@@ -6,7 +6,18 @@ import "../css/styles.css";
 
 const Payment = () => {
   // 1) Leemos del localStorage la reserva que se guardó al crearla en ReservationForm.jsx
-  const reserva = JSON.parse(localStorage.getItem("reserva")) || {};
+  const reservaRaw = localStorage.getItem("reservaDetalle");
+  const reserva = reservaRaw ? JSON.parse(reservaRaw) : {};
+
+  const {
+    reservationId,
+    fullName,
+    email,
+    reservationDate,
+    reservationTime,
+    tipoReservaTexto,
+    totalPrice
+  } = reserva;
 
   const cardNumberRef = useRef(null);
   const cardExpiryRef = useRef(null);
@@ -143,7 +154,7 @@ const Payment = () => {
 
     // 6.1) Inicializa Stripe con tu clave pública
     const stripeInstance = window.Stripe(
-      "pk_test_51RXYlZFjV5Crd3Dk4cvF4ipz6XoQB40CJBlhpwMR6eCtskXqREegrbZ4DtfrIBKeHM3w49sxuzUEUGKu8JbmT3p30034EFhLHg"
+      "pk_test_51RWoZ9Ru378lq3HwVAwzt3K4PO1P6MeUDcXDyofMHoVnZieXhKTbiU0EpVf5ydInLNVRfqIzr0Z5bKxQJblp8T1u00zHw51AQ8"
     );
     setStripe(stripeInstance);
 
@@ -222,14 +233,9 @@ const Payment = () => {
           const details = await actions.order.capture();
           console.log("→ PayPal payment succeeded:", details);
 
-          // 7.2) En cuanto PayPal confirma, invocamos confirm-payment en nuestro backend
-          const pendingReservationId = JSON.parse(localStorage.getItem("ultimaReserva"))
-            .reservationId;
-          console.log("→ Invocando confirm-payment (PayPal) para ID =", pendingReservationId);
-
           try {
             const response = await fetch(
-              `http://localhost:3000/api/reservation/${pendingReservationId}/confirm-payment`,
+              `http://localhost:3000/api/reservation/${reservationId}/confirm-payment`,
               {
                 method:  "POST",
                 headers: { "Content-Type": "application/json" },
@@ -365,13 +371,8 @@ const Payment = () => {
       if (paymentIntent.status === "succeeded") {
         console.log("✔ Pago registrado en Stripe:", paymentIntent);
 
-        // 9.6) Invocar confirm-payment en nuestro backend
-        const pendingReservationId = JSON.parse(localStorage.getItem("ultimaReserva"))
-          .reservationId;
-        console.log("→ Invocando confirm-payment (Stripe) para ID =", pendingReservationId);
-
         const respConfirm = await fetch(
-          `http://localhost:3000/api/reservation/${pendingReservationId}/confirm-payment`,
+          `http://localhost:3000/api/reservation/${reservationId}/confirm-payment`,
           {
             method:  "POST",
             headers: { "Content-Type": "application/json" },
@@ -424,7 +425,7 @@ const Payment = () => {
                 <div className="resumen-details">
                   <div className="detail-item">
                     <i className="fas fa-user"></i>
-                    <span>{reserva.userName || ""}</span>
+                    <span>{fullName || "-"}</span>
                   </div>
                   <div className="detail-item">
                     <i className="fas fa-calendar-day"></i>

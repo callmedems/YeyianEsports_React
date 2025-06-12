@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import '../index.css';
+import '../css/navbar.css';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,43 +16,32 @@ const Navbar = () => {
   const toggleMenu = () => setMenuOpen((prev) => !prev);
   const closeMenu = () => setMenuOpen(false);
 
-  // 1) Cada vez que cambie la ruta, checamos si está logueado
-  useEffect(() => {
+  const loadUser = () => {
     const token = localStorage.getItem('reserva');
     setIsLoggedIn(!!token);
-    localStorage.getItem("adminId") ? setIsAdmin(true) : setIsAdmin(false); //si adminid es true admin es ture tmb
-    console.log("ES ADMIN?",localStorage.getItem("adminId"))
+    setIsAdmin(!!localStorage.getItem('adminId'));
+    setUserName(localStorage.getItem('reservaUserName') || 'Usuario');
+    setProfilePicture(localStorage.getItem('navbarProfilePicture') || null);
+  };
 
-    // Si existe token, leemos también el userName (aunque la suscripción del otro useEffect ya lo cubre)
-    const storedName = localStorage.getItem('reservaUserName') || '';
-    setUserName(storedName);
-     const storedPic  = localStorage.getItem("navbarProfilePicture") || null;
-     setProfilePicture(storedPic);
+  const handleReservationClick = (e) => {
+  e.preventDefault();               // evitamos la navegación por defecto
+  if (isLoggedIn) {
+    navigate('/reservation');
+  } else {
+    navigate('/login');
+  }
+};
+
+  // 1) Cada vez que cambie la ruta, recargamos datos
+  useEffect(() => {
+    loadUser();
   }, [location]);
 
   // 2) Al montar, inicializamos nombre y foto, y nos suscribimos al evento
   useEffect(() => {
-    const storedName = localStorage.getItem("reservaUserName") || "Usuario";
-    const storedPic  = localStorage.getItem("navbarProfilePicture") || null;
-    const token = localStorage.getItem('reserva');
-    setIsLoggedIn(!!token);
-    localStorage.getItem("adminId") ? setIsAdmin(true) : setIsAdmin(false); //si adminid es true admin es ture tmb
-    console.log("ES ADMIN?",localStorage.getItem("adminId"))
-    setUserName(storedName);
-    setProfilePicture(storedPic);
-
-    // Cuando alguien dispare 'userProfileChanged', volvemos a leer del localStorage:
-    const onChange = () => {
-      const newName = localStorage.getItem("reservaUserName") || "Usuario";
-      const newPic  = localStorage.getItem("navbarProfilePicture") || null;
-      setUserName(newName);
-      setProfilePicture(newPic);
-    };
-    window.addEventListener("userProfileChanged", onChange);
-
-    return () => {
-      window.removeEventListener("userProfileChanged", onChange);
-    };
+    window.addEventListener('userProfileChanged', loadUser);
+    return () => window.removeEventListener('userProfileChanged', loadUser);
   }, []);
   
 
@@ -77,7 +66,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem('reserva');
     localStorage.removeItem('clientId');
-    localStorage.removeItem("adminId")
+    localStorage.removeItem('adminId');
     localStorage.removeItem('reservaUserName');
     localStorage.removeItem('navbarProfilePicture');
     setIsLoggedIn(false);
@@ -113,9 +102,17 @@ const Navbar = () => {
           </section>
 
           <section className="navbar_right">
-            <Link to="/reservation" className="reservation-link">
+            {!isLoggedIn && (
+              <Link
+                to="/login"
+                className="login-button"
+                onClick={closeMenu}
+              >
+                Iniciar sesion / Registrarse
+              </Link>
+            )}
+            <Link to="/reservation" className="reservation-link" onClick={handleReservationClick}>
               <span className="reservationText">¡Reserva Ya Tu Horario!</span>
-              <span className="reservationShortText">¡Reserva Ya!</span>
             </Link>
           </section>
         </nav>
@@ -130,19 +127,13 @@ const Navbar = () => {
           &times;
         </button>
 
-        {!isLoggedIn ? (
-          /*  Si NO está autenticado, muestro el link "/login" */
-          <Link
-            to="/login"
-            className="sidebar-auth-link"
-            onClick={() => navigateTo('login')}
-          >
-            Iniciar sesión / Registrarse
-          </Link>
-        ) : (
-          /* Si SÍ está autenticado, muestro la foto/nombre */
+        {isLoggedIn && (
           <div className="sidebar-user-container">
-            <Link to="/Profile" onClick={closeMenu} className="sidebar-user-link">
+            <Link
+              to="/Profile"
+              onClick={closeMenu}
+              className="sidebar-user-link"
+            >
               <div className="profile-avatar-wrapper">
                 {profilePicture ? (
                   <img
@@ -173,8 +164,6 @@ const Navbar = () => {
         </nav>
        
         {isLoggedIn && ( 
-        
-         
           <button
             className="sidebar-logout-button"
             onClick={handleLogout}
