@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 
 const Confirmation = () => {
   // 1) Leemos del localStorage la reserva completa
-  const reserva = JSON.parse(localStorage.getItem("reserva")) || {};
+  const reserva = JSON.parse(localStorage.getItem("reservaDetalle")) || {};
 
   // 2) Creamos un estado local con TODOS los campos que queremos mostrar
   const [detalles, setDetalles] = useState({
@@ -109,11 +109,11 @@ const Confirmation = () => {
 
     // Extraemos del objeto “reserva” los campos que necesitamos
     const detallesObj = {
-      nombre: reserva.userName || "",               // nombre del cliente
-      tipoReserva: reserva.tipoReservaTexto || "",   // texto del tipo (“Individual”, etc.)
+      nombre: reserva.fullName,
+      correo: reserva.email,
+      tipoReserva: reserva.tipoReservaTexto,
       fecha: formatearFecha(reserva.reservationDate),
       hora: formatearHora(reserva.reservationTime),
-      correo: reserva.correo || ""
     };
 
     // Si guardaste método de contacto (email/whatsapp), también lo mostramos:
@@ -166,7 +166,7 @@ const Confirmation = () => {
               <h2>Detalles de tu reserva:</h2>
               <div className="details-container">
                 <div>
-                  <strong>Nombre:</strong> {detalles.nombre || "N/A"}
+                  <strong>Nombre:</strong> {detalles.nombre}
                 </div>
                 <div>
                   <strong>Tipo:</strong> {detalles.tipoReserva || "N/A"}

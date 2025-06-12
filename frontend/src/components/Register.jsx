@@ -38,10 +38,10 @@ const Register = () => {
         return res.json();
       })
       .then((data) => {
-        localStorage.setItem('reserva', 'true');
-        
+        localStorage.setItem('token', 'true');
         localStorage.setItem('clientId', data.clientId);
         localStorage.setItem('reservaUserName', data.userName);
+        localStorage.setItem('reservaUserEmail', form.mail);
         
         setForm({ //se reinicia la info del forms para cuando se cree otra cuenta
           mail: '',

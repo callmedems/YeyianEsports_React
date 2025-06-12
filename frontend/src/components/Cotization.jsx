@@ -6,11 +6,11 @@ import "../css/cotization.css";
 
 const Cotization = () => {
   // Leemos del localStorage la reserva que guardamos justo después de crearla
-  const reserva = JSON.parse(localStorage.getItem("ultimaReserva")) || {};
+  const reserva = JSON.parse(localStorage.getItem("reservaDetalle")) || {};
 
   // Extraemos cada campo (si no existe, ponemos valores por defecto)
   const tipoReservaTexto = reserva.tipoReservaTexto || "Individual";
-  const userName = reserva.userName || "N/A";
+  const userName = reserva.fullName || "N/A";
   const reservationDate = reserva.reservationDate || "";     // "2025-06-07"
   const reservationTime = reserva.reservationTime || "";     // "16:36:00"
   const totalPrice = reserva.totalPrice || 0;
@@ -140,19 +140,6 @@ const Cotization = () => {
 
   // Al hacer click en “Continuar al pago”, redirigimos a la página de Pago
   const irAPago = () => {
-    const ultima = JSON.parse(localStorage.getItem("ultimaReserva")) || {};
-    // Supongamos que ya tienes nombre y correo en algún estado o contexto:
-    const nombreUsuario = reserva.userName || "";
-    const correoUsuario = reserva.correo || "";
-    const objetoPago = {
-      userName: nombreUsuario,
-      correo: correoUsuario,
-      tipoReservaTexto: ultima.tipoReservaTexto,
-      reservationDate: ultima.reservationDate,
-      reservationTime: ultima.reservationTime,
-      totalPrice: ultima.totalPrice
-    };
-    localStorage.setItem("reserva", JSON.stringify(objetoPago));
     window.location.href = "/Payment";
   };
 
