@@ -1,8 +1,9 @@
 .containerAdminReserv {
   padding: 4vh;
   color: white;
-  height: 100vh;
+  
   background: linear-gradient(180deg, #1A1A42 0%, #25314c 40%, #3a4870 70%, #4e5b8c 100%);
+   min-height: 100vh;
 }
 
 .containerAdminReserv h2 {
