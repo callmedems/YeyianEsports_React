@@ -11,9 +11,10 @@ export default function AdminConfig(){
                 <h1>Configuración vista cliente</h1>
                 <nav className="btnsAdmin">             
                         <Link to="./AdminReservations" className="myBtn" o><span>Ver/Aprobar/Cancelar reservas</span></Link>
-                        <Link to="/" className="myBtn"><span>Eliminar reseñas</span></Link>
-                        <Link to="/" className="myBtn"><span>Modificar horarios</span></Link>
                         <Link to="./ModifyResType" className="myBtn" ><span>Modificar precios</span></Link>
+                        <Link to="/" className="myBtn"><span>Ver estadísticas</span></Link>
+                        <Link to="/" className="myBtn"><span>Modificar horarios</span></Link>
+                        
                 </nav>
             </main>
         </div>

@@ -82,7 +82,7 @@ function AppContent() {
           />
   
          <Route
-            path="/admin"
+            path="/AdminConfig/admin"
             element={
               <ProtectedRoute>
                 <AdminDashboard />
