@@ -43,7 +43,8 @@ const Login = () => {
         localStorage.setItem('reservaUserName', data.userName);
         localStorage.setItem('navbarProfilePicture', data.profilePicture);
 
-        
+        localStorage.setItem('sessionId', data.sessionId);
+        localStorage.setItem('isAdmin', data.isAdmin);  /*POSIBLE PROBLEMA */
 
         // 3) Rediriges inmediatamente a "/"
         navigate('/');
