@@ -22,49 +22,62 @@ const Register = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    if (!form.mail.includes('@')) {
-      alert('Debes escribir un correo válido.');
-      return;
-    }
+ const handleSubmit = (e) => {
+  e.preventDefault();
 
-    fetch('http://localhost:3000/api/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form)
+  if (!form.mail.includes('@')) {
+    alert('Debes escribir un correo válido.');
+    return;
+  }
+
+  fetch('http://localhost:3000/api/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(form)
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error('Error al registrar cuenta');
+      return res.json();
     })
-      .then((res) => {
-        if (!res.ok) throw new Error('Error al registrar cuenta');
-        return res.json();
-      })
-      .then((data) => {
-        localStorage.setItem('token', 'true');
-        localStorage.setItem('clientId', data.clientId);
-        localStorage.setItem('sessionId', data.sessionId)
-        localStorage.setItem('reservaUserName', data.userName);
-        localStorage.setItem('reservaUserEmail', form.mail);
-        
-        setForm({ //se reinicia la info del forms para cuando se cree otra cuenta
-          mail: '',
-          phoneNumber: '',
-          userName: '',
-          password: '',
-          profilePicture: '',
-          dateOfBirth: '',
-          gender: ''  
-        });
-        setShowBanner(true);
-        setTimeout(() => {
-            navigate('/');  // Redirecciona a la pag principal
-        }, 1000);
-      })
-      .catch(err => {
-        console.error(err);
-        alert('No se pudo enviar registrar la cuenta');
+    .then((data) => {
+      console.log('Cuenta creada correctamente, ahora hacemos login automático...');
+      
+      // Ahora hacemos login con las mismas credenciales:
+      return fetch('http://localhost:3000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          mail: form.mail,
+          password: form.password
+        }),
       });
-  };
+    })
+    .then((res) => {
+      if (!res.ok) throw new Error('Error al iniciar sesión después de registrarse');
+      return res.json();
+    })
+    .then((data) => {
+      // Mismo manejo que tu Login.jsx actual:
+      localStorage.setItem('reserva', data.token || 'true');
+      if (data.fullPermits === true) {
+        localStorage.setItem('adminId', data.adminId);
+      } else {
+        localStorage.setItem('clientId', data.clientId);
+      }
+      localStorage.setItem('reservaUserName', data.userName);
+      localStorage.setItem('navbarProfilePicture', data.profilePicture);
+      localStorage.setItem('sessionId', data.sessionId);
+      localStorage.setItem('isAdmin', data.isAdmin);
+
+      // Ya estamos logueados, redirigimos:
+      navigate('/');
+    })
+    .catch(err => {
+      console.error(err);
+      alert('No se pudo registrar e iniciar sesión');
+    });
+};
+
     // backend here
     console.log('Registrando...', form);
   
