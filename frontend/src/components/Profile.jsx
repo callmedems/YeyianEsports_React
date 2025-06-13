@@ -16,10 +16,10 @@ const Profile = () => {
 
   const fileInputRef = useRef(null);
   const clientId = localStorage.getItem("clientId");
-
+  const adminId = localStorage.getItem("adminId");
   // 1) Al montar, bajamos los datos del usuario (nombre + foto) y sus reservaciones
   useEffect(() => {
-    if (!clientId) {
+    if (!clientId && !adminId ) {
       window.location.href = "/login";
       return;
     }
