@@ -2,7 +2,7 @@
 
 // Importamos React y las librerías para las páginas necesarias
 import React from 'react';
-import {BrowserRouter, Routes, Route } from 'react-router-dom';
+import {BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -20,14 +20,23 @@ import Rules from './components/Rules';
 import MyReservations from './components/MyReservations';
 import Profile from './components/Profile';
 import MeetUs from './components/MeetUs';
+
+/*Componentes del admin */
 import AdminConfig from './components/AdminConfig';
 import AdminReservations from './components/AdminReservations';
 import ModifyResType from './components/ModifyResType';
-// ----- Main Function ----- //
-function App() {
 
+import ProtectedRoute from './components/ProtectedRoute'
+import AdminDashboard from './components/AdminDashboard'
+
+
+
+// ----- Main Function ----- //
+function AppContent() {
+  const location = useLocation()
   return (
-    <BrowserRouter>
+
+    <>
       <Navbar />
       <main className="page-content">
       <Routes>
@@ -43,14 +52,30 @@ function App() {
         <Route path="/MyReservations" element={<MyReservations />} />
         <Route path="/Profile" element={<Profile />} />
          <Route path="/MeetUs" element={<MeetUs />} />
+
+         {/* Componentes del admin*/}
          <Route path="/AdminConfig" element={<AdminConfig />} />
          <Route path="/AdminConfig/AdminReservations" element={<AdminReservations />} />
          <Route path="/AdminConfig/ModifyResType" element={<ModifyResType />} />
+         <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
       </Routes>
       </main>
       <Footer />
-    </BrowserRouter>
+    </>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  )
+}

@@ -11,7 +11,9 @@ const Register = () => {
     phoneNumber: '',
     userName: '',
     password: '',
-    profilePicture: ''
+    profilePicture: '',
+    dateOfBirth: '',
+    gender: ''
   });
   const [showBanner, setShowBanner]=useState(false);
   const [showRegisterBanner, setShowRegisterBanner]=useState(true);
@@ -40,6 +42,7 @@ const Register = () => {
       .then((data) => {
         localStorage.setItem('token', 'true');
         localStorage.setItem('clientId', data.clientId);
+        localStorage.setItem('sessionId', data.sessionId)
         localStorage.setItem('reservaUserName', data.userName);
         localStorage.setItem('reservaUserEmail', form.mail);
         
@@ -48,7 +51,9 @@ const Register = () => {
           phoneNumber: '',
           userName: '',
           password: '',
-          profilePicture: ''
+          profilePicture: '',
+          dateOfBirth: '',
+          gender: ''  
         });
         setShowBanner(true);
         setTimeout(() => {
@@ -74,6 +79,21 @@ const Register = () => {
           <input name="phoneNumber" type="tel" placeholder="Teléfono" onChange={handleChange} />
           <input name="userName" type="text" placeholder="Nombre de usuario" onChange={handleChange} required />
           <input name="password" type="password" placeholder="Contraseña" onChange={handleChange} required />
+          <label>Fecha de nacimiento</label>
+          <input
+            name="dateOfBirth"
+            type="date"
+            onChange={handleChange}
+            required
+          />
+           <label>Género</label>
+          <select name="gender" onChange={handleChange} required>
+            <option value="">Selecciona...</option>
+            <option value="Male">Masculino</option>
+            <option value="Female">Femenino</option>
+            <option value="Other">Otro</option>
+          </select>
+
           <button type="submit"> <p style={{  color: 'white' }}>Crear cuenta</p></button>
         </form>
         {showBanner && (
