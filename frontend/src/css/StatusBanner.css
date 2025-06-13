@@ -1,0 +1,67 @@
+.banner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+}
+
+.banner-container {
+  background-color: #1b2140;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  color: white;
+  max-width: 400px;
+  width: 90%;
+}
+
+.banner-icon {
+  margin-bottom: 1rem;
+}
+
+.status-icon {
+  width: 60px;
+  height: 60px;
+}
+
+.success-icon {
+  color: #00d084;
+}
+
+.error-icon {
+  color: #ff4b4b;
+}
+
+.banner-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.banner-description {
+  font-size: 1rem;
+  color: #c9c9c9;
+  margin-bottom: 1.5rem;
+}
+
+.banner-button {
+  background-color: #0070f3;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.banner-button:hover {
+  background-color: #005bb5;
+}

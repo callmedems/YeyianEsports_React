@@ -1,7 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../css/reviews.css';
+//import StatusBanner from './StatusBanner';
+
 
 export default function Reviews() {
+  //const [showStatusBanner, setshowStatusBanner] = useState(false);
+
+
   const [reviews, setReviews] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -55,7 +60,16 @@ export default function Reviews() {
   
   const submitReview = () => {
     if (!comment.trim() || rating === 0) {
-      alert('Debes escribir un comentario y dar una calificación.');
+      /*{showStatusBanner && (
+      <StatusBanner
+  type="error"
+  title="Error al guardar reseña"
+  description="Debes escribir un comentario y dar una calificación"
+  buttonText="Intentar de nuevo"
+  onClose={() => setShowBanner(false)}
+/>)}*/
+
+     alert('Debes escribir un comentario y dar una calificación.');
       return;
     }
 
