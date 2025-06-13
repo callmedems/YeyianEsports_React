@@ -215,7 +215,7 @@ const Confirmation = () => {
                 <i className="fas fa-envelope-open-text"></i>
                 <p>
                   Hemos enviado un correo de confirmación a:<br />
-                  <span>{detalles.correo || "usuario@ejemplo.com"}</span>
+                  <span>{detalles.email || "usuario@ejemplo.com"}</span> {/*POSIBLE ERROR */}
                 </p>
               </div>
               <div className="info-box">
