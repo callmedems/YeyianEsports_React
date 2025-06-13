@@ -21,7 +21,11 @@ const Navbar = () => {
     setIsLoggedIn(!!token);
     setIsAdmin(!!localStorage.getItem('adminId'));
     setUserName(localStorage.getItem('reservaUserName') || 'Usuario');
-    setProfilePicture(localStorage.getItem('navbarProfilePicture') || null);
+   //Para que si detecte el nulo 
+    const storedPicRaw = localStorage.getItem('navbarProfilePicture');
+    const storedPic = (storedPicRaw && storedPicRaw !== 'null') ? storedPicRaw : null;
+    setProfilePicture(storedPic);
+
   };
 
   const handleReservationClick = (e) => {
