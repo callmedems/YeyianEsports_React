@@ -43,6 +43,22 @@ const Navbar = () => {
     window.addEventListener('userProfileChanged', loadUser);
     return () => window.removeEventListener('userProfileChanged', loadUser);
   }, []);
+
+    useEffect(() => {
+      const storedName = localStorage.getItem('reservaUserName') || 'Usuario'
+      const storedPic = localStorage.getItem('navbarProfilePicture') || null
+      const token = localStorage.getItem('reserva')
+      setIsLoggedIn(!!token)
+      setUserName(storedName)
+      setProfilePicture(storedPic)
+
+      const onChange = () => {
+        setUserName(localStorage.getItem('reservaUserName') || 'Usuario')
+        setProfilePicture(localStorage.getItem('navbarProfilePicture') || null)
+      }
+      window.addEventListener('userProfileChanged', onChange)
+      return () => window.removeEventListener('userProfileChanged', onChange)
+  }, [])
   
 
   // 3) Permitir cerrar con Esc
@@ -159,7 +175,7 @@ const Navbar = () => {
           <Link to="/news" onClick={() => navigateTo('news')}>Noticias</Link>
           <Link to="/rules" onClick={() => navigateTo('rules')}>Reglamento</Link>
           <Link to="/MeetUs" onClick={() => navigateTo('MeetUs')}>Conócenos</Link>
-          <Link to="/cotization" onClick={() => navigateTo('cotization')}>Precios</Link>
+          
           {isAdmin&&(<Link to="/AdminConfig" onClick={() => navigateTo('AdminConfig')}>Configuración</Link>)}
         </nav>
        
