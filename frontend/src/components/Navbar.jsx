@@ -44,7 +44,7 @@ const Navbar = () => {
     return () => window.removeEventListener('userProfileChanged', loadUser);
   }, []);
 
-    useEffect(() => {
+    useEffect(() => { //actualiza las reservas al username que es si se lo cambias
       const storedName = localStorage.getItem('reservaUserName') || 'Usuario'
       const storedPic = localStorage.getItem('navbarProfilePicture') || null
       const token = localStorage.getItem('reserva')
@@ -80,11 +80,22 @@ const Navbar = () => {
 
   // 5) Logout
   const handleLogout = () => {
+    const sessionId = localStorage.getItem('sessionId')
+    if (sessionId) {
+      fetch('http://localhost:3000/api/track/session-end', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId }),
+        keepalive: true
+      })
+    }
+    
     localStorage.removeItem('reserva');
     localStorage.removeItem('clientId');
     localStorage.removeItem('adminId');
     localStorage.removeItem('reservaUserName');
     localStorage.removeItem('navbarProfilePicture');
+    localStorage.removeItem('sessionId');
     setIsLoggedIn(false);
     setIsAdmin(false);
     setUserName('');

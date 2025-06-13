@@ -54,9 +54,33 @@ function AppContent() {
          <Route path="/MeetUs" element={<MeetUs />} />
 
          {/* Componentes del admin*/}
-         <Route path="/AdminConfig" element={<AdminConfig />} />
-         <Route path="/AdminConfig/AdminReservations" element={<AdminReservations />} />
-         <Route path="/AdminConfig/ModifyResType" element={<ModifyResType />} />
+        
+        <Route
+            path="/AdminConfig"
+            element={
+              <ProtectedRoute>
+                <AdminConfig />
+              </ProtectedRoute>
+            }
+          />
+
+        <Route
+            path="/AdminConfig/AdminReservations"
+            element={
+              <ProtectedRoute>
+                <AdminReservations />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/AdminConfig/ModifyResType"
+            element={
+              <ProtectedRoute>
+                <ModifyResType />
+              </ProtectedRoute>
+            }
+          />
+  
          <Route
             path="/admin"
             element={
