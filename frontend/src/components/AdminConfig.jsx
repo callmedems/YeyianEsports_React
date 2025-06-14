@@ -8,9 +8,9 @@ export default function AdminConfig(){
     return(       
         <div className = "containerAdminConfig">
             <main className = "mainAdminConfig">
-                <h1>Configuración vista cliente</h1>
+                <h1>Panel administrador</h1>
                 <nav className="btnsAdmin">             
-                        <Link to="./AdminReservations" className="myBtn" o><span>Ver/Aprobar/Cancelar reservas</span></Link>
+                        <Link to="./AdminReservations" className="myBtn" o><span>Ver/Cancelar reservas</span></Link>
                         <Link to="./ModifyResType" className="myBtn" ><span>Modificar precios</span></Link>
                         <Link to="./admin" className="myBtn"><span>Ver estadísticas</span></Link>
                         <Link to="/" className="myBtn"><span>Modificar juegos</span></Link>

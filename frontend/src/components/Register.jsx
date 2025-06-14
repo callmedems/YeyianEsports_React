@@ -41,6 +41,7 @@ const Register = () => {
     })
     .then((data) => {
       console.log('Cuenta creada correctamente, ahora hacemos login automático...');
+      alert("Tu cuenta se ha registrado exitosamente")
       
       // Ahora hacemos login con las mismas credenciales:
       return fetch('http://localhost:3000/api/login', {
